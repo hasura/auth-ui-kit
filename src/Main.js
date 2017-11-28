@@ -8,27 +8,30 @@ import {
 import Home from "./Home";
 import Stuff from "./Stuff";
 import Contact from "./Contact";
- 
+import Username from "./Username";
+import Email from "./Email";
+import Mobile from "./Mobile";
+import MobileOtp from "./MobileOtp";
+import ForgotPassword from "./ForgotPassword";
+import ChangePassword from "./ChangePassword";
 class Main extends Component {
   render() {
     return (
       <HashRouter>
         <div>
-          <h1>Simple SPA</h1>
-          <ul className="header">
-            <li><NavLink to="/">Home</NavLink></li>
-            <li><NavLink to="/stuff">Stuff</NavLink></li>
-            <li><NavLink to="/contact">Contact</NavLink></li>
-          </ul>
           <div className="content">
             <Route exact path="/" component={Home}/>
-            <Route path="/stuff" component={Stuff}/>
-            <Route path="/contact" component={Contact}/>
+            <Route path="/username" component={Username}/>
+            <Route path="/email" component={Email}/>
+            <Route path="/mobile" component={Mobile}/>
+            <Route path="/mobile-otp" component={MobileOtp}/>
+            <Route path="/forgot-password" component={ForgotPassword}/>
+            <Route path="/change-password" component={ChangePassword}/>
           </div>
         </div>
       </HashRouter>
     );
   }
 }
- 
+
 export default Main;

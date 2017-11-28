@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700');
+body
+{
+  margin: 0;
+}
+.hide
+{
+  display: none !important;
+}
+.landingPageWrapper
+{
+  background-color: #fff;
+  width: calc(100vw - 80px);
+  height: calc(100vh - 80px);
+  padding: 40px;
+}
+.landingPageInnerWrapper
+{
+  background-color: #f4f4f4;
+  text-align: center;
+  width: 100%;
+  border-radius: 10px;
+  height: 100%;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+}
+.headerDescription
+{
+  font-family: 'Raleway';
+  font-weight: 600;
+  font-size: 22px;
+}
+.addPaddTop
+{
+  padding-top: 20px;
+}
+.descriptionText
+{
+  font-family: 'Open Sans';
+  font-size: 14px;
+  padding-top: 10px;
+}
+.signUpWrapper
+{
+  width: 400px;
+  margin: 0 auto;
+  padding: 0px 10px;
+}
+.formGroupWrapper
+{
+  display: flex;
+  padding-top: 20px;
+}
+.formGroupWrapper input
+{
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  border: 2px solid #ccc;
+  padding: 0;
+  padding-left: 10px;
+  font-size: 14px;
+}
+.formGroupWrapper input:focus
+{
+  border: 2px solid #444;
+  outline: none;
+}
+.linkDescription
+{
+  color: #FF993A;
+}
+.linkDescription a
+{
+  color: #FF993A;
+  text-decoration: none;
+}
+.linkDescription a:hover
+{
+  text-decoration: underline;
+}
+.forgotPassword
+{
+  text-align: right;
+  padding: 15px 0;
+}
+.commonBtn
+{
+  text-align: center;
+}
+.signInbtn a button
+{
+  background-color: #FFCA27;
+  width: 100%;
+  height: 44px;
+  text-align: center;
+  border: 1px solid #FFCA27;
+  text-transform: uppercase;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 15px;
+  color: #fff;
+}
+.commonBtn a button
+{
+  /* background-color: #FFCA27; */
+  max-width: 300px;
+  min-width: 300px;
+  height: 44px;
+  text-align: left;
+  /* border: 1px solid #FFCA27; */
+  text-transform: uppercase;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 15px;
+  color: #fff;
+}
+.commonBtn a
+{
+  text-decoration: none;
+}
+.commonBtn a button span i
+{
+  padding: 0 20px;
+  font-size: 20px;
+}
+.usernameLogin a button
+{
+  background-color: #FFCA27;
+  border: 1px solid #FFCA27;
+}
+.emailLogin a button
+{
+  background-color: #db4437;
+  border: 1px solid #db4437;
+  color: #fff;
+}
+.mobileLogin a button
+{
+  background-color: #02bd7e;
+  border: 1px solid #02bd7e;
+}
+.commonBtn button:focus
+{
+  outline: none;
+}
+.socialLoginWrapper
+{
+  padding: 15px 0;
+}
+.socialLoginIconWrapper
+{
+  margin: 0 auto;
+  padding: 20px 0;
+}
+.socialLoginIcon
+{
+  display: inline-block;
+  width: 20%;
+  text-align: center;
+}
+.socialLoginIcon i
+{
+  font-size: 30px;
+}
