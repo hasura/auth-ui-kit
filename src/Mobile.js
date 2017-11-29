@@ -29,7 +29,7 @@ class Mobile extends Component {
                 <input type="password" placeholder='Password' />
               </div>
               <div className='linkDescription forgotPassword descriptionText'>
-                <a href='#'> Forgot Password?</a>
+                <a>Forgot Password?</a>
               </div>
               <div className='signInbtn'>
                 <a><button>Sign In</button></a>

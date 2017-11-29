@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {Helmet} from 'react-helmet';
 import { NavLink } from "react-router-dom";
 import SocialLoginWrapper from './SocialLoginWrapper';
+import {usernameSignIn} from './api';
 import SignUpMessage from './SignUpMessage';
 import './style.css';
 class Username extends Component {
@@ -21,18 +22,21 @@ class Username extends Component {
             <div className='descriptionText'>
               Hello! Sign in with your username or email
             </div>
-            <form className='formGroupWrapper'>
+            <form className='formGroupWrapper' onSubmit={(e) => {
+                e.preventDefault();
+                usernameSignIn(this.username.value, this.password.value);
+              }}>
               <div className='formInput'>
-                <input type="email" placeholder='Sign in with Username' />
+                <input type="text" placeholder='Sign in with Username' ref={(input) => { this.username = input; }} />
               </div>
               <div className='formInput'>
-                <input type="password" placeholder='Password' />
+                <input type="password" placeholder='Password' ref={(input) => { this.password = input; }} />
               </div>
               <div className='linkDescription forgotPassword descriptionText'>
                 <NavLink to='/forgot-password'> Forgot Password?</NavLink>
               </div>
               <div className='signInbtn'>
-                <a><button>Sign In</button></a>
+                <a><button type="submit">Sign In</button></a>
               </div>
             </form>
             <SocialLoginWrapper />

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import {Helmet} from "react-helmet";
 import SocialLoginWrapper from './SocialLoginWrapper';
 import SignInMessage from './SignInMessage';
-import { NavLink } from "react-router-dom";
 import './style.css';
 class SignUp extends Component {
 
