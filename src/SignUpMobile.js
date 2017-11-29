@@ -1,23 +1,24 @@
 import React, { Component } from "react";
 import {Helmet} from "react-helmet";
 import SocialLoginWrapper from './SocialLoginWrapper';
-import SignUpMessage from './SignUpMessage';
+import SignInMessage from './SignInMessage';
 import './style.css';
-class MobileOtp extends Component {
+class SignUpMobile extends Component {
+
   render() {
     return (
       <div className='landingPageWrapper container-fluid'>
         <Helmet>
           <meta charSet="utf-8" />
-          <title>Sign in with Mobile OTP</title>
+          <title>Sign up with Mobile</title>
         </Helmet>
         <div className='landingPageInnerWrapper'>
           <div className='signUpWrapper'>
             <div className='headerDescription'>
-              Sign In
+              Sign Up
             </div>
             <div className='descriptionText'>
-              Hello! Sign in with your mobile OTP
+              Hello! Sign up with your mobile
             </div>
             <form className='formGroupWrapper'>
               <div className='formInput'>
@@ -25,14 +26,20 @@ class MobileOtp extends Component {
               <input className='mobileInput' type="email" placeholder='Enter mobile number' />
               </div>
               <div className='formInput'>
-                <input type="text" placeholder='otp' />
+                <input type="password" placeholder='Password' />
+              </div>
+              <div className='formInput'>
+                <input type="password" placeholder='Confirm Password' />
+              </div>
+              <div className='linkDescription forgotPassword descriptionText'>
+                <a href='#'> Forgot Password?</a>
               </div>
               <div className='signInbtn'>
-                <a><button>Sign In</button></a>
+                <a><button>Sign Up</button></a>
               </div>
             </form>
             <SocialLoginWrapper />
-            <SignUpMessage />
+            <SignInMessage />
           </div>
         </div>
       </div>
@@ -40,4 +47,4 @@ class MobileOtp extends Component {
   }
 }
 
-export default MobileOtp
+export default SignUpMobile;

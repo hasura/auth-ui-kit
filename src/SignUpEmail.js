@@ -15,7 +15,7 @@ class SignUpEmail extends Component {
         </Helmet>
         <div className='landingPageInnerWrapper'>
           <div className='signUpWrapper'>
-            <div className='headerDescription addPaddTop'>
+            <div className='headerDescription'>
               Sign Up
             </div>
             <div className='descriptionText'>

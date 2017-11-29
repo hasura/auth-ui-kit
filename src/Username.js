@@ -16,7 +16,7 @@ class Username extends Component {
         </Helmet>
         <div className='landingPageInnerWrapper'>
           <div className='signUpWrapper'>
-            <div className='headerDescription addPaddTop'>
+            <div className='headerDescription'>
               Sign In
             </div>
             <div className='descriptionText'>

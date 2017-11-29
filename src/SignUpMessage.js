@@ -5,7 +5,7 @@ class SignUpMessage extends Component {
   render() {
     return (
       <div className='descriptionText'>
-        Don{'\''}t have an account? <b><NavLink className='textDecoration linkDescription' to="/sign-up">Sign Up</NavLink></b>
+        Don{'\''}t have an account? <b><NavLink className='textDecoration linkDescription' to="/signup">Sign Up</NavLink></b>
       </div>
     );
   }

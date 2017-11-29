@@ -9,7 +9,11 @@ import MobileOtp from "./MobileOtp";
 import ForgotPassword from "./ForgotPassword";
 import ChangePassword from "./ChangePassword";
 import globals from './globals';
+import SignUpHome from './SignUpHome';
+import SignUpUsername from './SignUpUsername';
 import SignUpEmail from './SignUpEmail';
+import SignUpMobile from './SignUpMobile';
+import SignUpMobileOtp from './SignUpMobileOtp';
 class Main extends Component {
   render() {
     let activeProvider = null;
@@ -36,13 +40,17 @@ class Main extends Component {
                   <Home />
                 )
             )} />
-            <Route path="/username" component={Username}/>
-            <Route path="/email" component={Email}/>
-            <Route path="/mobile" component={Mobile}/>
-            <Route path="/mobile-otp" component={MobileOtp}/>
-            <Route path="/forgot-password" component={ForgotPassword}/>
-            <Route path="/change-password" component={ChangePassword}/>
-            <Route path="/sign-up" component={SignUpEmail}/>
+            <Route exact path="/signin/username" component={Username}/>
+            <Route exact path="/signin/email" component={Email}/>
+            <Route exact path="/signin/mobile" component={Mobile}/>
+            <Route exact path="/signin/mobile-otp" component={MobileOtp}/>
+            <Route exact path="/forgot-password" component={ForgotPassword}/>
+            <Route exact path="/change-password" component={ChangePassword}/>
+            <Route exact path="/signup/username" component={SignUpUsername}/>
+            <Route exact path="/signup/email" component={SignUpEmail}/>
+            <Route exact path="/signup/mobile" component={SignUpMobile}/>
+            <Route exact path="/signup/mobile-otp" component={SignUpMobileOtp}/>
+            <Route exact path="/signup" component={SignUpHome}/>
           </div>
         </div>
       </Router>
