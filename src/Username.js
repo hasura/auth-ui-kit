@@ -1,11 +1,17 @@
 import React, { Component } from "react";
-import './style.css';
+import {Helmet} from 'react-helmet';
 import { NavLink } from "react-router-dom";
-class Username extends React.Component {
+import SocialLoginWrapper from './SocialLoginWrapper';
+import './style.css';
+class Username extends Component {
 
   render() {
     return (
       <div className='landingPageWrapper container-fluid'>
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>Sign in with Username</title>
+        </Helmet>
         <div className='landingPageInnerWrapper'>
           <div className='signUpWrapper'>
             <div className='headerDescription addPaddTop'>
@@ -15,7 +21,7 @@ class Username extends React.Component {
               Hello! Sign in with your username or email
             </div>
             <form className='formGroupWrapper'>
-              <input type="email" placeholder='Sign in with Username' />
+              <input type="text" placeholder='Sign in with Username' />
             </form>
             <form className='formGroupWrapper'>
               <input type="password" placeholder='Password' />
@@ -26,25 +32,7 @@ class Username extends React.Component {
             <div className='signInbtn'>
               <a><button>Sign In</button></a>
             </div>
-            <div className='socialLoginWrapper'>
-              <div className='descriptionText'>
-                Or connect with:
-              </div>
-              <div className='socialLoginIconWrapper'>
-                <div className='socialLoginIcon'>
-                  <i className='fa fa-github' aria-hidden='true'></i>
-                </div>
-                <div className='socialLoginIcon'>
-                  <i className='fa fa-facebook' aria-hidden='true'></i>
-                </div>
-                <div className='socialLoginIcon'>
-                  <i className='fa fa-google' aria-hidden='true'></i>
-                </div>
-                <div className='socialLoginIcon'>
-                  <i className='fa fa-linkedin' aria-hidden='true'></i>
-                </div>
-              </div>
-            </div>
+            <SocialLoginWrapper />
             <div className='descriptionText'>
               Don{'\''}t have an account? <b>Sign Up</b>
             </div>

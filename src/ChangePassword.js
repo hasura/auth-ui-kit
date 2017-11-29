@@ -1,10 +1,15 @@
 import React, { Component } from "react";
+import {Helmet} from "react-helmet";
 import './style.css';
-class ChangePassword extends React.Component {
+class ChangePassword extends Component {
 
   render() {
     return (
       <div className='landingPageWrapper container-fluid'>
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>Change Password</title>
+        </Helmet>
         <div className='landingPageInnerWrapper'>
           <div className='signUpWrapper'>
             <div className='headerDescription addPaddTop'>
