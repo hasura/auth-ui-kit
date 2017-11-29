@@ -1,17 +1,22 @@
 import React, { Component } from "react";
+import {Helmet} from "react-helmet";
 import './style.css';
-class ForgotPassword extends React.Component {
+class ForgotPassword extends Component {
 
   render() {
     return (
       <div className='landingPageWrapper container-fluid'>
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>Forgot Password</title>
+        </Helmet>
         <div className='landingPageInnerWrapper'>
           <div className='signUpWrapper'>
             <div className='headerDescription addPaddTop'>
               Forgot Password
             </div>
             <div className='descriptionText'>
-              Hello! Sign in with your username or email
+              Hello! Submit your username to reset your password
             </div>
             <form className='formGroupWrapper'>
               <div className='formInput'>
