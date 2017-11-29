@@ -20,17 +20,19 @@ class Mobile extends Component {
               Hello! Sign in with your mobile
             </div>
             <form className='formGroupWrapper'>
-              <input type="text" placeholder='Sign in with mobile' />
+              <div className='formInput'>
+                <input type="email" placeholder='Sign in with mobile' />
+              </div>
+              <div className='formInput'>
+                <input type="password" placeholder='Password' />
+              </div>
+              <div className='linkDescription forgotPassword descriptionText'>
+                <a href='#'> Forgot Password?</a>
+              </div>
+              <div className='signInbtn'>
+                <a><button>Sign In</button></a>
+              </div>
             </form>
-            <form className='formGroupWrapper'>
-              <input type="password" placeholder='Password' />
-            </form>
-            <div className='linkDescription forgotPassword descriptionText'>
-              <a>Forgot Password?</a>
-            </div>
-            <div className='signInbtn'>
-              <button>Sign In</button>
-            </div>
             <SocialLoginWrapper />
             <div className='descriptionText'>
               Don{'\''}t have an account? <b>Sign Up</b>

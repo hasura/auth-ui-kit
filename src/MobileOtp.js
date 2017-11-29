@@ -19,14 +19,16 @@ class MobileOtp extends Component {
               Hello! Sign in with your mobile OTP
             </div>
             <form className='formGroupWrapper'>
-              <input type="text" placeholder='Sign in with mobile otp' />
+              <div className='formInput'>
+                <input type="email" placeholder='Sign in with mobile otp' />
+              </div>
+              <div className='formInput'>
+                <input type="text" placeholder='otp' />
+              </div>
+              <div className='signInbtn'>
+                <a><button>Sign In</button></a>
+              </div>
             </form>
-            <form className='formGroupWrapper hide'>
-              <input type="text" placeholder='otp' />
-            </form>
-            <div className='signInbtn'>
-              <a><button>Sign In</button></a>
-            </div>
             <SocialLoginWrapper />
             <div className='descriptionText'>
               Don{'\''}t have an account? <b>Sign Up</b>

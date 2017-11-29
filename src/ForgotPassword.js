@@ -19,14 +19,16 @@ class ForgotPassword extends Component {
               Hello! Submit your username to reset your password
             </div>
             <form className='formGroupWrapper'>
-              <input type="email" placeholder='Enter username' />
+              <div className='formInput'>
+                <input type="email" placeholder='Enter username' />
+              </div>
+              <div className='formInput'>
+                <input type="text" placeholder='otp' />
+              </div>
+              <div className='signInbtn'>
+                <a><button>Submit</button></a>
+              </div>
             </form>
-            <form className='formGroupWrapper hide'>
-              <input type="text" placeholder='otp' />
-            </form>
-            <div className='signInbtn'>
-              <a><button>Submit</button></a>
-            </div>
             <div className='descriptionText'>
               Don{'\''}t have an account? <b>Sign Up</b>
             </div>

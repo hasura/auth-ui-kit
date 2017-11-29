@@ -21,18 +21,19 @@ class Email extends Component {
               Hello! Sign in with your email
             </div>
             <form className='formGroupWrapper'>
-              <input type="email" placeholder='Sign in with Email' />
+              <div className='formInput'>
+                <input type="email" placeholder='Sign in with Email' />
+              </div>
+              <div className='formInput'>
+                <input type="password" placeholder='Password' />
+              </div>
+              <div className='linkDescription forgotPassword descriptionText'>
+                <NavLink to='/forgot-password'> Forgot Password?</NavLink>
+              </div>
+              <div className='signInbtn'>
+                <a><button>Sign In</button></a>
+              </div>
             </form>
-            <form className='formGroupWrapper'>
-              <input type="password" placeholder='Password' />
-            </form>
-            <div className='linkDescription forgotPassword descriptionText'>
-              <NavLink to='/forgot-password'> Forgot Password?</NavLink>
-            </div>
-            <div className='signInbtn'>
-              <a><button>Sign In</button></a>
-            </div>
-
             <SocialLoginWrapper />
 
             <div className='descriptionText'>
