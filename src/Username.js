@@ -3,6 +3,7 @@ import {Helmet} from 'react-helmet';
 import { NavLink } from "react-router-dom";
 import SocialLoginWrapper from './SocialLoginWrapper';
 import {usernameSignIn} from './api';
+import SignUpMessage from './SignUpMessage';
 import './style.css';
 class Username extends Component {
 
@@ -39,9 +40,7 @@ class Username extends Component {
               </div>
             </form>
             <SocialLoginWrapper />
-            <div className='descriptionText'>
-              Don{'\''}t have an account? <b>Sign Up</b>
-            </div>
+            <SignUpMessage />
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {Helmet} from "react-helmet";
 import SocialLoginWrapper from './SocialLoginWrapper';
+import SignUpMessage from './SignUpMessage';
 import './style.css';
 class MobileOtp extends Component {
   render() {
@@ -30,9 +31,7 @@ class MobileOtp extends Component {
               </div>
             </form>
             <SocialLoginWrapper />
-            <div className='descriptionText'>
-              Don{'\''}t have an account? <b>Sign Up</b>
-            </div>
+            <SignUpMessage />
           </div>
         </div>
       </div>

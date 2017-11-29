@@ -1,36 +1,42 @@
 import React, { Component } from "react";
 import {Helmet} from "react-helmet";
+import SocialLoginWrapper from './SocialLoginWrapper';
+import SignInMessage from './SignInMessage';
+import { NavLink } from "react-router-dom";
 import './style.css';
-import SignUpMessage from './SignUpMessage';
-class ForgotPassword extends Component {
+class SignUp extends Component {
 
   render() {
     return (
       <div className='landingPageWrapper container-fluid'>
         <Helmet>
           <meta charSet="utf-8" />
-          <title>Forgot Password</title>
+          <title>Sign in with Mobile</title>
         </Helmet>
         <div className='landingPageInnerWrapper'>
           <div className='signUpWrapper'>
             <div className='headerDescription addPaddTop'>
-              Forgot Password
+              Sign Up
             </div>
             <div className='descriptionText'>
-              Hello! Submit your username to reset your password
+              Hello! Sign up with your email
             </div>
             <form className='formGroupWrapper'>
               <div className='formInput'>
-                <input type="email" placeholder='Enter username' />
+                <input type="email" placeholder='Enter Email' />
               </div>
               <div className='formInput'>
-                <input type="text" placeholder='otp' />
+                <input type="password" placeholder='Password' />
+              </div>
+              <div className='formInput'>
+                <input type="password" placeholder='Confirm Password' />
               </div>
               <div className='signInbtn'>
-                <a><button>Submit</button></a>
+                <a><button>Register</button></a>
               </div>
             </form>
-            <SignUpMessage />
+            <SocialLoginWrapper />
+            <SignInMessage />
           </div>
         </div>
       </div>
@@ -38,4 +44,4 @@ class ForgotPassword extends Component {
   }
 }
 
-export default ForgotPassword
+export default SignUp

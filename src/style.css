@@ -9,6 +9,10 @@ body
 {
   display: none !important;
 }
+.textDecoration
+{
+  text-decoration: none;
+}
 .landingPageWrapper
 {
   /* background-color: #fff; */
@@ -61,7 +65,7 @@ body
 }
 .formGroupWrapper .formInput input
 {
-  width: 100%;
+  width: calc( 100% - 15px );
   height: 40px;
   border-radius: 5px;
   /* border: 2px solid #ccc; */
@@ -75,7 +79,7 @@ body
 }
 .formGroupWrapper .formInput input:focus
 {
-  border: 2px solid #222;
+  border: 2px solid #222 !important;
   outline: none;
 }
 .linkDescription
@@ -113,6 +117,10 @@ body
   margin-top: 15px;
   color: #fff;
 }
+.signInbtn a button:hover
+{
+  background-color: #EAB41C;
+}
 .commonBtn a button
 {
   /* background-color: #FFCA27; */
@@ -141,16 +149,30 @@ body
   background-color: #FFCA27;
   border: 1px solid #FFCA27;
 }
+.usernameLogin a button:hover
+{
+  background-color: #EAB41C;
+}
 .emailLogin a button
 {
   background-color: #db4437;
   border: 1px solid #db4437;
   color: #fff;
 }
+.emailLogin a button:hover
+{
+  background-color: #c62f28;
+  border: 1px solid #c62f28;
+}
 .mobileLogin a button
 {
   background-color: #02bd7e;
   border: 1px solid #02bd7e;
+}
+.mobileLogin a button:hover
+{
+  background-color: #059662;
+  border: 1px solid #059662;
 }
 .commonBtn button:focus
 {
