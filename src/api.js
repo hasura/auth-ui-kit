@@ -25,6 +25,82 @@ const usernameSignUp = (username, password) => {
   });
 }
 
+const emailSignUp = (email, password) => {
+  var requestOptions = {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        provider: "email",
+        data: {
+          "email": email,
+          "password": password
+        }
+      })
+  };
+
+  return fetch(authUrl + endpoints.signup, requestOptions)
+  .then(function(response) {
+    // window.location.href = window.__env.redirectUrl;
+    console.log(response.json());
+    return response.json();
+  })
+  .catch(function(error) {
+    console.log('Request Failed:' + error);
+  });
+}
+
+const mobilePasswordSignUp = (mobile, password) => {
+  var requestOptions = {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        provider: "mobile-password",
+        data: {
+          "mobile": mobile,
+          "password": password
+        }
+      })
+  };
+
+  return fetch(authUrl + endpoints.signup, requestOptions)
+  .then(function(response) {
+    console.log(response);
+    return response.json();
+  })
+  .catch(function(error) {
+    console.log('Request Failed:' + error);
+  });
+}
+
+const mobileOnlySignUp = (mobile, password) => {
+  var requestOptions = {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        provider: "mobile-password",
+        data: {
+          "mobile": mobile,
+          "password": password
+        }
+      })
+  };
+
+  return fetch(authUrl + endpoints.signup, requestOptions)
+  .then(function(response) {
+    console.log(response);
+    return response.json();
+  })
+  .catch(function(error) {
+    console.log('Request Failed:' + error);
+  });
+}
+
 const usernameSignIn = (username, password) => {
   var requestOptions = {
       method: "POST",
@@ -42,6 +118,8 @@ const usernameSignIn = (username, password) => {
 
   return fetch(authUrl + endpoints.login, requestOptions)
   .then(function(response) {
+    console.log(response.status);
+    console.log(response.json());
     return response.json();
   })
   .catch(function(error) {
@@ -124,13 +202,15 @@ const mobileOtpSignIn = (mobile, otp, country_code) => {
 }
 
 export {
-  usernameSignUp,
   usernameSignIn,
   emailSignIn,
   mobileSignIn,
-  mobileOtpSignIn
-  /*
+  mobileOtpSignIn,
+  usernameSignUp,
   emailSignUp,
+  mobilePasswordSignUp,
+  mobileOnlySignUp
+  /*
   mobileSignUp,
   mobileOtpSignUp
   */

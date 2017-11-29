@@ -6,6 +6,9 @@ const globals = {
   facebook: window.__env.facebook,
   google: window.__env.google,
   github: window.__env.github,
-  linkedin: window.__env.linkedin
+  linkedin: window.__env.linkedin,
+  redirectUrl: window.__env.redirectUrl,
+  googleClientId: window.__env.googleClientId,
+  githubClientId: window.__env.githubClientId
 };
 export default globals;

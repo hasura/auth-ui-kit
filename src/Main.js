@@ -9,7 +9,7 @@ import MobileOtp from "./MobileOtp";
 import ForgotPassword from "./ForgotPassword";
 import ChangePassword from "./ChangePassword";
 import globals from './globals';
-import SignUp from './SignUp';
+import SignUpEmail from './SignUpEmail';
 class Main extends Component {
   render() {
     let activeProvider = null;
@@ -42,7 +42,7 @@ class Main extends Component {
             <Route path="/mobile-otp" component={MobileOtp}/>
             <Route path="/forgot-password" component={ForgotPassword}/>
             <Route path="/change-password" component={ChangePassword}/>
-            <Route path="/sign-up" component={SignUp}/>
+            <Route path="/sign-up" component={SignUpEmail}/>
           </div>
         </div>
       </Router>

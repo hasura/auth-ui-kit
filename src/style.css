@@ -197,12 +197,13 @@ body
   width: 20%;
   text-align: center;
 }
-.socialLoginIcon i
+.socialLoginIcon a i
 {
   font-size: 30px;
   cursor: pointer;
+  color:  #333;
 }
-.socialLoginIcon i:hover
+.socialLoginIcon a i:hover
 {
   color: #aaa;
 }

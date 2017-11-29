@@ -2,15 +2,16 @@ import React, { Component } from "react";
 import {Helmet} from "react-helmet";
 import SocialLoginWrapper from './SocialLoginWrapper';
 import SignInMessage from './SignInMessage';
+import {emailSignUp} from './api';
 import './style.css';
-class SignUp extends Component {
+class SignUpEmail extends Component {
 
   render() {
     return (
       <div className='landingPageWrapper container-fluid'>
         <Helmet>
           <meta charSet="utf-8" />
-          <title>Sign in with Mobile</title>
+          <title>Sign up with Email</title>
         </Helmet>
         <div className='landingPageInnerWrapper'>
           <div className='signUpWrapper'>
@@ -20,18 +21,25 @@ class SignUp extends Component {
             <div className='descriptionText'>
               Hello! Sign up with your email
             </div>
-            <form className='formGroupWrapper'>
+            <form className='formGroupWrapper' onSubmit={(e) => {
+                e.preventDefault();
+                if (this.password.value === this.confirm_password.value) {
+                  emailSignUp(this.email.value, this.password.value);
+                } else {
+                  alert("Passwords don't match. Try again");
+                }
+              }}>
               <div className='formInput'>
-                <input type="email" placeholder='Enter Email' />
+                <input type="email" placeholder='Enter Email' ref={(input) => { this.email = input; }} />
               </div>
               <div className='formInput'>
-                <input type="password" placeholder='Password' />
+                <input type="password" placeholder='Password' ref={(input) => { this.password = input; }} />
               </div>
               <div className='formInput'>
-                <input type="password" placeholder='Confirm Password' />
+                <input type="password" placeholder='Confirm Password' ref={(input) => { this.confirm_password = input; }} />
               </div>
               <div className='signInbtn'>
-                <a><button>Register</button></a>
+                <a><button type="submit">Register</button></a>
               </div>
             </form>
             <SocialLoginWrapper />
@@ -43,4 +51,4 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp
+export default SignUpEmail
