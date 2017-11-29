@@ -4,7 +4,7 @@ import './style.css';
 import { NavLink } from "react-router-dom";
 import globals from './globals';
 import SocialLoginWrapper from './SocialLoginWrapper';
-
+import SignUpMessage from './SignUpMessage';
 class Home extends Component {
   render() {
     return (
@@ -60,10 +60,7 @@ class Home extends Component {
             : null}
 
             <SocialLoginWrapper />
-
-            <div className='descriptionText'>
-              Don{'\''}t have an account? <b>Sign Up</b>
-            </div>
+            <SignUpMessage />
           </div>
         </div>
       </div>
