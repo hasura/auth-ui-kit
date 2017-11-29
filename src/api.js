@@ -1,24 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import {authUrl, endpoints} from './config';
 
-const signOut = (userInfo) => {
-  var requestOptions = {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer " + userInfo.auth_token
-      }
-  };
-
-  return fetch(projectConfig.url.auth + "/user/logout", requestOptions)
-  .then(function(response) {
-    return response.json();
-  })
-  .catch(function(error) {
-    console.log('Request Failed:' + error);
-  });
-}
-
 const usernameSignUp = (username, password) => {
   var requestOptions = {
       method: "POST",
@@ -142,9 +124,11 @@ const mobileOtpSignIn = (mobile, otp, country_code) => {
 }
 
 export {
-  signOut,
-  usernameSignup,
-  usernameSignin,
+  usernameSignUp,
+  usernameSignIn,
+  emailSignIn,
+  mobileSignIn,
+  mobileOtpSignIn
   /*
   emailSignUp,
   mobileSignUp,
