@@ -14,7 +14,7 @@ class Mobile extends Component {
         </Helmet>
         <div className='landingPageInnerWrapper'>
           <div className='signUpWrapper'>
-            <div className='headerDescription addPaddTop'>
+            <div className='headerDescription'>
               Sign In
             </div>
             <div className='descriptionText'>
@@ -22,7 +22,8 @@ class Mobile extends Component {
             </div>
             <form className='formGroupWrapper'>
               <div className='formInput'>
-                <input type="email" placeholder='Sign in with mobile' />
+              <input className='countryInput' type="email" placeholder='Country code' />
+              <input className='mobileInput' type="email" placeholder='Enter mobile number' />
               </div>
               <div className='formInput'>
                 <input type="password" placeholder='Password' />

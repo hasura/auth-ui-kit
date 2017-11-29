@@ -1,36 +1,38 @@
 import React, { Component } from "react";
 import {Helmet} from "react-helmet";
+import SocialLoginWrapper from './SocialLoginWrapper';
+import SignInMessage from './SignInMessage';
 import './style.css';
-import SignUpMessage from './SignUpMessage';
-class ForgotPassword extends Component {
-
+class SignUpMobileOtp extends Component {
   render() {
     return (
       <div className='landingPageWrapper container-fluid'>
         <Helmet>
           <meta charSet="utf-8" />
-          <title>Forgot Password</title>
+          <title>Sign up with Mobile OTP</title>
         </Helmet>
         <div className='landingPageInnerWrapper'>
           <div className='signUpWrapper'>
             <div className='headerDescription'>
-              Forgot Password
+              Sign Up
             </div>
             <div className='descriptionText'>
-              Hello! Submit your username to reset your password
+              Hello! Sign up with your mobile OTP
             </div>
             <form className='formGroupWrapper'>
               <div className='formInput'>
-                <input type="email" placeholder='Enter username' />
+                <input className='countryInput' type="email" placeholder='Country code' />
+                <input className='mobileInput' type="email" placeholder='Enter mobile number' />
               </div>
-              <div className='formInput'>
+              <div className='formInput hide'>
                 <input type="text" placeholder='otp' />
               </div>
               <div className='signInbtn'>
-                <a><button>Submit</button></a>
+                <a><button>Sign Up</button></a>
               </div>
             </form>
-            <SignUpMessage />
+            <SocialLoginWrapper />
+            <SignInMessage />
           </div>
         </div>
       </div>
@@ -38,4 +40,4 @@ class ForgotPassword extends Component {
   }
 }
 
-export default ForgotPassword
+export default SignUpMobileOtp;

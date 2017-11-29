@@ -3,7 +3,7 @@
 body
 {
   margin: 0;
-  color: #fff;
+  color: #333;
 }
 .hide
 {
@@ -13,25 +13,44 @@ body
 {
   text-decoration: none;
 }
+.textDecoration:hover
+{
+  text-decoration: underline;
+}
+.countryInput
+{
+  width: 25% !important;
+  display: inline-block;
+  margin-right: 2%;
+}
+.mobileInput
+{
+  width: 66% !important;
+  display: inline-block;
+}
 .landingPageWrapper
 {
-  /* background-color: #fff; */
-  background-color: #333;
+  /* background-color: #333; */
+  background-color: #fff;
   width: calc(100vw - 80px);
   height: calc(100vh - 80px);
   padding: 40px;
 }
 .landingPageInnerWrapper
 {
-  /* background-color: #f4f4f4; */
-  background-color: #444;
+  /* background-color: #444; */
+  background-color: #f4f4f4;
   text-align: center;
   width: 100%;
   border-radius: 10px;
-  height: 100%;
+  height: calc(100% - 40px);
+  overflow: scroll;
+  padding: 20px 0;
   -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
 }
 .headerDescription
 {
@@ -68,14 +87,14 @@ body
   width: calc( 100% - 15px );
   height: 40px;
   border-radius: 5px;
-  /* border: 2px solid #ccc; */
-   border: 2px solid #333 !important;
+  border: 2px solid #ccc;
+  /* border: 2px solid #333 !important; */
   padding: 0;
   padding-left: 10px;
   font-size: 14px;
 
-  background-color: #555 !important;
-  color: #fff !important;
+  /* background-color: #555 !important; */
+  /* color: #fff !important; */
 }
 .formGroupWrapper .formInput input:focus
 {
@@ -204,6 +223,17 @@ body
 }
 @media (max-width: 767px)
 {
+  .countryInput
+  {
+    width: 27% !important;
+    display: inline-block;
+    margin-right: 2%;
+  }
+  .mobileInput
+  {
+    width: 60% !important;
+    display: inline-block;
+  }
   .landingPageWrapper
   {
     padding: 20px;

@@ -2,16 +2,15 @@ import React, { Component } from "react";
 import {Helmet} from "react-helmet";
 import SocialLoginWrapper from './SocialLoginWrapper';
 import SignInMessage from './SignInMessage';
-import { NavLink } from "react-router-dom";
 import './style.css';
-class SignUp extends Component {
+class SignUpMobile extends Component {
 
   render() {
     return (
       <div className='landingPageWrapper container-fluid'>
         <Helmet>
           <meta charSet="utf-8" />
-          <title>Sign in with Mobile</title>
+          <title>Sign up with Mobile</title>
         </Helmet>
         <div className='landingPageInnerWrapper'>
           <div className='signUpWrapper'>
@@ -19,11 +18,12 @@ class SignUp extends Component {
               Sign Up
             </div>
             <div className='descriptionText'>
-              Hello! Sign up with your email
+              Hello! Sign up with your mobile
             </div>
             <form className='formGroupWrapper'>
               <div className='formInput'>
-                <input type="email" placeholder='Enter Email' />
+              <input className='countryInput' type="email" placeholder='Country code' />
+              <input className='mobileInput' type="email" placeholder='Enter mobile number' />
               </div>
               <div className='formInput'>
                 <input type="password" placeholder='Password' />
@@ -31,8 +31,11 @@ class SignUp extends Component {
               <div className='formInput'>
                 <input type="password" placeholder='Confirm Password' />
               </div>
+              <div className='linkDescription forgotPassword descriptionText'>
+                <a href='#'> Forgot Password?</a>
+              </div>
               <div className='signInbtn'>
-                <a><button>Register</button></a>
+                <a><button>Sign Up</button></a>
               </div>
             </form>
             <SocialLoginWrapper />
@@ -44,4 +47,4 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp
+export default SignUpMobile;
