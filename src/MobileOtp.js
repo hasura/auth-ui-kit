@@ -13,14 +13,16 @@ class MobileOtp extends React.Component {
               Hello! Sign in with your username or email
             </div>
             <form className='formGroupWrapper'>
-              <input type="email" placeholder='Sign in with mobile otp' />
+              <div className='formInput'>
+                <input type="email" placeholder='Sign in with mobile otp' />
+              </div>
+              <div className='formInput'>
+                <input type="text" placeholder='otp' />
+              </div>
+              <div className='signInbtn'>
+                <a><button>Sign In</button></a>
+              </div>
             </form>
-            <form className='formGroupWrapper hide'>
-              <input type="text" placeholder='otp' />
-            </form>
-            <div className='signInbtn'>
-              <a><button>Sign In</button></a>
-            </div>
             <div className='socialLoginWrapper'>
               <div className='descriptionText'>
                 Or connect with:

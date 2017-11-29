@@ -14,17 +14,19 @@ class Mobile extends React.Component {
               Hello! Sign in with your username or email
             </div>
             <form className='formGroupWrapper'>
-              <input type="email" placeholder='Sign in with mobile' />
+              <div className='formInput'>
+                <input type="email" placeholder='Sign in with mobile' />
+              </div>
+              <div className='formInput'>
+                <input type="password" placeholder='Password' />
+              </div>
+              <div className='linkDescription forgotPassword descriptionText'>
+                <a href='#'> Forgot Password?</a>
+              </div>
+              <div className='signInbtn'>
+                <a><button>Sign In</button></a>
+              </div>
             </form>
-            <form className='formGroupWrapper'>
-              <input type="password" placeholder='Password' />
-            </form>
-            <div className='linkDescription forgotPassword descriptionText'>
-              <a href='#'> Forgot Password?</a>
-            </div>
-            <div className='signInbtn'>
-              <a><button>Sign In</button></a>
-            </div>
             <div className='socialLoginWrapper'>
               <div className='descriptionText'>
                 Or connect with:
