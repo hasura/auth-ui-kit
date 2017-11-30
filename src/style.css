@@ -141,6 +141,10 @@ body
 {
   background-color: #EAB41C;
 }
+.signInbtn a button:focus
+{
+  outline:  none;
+}
 .commonBtn a button
 {
   /* background-color: #FFCA27; */
@@ -163,6 +167,10 @@ body
 {
   padding: 0 20px;
   font-size: 20px;
+}
+.commonBtn button:focus
+{
+  outline: none;
 }
 .usernameLogin a button
 {
@@ -193,10 +201,6 @@ body
 {
   background-color: #059662;
   border: 1px solid #059662;
-}
-.commonBtn button:focus
-{
-  outline: none;
 }
 .socialLoginWrapper
 {

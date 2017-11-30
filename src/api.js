@@ -7,6 +7,7 @@ const usernameSignUp = (username, password) => {
       headers: {
           "Content-Type": "application/json"
       },
+      credentials: 'include',
       body: JSON.stringify({
         provider: "username",
         data: {
@@ -18,85 +19,19 @@ const usernameSignUp = (username, password) => {
 
   return fetch(authUrl + endpoints.signup, requestOptions)
   .then(function(response) {
+    const redirectUrl = window.localStorage.getItem("redirect_url");
+    if (response.ok) {
+      if (redirectUrl) {
+        window.location.href = redirectUrl;
+      }
+    } else {
+      console.log(response.json());
+      alert("An error occured");
+    }
     return response.json();
   })
   .catch(function(error) {
-    console.log('Request Failed:' + error);
-  });
-}
-
-const emailSignUp = (email, password) => {
-  var requestOptions = {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        provider: "email",
-        data: {
-          "email": email,
-          "password": password
-        }
-      })
-  };
-
-  return fetch(authUrl + endpoints.signup, requestOptions)
-  .then(function(response) {
-    // window.location.href = window.__env.redirectUrl;
-    console.log(response.json());
-    return response.json();
-  })
-  .catch(function(error) {
-    console.log('Request Failed:' + error);
-  });
-}
-
-const mobilePasswordSignUp = (mobile, password) => {
-  var requestOptions = {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        provider: "mobile-password",
-        data: {
-          "mobile": mobile,
-          "password": password
-        }
-      })
-  };
-
-  return fetch(authUrl + endpoints.signup, requestOptions)
-  .then(function(response) {
-    console.log(response);
-    return response.json();
-  })
-  .catch(function(error) {
-    console.log('Request Failed:' + error);
-  });
-}
-
-const mobileOnlySignUp = (mobile, password) => {
-  var requestOptions = {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        provider: "mobile-password",
-        data: {
-          "mobile": mobile,
-          "password": password
-        }
-      })
-  };
-
-  return fetch(authUrl + endpoints.signup, requestOptions)
-  .then(function(response) {
-    console.log(response);
-    return response.json();
-  })
-  .catch(function(error) {
+    alert("An error occured");
     console.log('Request Failed:' + error);
   });
 }
@@ -107,6 +42,7 @@ const usernameSignIn = (username, password) => {
       headers: {
           "Content-Type": "application/json"
       },
+      credentials: 'include',
       body: JSON.stringify({
         provider: "username",
         data: {
@@ -118,11 +54,50 @@ const usernameSignIn = (username, password) => {
 
   return fetch(authUrl + endpoints.login, requestOptions)
   .then(function(response) {
-    console.log(response.status);
-    console.log(response.json());
+    const redirectUrl = window.localStorage.getItem("redirect_url");
+    if (response.ok) {
+      window.location.href = redirectUrl;
+    } else {
+      console.log(response.json());
+      alert("An error occured");
+    }
     return response.json();
   })
   .catch(function(error) {
+    alert("An error occured");
+    console.log('Request Failed:' + error);
+  });
+}
+
+const emailSignUp = (email, password) => {
+  var requestOptions = {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        provider: "email",
+        data: {
+          "email": email,
+          "password": password
+        }
+      })
+  };
+
+  return fetch(authUrl + endpoints.signup, requestOptions)
+  .then(function(response) {
+    const redirectUrl = window.localStorage.getItem("redirect_url");
+    if (response.ok) {
+      window.location.href = redirectUrl;
+    } else {
+      console.log(response.json());
+      alert("An error occured");
+    }
+    return response.json();
+  })
+  .catch(function(error) {
+    alert("An error occured");
     console.log('Request Failed:' + error);
   });
 }
@@ -133,6 +108,7 @@ const emailSignIn = (email, password) => {
       headers: {
           "Content-Type": "application/json"
       },
+      credentials: 'include',
       body: JSON.stringify({
         provider: "email",
         data: {
@@ -144,6 +120,13 @@ const emailSignIn = (email, password) => {
 
   return fetch(authUrl + endpoints.login, requestOptions)
   .then(function(response) {
+    const redirectUrl = window.localStorage.getItem("redirect_url");
+    if (response.ok) {
+      window.location.href = redirectUrl;
+    } else {
+      console.log(response.json());
+      alert("An error occured");
+    }
     return response.json();
   })
   .catch(function(error) {
@@ -151,12 +134,46 @@ const emailSignIn = (email, password) => {
   });
 }
 
-const mobileSignIn = (mobile, password, country_code) => {
+const mobilePasswordSignUp = (mobile, password, country_code) => {
   var requestOptions = {
       method: "POST",
       headers: {
           "Content-Type": "application/json"
       },
+      credentials: 'include',
+      body: JSON.stringify({
+        provider: "mobile-password",
+        data: {
+          "mobile": mobile,
+          "password": password,
+          "country_code": country_code
+        }
+      })
+  };
+
+  return fetch(authUrl + endpoints.signup, requestOptions)
+  .then(function(response) {
+    const redirectUrl = window.localStorage.getItem("redirect_url");
+    if (response.ok) {
+      window.location.href = redirectUrl;
+    } else {
+      console.log(response.json());
+      alert("An error occured");
+    }
+    return response.json();
+  })
+  .catch(function(error) {
+    console.log('Request Failed:' + error);
+  });
+}
+
+const mobilePasswordSignIn = (mobile, password, country_code) => {
+  var requestOptions = {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      credentials: 'include',
       body: JSON.stringify({
         provider: "mobile-password",
         data: {
@@ -169,6 +186,40 @@ const mobileSignIn = (mobile, password, country_code) => {
 
   return fetch(authUrl + endpoints.login, requestOptions)
   .then(function(response) {
+    const redirectUrl = window.localStorage.getItem("redirect_url");
+    if (response.ok) {
+      window.location.href = redirectUrl;
+    } else {
+      console.log(response.json());
+      alert("An error occured");
+    }
+    return response.json();
+  })
+  .catch(function(error) {
+    console.log('Request Failed:' + error);
+  });
+}
+
+
+const mobileOnlySignUp = (mobile, password) => {
+  var requestOptions = {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        provider: "mobile-password",
+        data: {
+          "mobile": mobile,
+          "password": password
+        }
+      })
+  };
+
+  return fetch(authUrl + endpoints.signup, requestOptions)
+  .then(function(response) {
+    console.log(response);
     return response.json();
   })
   .catch(function(error) {
@@ -182,6 +233,7 @@ const mobileOtpSignIn = (mobile, otp, country_code) => {
       headers: {
           "Content-Type": "application/json"
       },
+      credentials: 'include',
       body: JSON.stringify({
         provider: "mobile",
         data: {
@@ -204,7 +256,7 @@ const mobileOtpSignIn = (mobile, otp, country_code) => {
 export {
   usernameSignIn,
   emailSignIn,
-  mobileSignIn,
+  mobilePasswordSignIn,
   mobileOtpSignIn,
   usernameSignUp,
   emailSignUp,

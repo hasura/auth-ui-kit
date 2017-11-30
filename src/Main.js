@@ -14,7 +14,13 @@ import SignUpUsername from './SignUpUsername';
 import SignUpEmail from './SignUpEmail';
 import SignUpMobile from './SignUpMobile';
 import SignUpMobileOtp from './SignUpMobileOtp';
+import getQueryVariable from './utils';
+
 class Main extends Component {
+  componentDidMount() {
+    const redirectParam = getQueryVariable('redirect_url');
+    window.localStorage.setItem("redirect_url", redirectParam);
+  }
   render() {
     let activeProvider = null;
     if (globals.username) {
@@ -26,7 +32,8 @@ class Main extends Component {
     } else if (globals.mobileOtp) {
       activeProvider = 'mobile-otp';
     }
-    const redirectUrl = "/" + activeProvider;
+    const signinRedirectUrl = "/signin/" + activeProvider;
+    const signupRedirectUrl = "/signup/" + activeProvider;
     return (
       <Router>
         <div>
@@ -35,7 +42,7 @@ class Main extends Component {
               // check if only one provider is enabled. and redirect accordingly.
               (globals.username?1:0)+(globals.email?1:0)+(globals.mobile?1:0)+(globals.mobileOtp?1:0) === 1
                 ? (
-                  <Redirect to={redirectUrl}/>
+                  <Redirect to={signinRedirectUrl}/>
                 ) : (
                   <Home />
                 )
@@ -46,11 +53,19 @@ class Main extends Component {
             <Route exact path="/signin/mobile-otp" component={MobileOtp}/>
             <Route exact path="/forgot-password" component={ForgotPassword}/>
             <Route exact path="/change-password" component={ChangePassword}/>
+            <Route exact path="/signup" render={() => (
+              // check if only one provider is enabled. and redirect accordingly.
+              (globals.username?1:0)+(globals.email?1:0)+(globals.mobile?1:0)+(globals.mobileOtp?1:0) === 1
+                ? (
+                  <Redirect to={signupRedirectUrl}/>
+                ) : (
+                  <SignUpHome />
+                )
+            )}/>
             <Route exact path="/signup/username" component={SignUpUsername}/>
             <Route exact path="/signup/email" component={SignUpEmail}/>
             <Route exact path="/signup/mobile" component={SignUpMobile}/>
             <Route exact path="/signup/mobile-otp" component={SignUpMobileOtp}/>
-            <Route exact path="/signup" component={SignUpHome}/>
           </div>
         </div>
       </Router>

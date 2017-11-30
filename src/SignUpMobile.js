@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {Helmet} from "react-helmet";
 import SocialLoginWrapper from './SocialLoginWrapper';
 import SignInMessage from './SignInMessage';
+import {mobilePasswordSignUp} from './api';
 import './style.css';
 class SignUpMobile extends Component {
 
@@ -20,22 +21,29 @@ class SignUpMobile extends Component {
             <div className='descriptionText'>
               Hello! Sign up with your mobile
             </div>
-            <form className='formGroupWrapper'>
+            <form className='formGroupWrapper' onSubmit={(e) => {
+                e.preventDefault();
+                if (this.password.value === this.confirm_password.value) {
+                  mobilePasswordSignUp(this.mobile.value, this.password.value, this.country_code.value);
+                } else {
+                  alert("Passwords don't match. Try again");
+                }
+              }}>
               <div className='formInput'>
-              <input className='countryInput' type="email" placeholder='Country code' />
-              <input className='mobileInput' type="email" placeholder='Enter mobile number' />
+              <input className='countryInput' type="number" placeholder='Country code' ref={(input) => { this.country_code = input; }} />
+              <input className='mobileInput' type="text" placeholder='Enter mobile number' ref={(input) => { this.mobile = input; }} />
               </div>
               <div className='formInput'>
-                <input type="password" placeholder='Password' />
+                <input type="password" placeholder='Password' ref={(input) => { this.password = input; }} />
               </div>
               <div className='formInput'>
-                <input type="password" placeholder='Confirm Password' />
+                <input type="password" placeholder='Confirm Password' ref={(input) => { this.confirm_password = input; }} />
               </div>
               <div className='linkDescription forgotPassword descriptionText'>
-                <a href='#'> Forgot Password?</a>
+                <a>Forgot Password?</a>
               </div>
               <div className='signInbtn'>
-                <a><button>Sign Up</button></a>
+                <a><button type="submit">Sign Up</button></a>
               </div>
             </form>
             <SocialLoginWrapper />

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {Helmet} from "react-helmet";
 import SocialLoginWrapper from './SocialLoginWrapper';
 import SignUpMessage from './SignUpMessage';
+import {mobilePasswordSignIn} from './api';
 import './style.css';
 class Mobile extends Component {
 
@@ -20,19 +21,22 @@ class Mobile extends Component {
             <div className='descriptionText'>
               Hello! Sign in with your mobile
             </div>
-            <form className='formGroupWrapper'>
+            <form className='formGroupWrapper' onSubmit={(e) => {
+                e.preventDefault();
+                mobilePasswordSignIn(this.mobile.value, this.password.value, this.country_code.value);
+              }}>
               <div className='formInput'>
-              <input className='countryInput' type="email" placeholder='Country code' />
-              <input className='mobileInput' type="email" placeholder='Enter mobile number' />
+              <input className='countryInput' type="number" placeholder='Country code' ref={(input) => { this.country_code = input; }} />
+              <input className='mobileInput' type="text" placeholder='Enter mobile number' ref={(input) => { this.mobile = input; }} />
               </div>
               <div className='formInput'>
-                <input type="password" placeholder='Password' />
+                <input type="password" placeholder='Password' ref={(input) => { this.password = input; }} />
               </div>
               <div className='linkDescription forgotPassword descriptionText'>
                 <a>Forgot Password?</a>
               </div>
               <div className='signInbtn'>
-                <a><button>Sign In</button></a>
+                <a><button type="submit">Sign In</button></a>
               </div>
             </form>
             <SocialLoginWrapper />
