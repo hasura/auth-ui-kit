@@ -17,19 +17,10 @@ class SignUpMobile extends Component {
     if (this.password.value === this.confirm_password.value) {
       mobilePasswordSignUp(this.mobile.value, this.password.value, this.country_code.value)
       .then( (resp) => {
-        if ( resp.ok ) {
-          this.setState({ ...this.state, mobile_number: this.mobile.value, country_code: this.country_code.value, isFirstStepCompleted: true});
-          return
-        }
-        return resp.json()
-        .then(( resp ) => {
-          return Promise.reject(resp);
-        })
-        .catch(( resp ) => {
-          return Promise.reject( resp );
-        });
+        this.setState({ ...this.state, mobile_number: this.mobile.value, country_code: this.country_code.value, isFirstStepCompleted: true});
+        return
       })
-      .catch( ( resp) => {
+      .catch( (resp) => {
         alert("Signup failed with: " + JSON.stringify(resp) );
       });
     } else {
@@ -77,9 +68,6 @@ class SignUpMobile extends Component {
                   </div>
                   <div className='formInput'>
                     <input type="password" placeholder='Confirm Password' ref={(input) => { this.confirm_password = input; }} />
-                  </div>
-                  <div className='linkDescription forgotPassword descriptionText'>
-                    <a>Forgot Password?</a>
                   </div>
                 </div>
               ) : (

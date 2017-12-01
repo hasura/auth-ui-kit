@@ -27,11 +27,11 @@ class Mobile extends Component {
   handleLogin(e) {
     e.preventDefault();
     mobilePasswordSignIn(this.mobile.value, this.password.value, this.country_code.value)
-    .then((resp) => {
+    .catch((resp) => {
       if ( resp.code === "not_verified" ) {
         this.setState({ ...this.state, mobile_number: this.mobile.value, country_code: this.country_code.value, isNotVerified: true });
       }
-      alert("Login failed: " + resp.message);
+      alert("Login failed: " + JSON.stringify(resp));
     });
   }
   handleVerification(e) {
@@ -67,7 +67,7 @@ class Mobile extends Component {
               <form className='formGroupWrapper'>
               { !this.state.isNotVerified ? (
                 <div>
-                  <div className='formInput'>
+                  <div key="1001" className='formInput'>
                     <input className='countryInput' type="number" placeholder='Country code' ref={(input) => { this.country_code = input; }} />
                     <input className='mobileInput' type="text" placeholder='Enter mobile number' ref={(input) => { this.mobile = input; }} />
                   </div>
@@ -79,7 +79,7 @@ class Mobile extends Component {
                   </div>
                 </div>
               ) : (
-                <div className='formInput'>
+                <div key="1000" className='formInput'>
                   <input type="text" placeholder='otp' ref={ (input) => { this.otp = input }} />
                   <div className="">
                     Looks like you haven't verified your mobile number. Please verify your mobile by clicking on the send otp link below.<br/>
@@ -131,15 +131,12 @@ class ForgotPassword extends Component {
     e.preventDefault();
     sendForgotPasswordOTP(this.mobile.value, this.country_code.value)
     .then(( resp ) => {
-      if ( resp.ok ) {
-        this.setState({ ...this.state, mobile_number: this.mobile.value, country_code: this.country_code.value, forgotPasswordInitiated: true });
-        return;
-      }
-      return resp.json()
-      .then(( resp ) => {
-        alert("Error sending otp: " + JSON.stringify(resp));
-        return Promise.reject();
-      });
+      this.setState({ ...this.state, mobile_number: this.mobile.value, country_code: this.country_code.value, forgotPasswordInitiated: true });
+      return;
+    })
+    .catch(( resp ) => {
+      alert("Error sending otp: " + JSON.stringify(resp));
+      return Promise.reject();
     });
   }
   resetMobilePassword(e) {
@@ -165,14 +162,14 @@ class ForgotPassword extends Component {
           <form className='formGroupWrapper'>
             { !this.state.forgotPasswordInitiated ? (
               <div>
-                <div className='formInput'>
+                <div key="1002" className='formInput'>
                   <input className='countryInput' type="number" placeholder='Country code' ref={(input) => { this.country_code = input; }} />
                   <input className='mobileInput' type="text" placeholder='Enter mobile number' ref={(input) => { this.mobile = input; }} />
                 </div>
               </div>
             ) : (
               <div>
-                <div className='formInput'>
+                <div key="1003" className='formInput'>
                   <input type="text" placeholder='OTP' ref={(input) => { this.forgot_otp = input; }} />
                 </div>
                 <div className='formInput'>

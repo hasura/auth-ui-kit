@@ -20,18 +20,17 @@ class SignUpMobileOtp extends Component {
       alert('OTP sent to mobile with number ' + this.state.mobile_number + ' again');
     })
     .catch( ( resp ) => {
-      alert('Error sending otp again');
+      alert("Error sending OTP: " + JSON.stringify(resp));
     });
   }
   handleSignup(e) {
-    
     mobileOtpSignUp(this.mobile_number.value, this.country_code.value)
     .then((resp) => {
       alert('OTP sent to your mobile number');
       this.setState({ ...this.state, mobile_number: this.mobile_number.value, country_code: this.country_code.value, isFirstStepCompleted: true});
     })
     .catch(( resp) => {
-      alert('Failed');
+      alert("Error sending OTP: " + JSON.stringify(resp));
     });
   }
   handleLogin() {
