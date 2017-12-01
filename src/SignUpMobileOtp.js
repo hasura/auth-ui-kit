@@ -56,12 +56,12 @@ class SignUpMobileOtp extends Component {
               e.preventDefault();
             }}>
               { !this.state.isFirstStepCompleted ? (
-                <div className='formInput'>
+                <div key="1" className='formInput'>
                   <input className='countryInput' type="text" placeholder='Country code' ref={ (input) => { this.country_code = input }} />
                   <input className='mobileInput' type="text" placeholder='Enter mobile number' ref={ (input) => { this.mobile_number= input }} />
                 </div>
               ) : (
-                <div className='formInput'>
+                <div key="2" className='formInput'>
                   <input type="text" placeholder='otp' ref={ (input) => { this.otp = input }} />
                   <div className="">
                     Haven't received OTP yet?
