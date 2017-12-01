@@ -1,9 +1,11 @@
 import globals from './globals';
 
-const clusterName = "h34-barn99-stg.hasura-app.io";
+const clusterName = "h34-enduring88-stg.hasura-app.io";
 const authVersion = "v1";
 const authUrl = "https://auth." + clusterName + "/" + authVersion;
 const endpoints = {
+  'otp_initiate': '/providers/mobile/send-otp',
+  'resend_otp': '/providers/mobile/resend-otp',
 	'signup': '/signup',
 	'login': '/login',
 	'facebookLogin': 'https://www.facebook.com/v2.11/dialog/oauth?client_id=' + globals.facebookClientId + '&redirect_uri=' + globals.redirectUrl,
