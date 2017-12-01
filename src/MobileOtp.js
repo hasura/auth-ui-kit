@@ -26,12 +26,10 @@ class MobileOtp extends Component {
     });
   }
   handleSignup(e) {
-    console.log('Handle Signup called');
-    console.log('Activating verification');
     
     mobileOtpSignUp(this.mobile_number.value, this.country_code.value)
     .then((resp) => {
-      alert('Succeeded');
+      alert('OTP sent to your mobile number');
       this.setState({ ...this.state, mobile_number: this.mobile_number.value, country_code: this.country_code.value, isFirstStepCompleted: true});
     })
     .catch(( resp) => {
@@ -42,8 +40,6 @@ class MobileOtp extends Component {
     mobileOtpLogin(this.state.mobile_number, this.state.country_code, this.otp.value);
   }
   render() {
-    this.mobile_number = null;
-    this.country_code = null;
     return (
       <div className='landingPageWrapper container-fluid'>
         <Helmet>

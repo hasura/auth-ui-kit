@@ -4,8 +4,13 @@ const clusterName = "h34-enduring88-stg.hasura-app.io";
 const authVersion = "v1";
 const authUrl = "https://auth." + clusterName + "/" + authVersion;
 const endpoints = {
+  'forgot_password_otp': '/providers/mobile-password/forgot-password',
+  'reset_password_otp': '/providers/mobile-password/reset-password',
+  'verify_mobile_password': '/providers/mobile-password/verify-otp',
+  'verify_mobile_otp': '/providers/mobile/verify-otp',
   'otp_initiate': '/providers/mobile/send-otp',
   'resend_otp': '/providers/mobile/resend-otp',
+  'resend_mobile_password_otp': '/providers/mobile-password/resend-otp',
 	'signup': '/signup',
 	'login': '/login',
 	'facebookLogin': 'https://www.facebook.com/v2.11/dialog/oauth?client_id=' + globals.facebookClientId + '&redirect_uri=' + globals.redirectUrl,

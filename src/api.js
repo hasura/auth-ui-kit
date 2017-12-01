@@ -229,7 +229,73 @@ const resendMobileOtp = (mobile_number, country_code) => {
   };
 
   return fetch(authUrl + endpoints.resend_otp, requestOptions);
-}
+};
+
+const sendForgotPasswordOTP = (mobile_number, country_code) => {
+  var requestOptions = {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        "mobile": mobile_number,
+        "country_code": country_code
+      })
+  };
+
+  return fetch(authUrl + endpoints.forgot_password_otp, requestOptions);
+};
+
+const resetMobilePassword = (mobile_number, country_code, otp, password) => {
+  var requestOptions = {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        "mobile": mobile_number,
+        "country_code": country_code,
+        "password": password,
+        "otp": otp
+      })
+  };
+
+  return fetch(authUrl + endpoints.reset_password_otp, requestOptions)
+  .then(function(response) {
+    const redirectUrl = window.localStorage.getItem("redirect_url");
+    if (response.ok) {
+      if (redirectUrl) {
+        window.location.href = redirectUrl;
+      }
+    } else {
+      console.log(response.json());
+      alert("An error occured");
+    }
+    return response.json();
+  })
+  .catch(function(error) {
+    alert("An error occured");
+    console.log('Request Failed:' + error);
+  });
+};
+
+const resendMobilePasswordOtp = (mobile_number, country_code) => {
+  var requestOptions = {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        "mobile": mobile_number,
+        "country_code": country_code
+      })
+  };
+
+  return fetch(authUrl + endpoints.resend_mobile_password_otp, requestOptions);
+};
 
 const mobilePasswordSignUp = (mobile, password, country_code) => {
   var requestOptions = {
@@ -248,21 +314,8 @@ const mobilePasswordSignUp = (mobile, password, country_code) => {
       })
   };
 
-  return fetch(authUrl + endpoints.signup, requestOptions)
-  .then(function(response) {
-    const redirectUrl = window.localStorage.getItem("redirect_url");
-    if (response.ok) {
-      window.location.href = redirectUrl;
-    } else {
-      console.log(response.json());
-      alert("An error occured");
-    }
-    return response.json();
-  })
-  .catch(function(error) {
-    console.log('Request Failed:' + error);
-  });
-}
+  return fetch(authUrl + endpoints.signup, requestOptions);
+};
 
 const mobilePasswordSignIn = (mobile, password, country_code) => {
   var requestOptions = {
@@ -286,6 +339,33 @@ const mobilePasswordSignIn = (mobile, password, country_code) => {
     const redirectUrl = window.localStorage.getItem("redirect_url");
     if (response.ok) {
       window.location.href = redirectUrl;
+    }
+    return response.json();
+  })
+  .catch(function(error) {
+    console.log('Request Failed:' + error);
+  });
+}
+
+const mobilePasswordVerify = (mobile, country_code, otp) => {
+  var requestOptions = {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        "mobile": mobile,
+        "country_code": country_code,
+        "otp": otp 
+      })
+  };
+
+  return fetch(authUrl + endpoints.verify_mobile_password, requestOptions)
+  .then(function(response) {
+    const redirectUrl = window.localStorage.getItem("redirect_url");
+    if (response.ok) {
+      window.location.href = redirectUrl;
     } else {
       console.log(response.json());
       alert("An error occured");
@@ -297,6 +377,35 @@ const mobilePasswordSignIn = (mobile, password, country_code) => {
   });
 }
 
+const mobileOtpVerify = (mobile, country_code, otp) => {
+  var requestOptions = {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        "mobile": mobile,
+        "country_code": country_code,
+        "otp": otp 
+      })
+  };
+
+  return fetch(authUrl + endpoints.verify_mobile_otp, requestOptions)
+  .then(function(response) {
+    const redirectUrl = window.localStorage.getItem("redirect_url");
+    if (response.ok) {
+      window.location.href = redirectUrl;
+    } else {
+      console.log(response.json());
+      alert("An error occured");
+    }
+    return response.json();
+  })
+  .catch(function(error) {
+    console.log('Request Failed:' + error);
+  });
+}
 
 const mobileOnlySignUp = (mobile, password) => {
   var requestOptions = {
@@ -362,7 +471,12 @@ export {
   mobileOtpSignUp,
   mobileOtpLogin,
   mobileOtpSignupFinal,
-  resendMobileOtp
+  resendMobileOtp,
+  resendMobilePasswordOtp,
+  mobilePasswordVerify,
+  mobileOtpVerify,
+  sendForgotPasswordOTP,
+  resetMobilePassword,
   /*
   mobileSignUp,
   */

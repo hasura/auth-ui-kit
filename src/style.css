@@ -5,6 +5,15 @@ body
   margin: 0;
   color: #333;
 }
+.go_back {
+  cursor: pointer;
+  position: absolute;
+  margin-left: 20px;
+  color: #FFCA27;
+  &:hover {
+    color: #EAB41C;
+  }
+}
 .hide
 {
   display: none !important;
@@ -119,6 +128,7 @@ body
 {
   text-align: right;
   padding: 15px 0;
+  cursor: pointer;
 }
 .commonBtn
 {
