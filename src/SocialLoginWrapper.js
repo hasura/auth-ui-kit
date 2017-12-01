@@ -15,22 +15,22 @@ class SocialLoginWrapper extends Component {
           </div>
           <div className='socialLoginIconWrapper'>
             {globals.facebook ?
-            <div className='socialLoginIcon'>
+            <div className='socialLoginIcon LightSocialLoginIcon'>
               <a href={endpoints.facebookLogin}><i className='fa fa-facebook' aria-hidden='true'></i></a>
             </div>
             : null}
             {globals.google ?
-            <div className='socialLoginIcon'>
+            <div className='socialLoginIcon LightSocialLoginIcon'>
               <a href={endpoints.googleLogin}><i className='fa fa-google' aria-hidden='true'></i></a>
             </div>
             : null}
             {globals.github ?
-            <div className='socialLoginIcon'>
+            <div className='socialLoginIcon LightSocialLoginIcon'>
               <a href={endpoints.githubLogin}><i className='fa fa-github' aria-hidden='true'></i></a>
             </div>
             : null}
             {globals.linkedin ?
-            <div className='socialLoginIcon'>
+            <div className='socialLoginIcon LightSocialLoginIcon'>
               <a href={endpoints.linkedinLogin}><i className='fa fa-linkedin' aria-hidden='true'></i></a>
             </div>
             : null}

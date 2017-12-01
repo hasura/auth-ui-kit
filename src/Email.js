@@ -8,12 +8,12 @@ class Email extends Component {
 
   render() {
     return (
-      <div className='landingPageWrapper container-fluid'>
+      <div className='landingPageWrapper LightLandingPageWrapper container-fluid'>
         <Helmet>
           <meta charSet="utf-8" />
           <title>Sign in with Email</title>
         </Helmet>
-        <div className='landingPageInnerWrapper'>
+        <div className='landingPageInnerWrapper LightLandingPageInnerWrapper'>
           <div className='signUpWrapper'>
             <div className='headerDescription'>
               Sign In
@@ -21,7 +21,7 @@ class Email extends Component {
             <div className='descriptionText'>
               Hello! Sign in with your email
             </div>
-            <form className='formGroupWrapper'>
+            <form className='LightFormGroupWrapper'>
               <div className='formInput'>
                 <input type="email" placeholder='Sign in with Email' />
               </div>

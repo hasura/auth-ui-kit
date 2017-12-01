@@ -8,12 +8,12 @@ import SignUpMessage from './SignUpMessage';
 class Home extends Component {
   render() {
     return (
-      <div className='landingPageWrapper container-fluid'>
+      <div className='landingPageWrapper LightLandingPageWrapper container-fluid'>
         <Helmet>
           <meta charSet="utf-8" />
           <title>Sign In</title>
         </Helmet>
-        <div className='landingPageInnerWrapper'>
+        <div className='landingPageInnerWrapper LightLandingPageInnerWrapper'>
           <div className='signUpWrapper'>
             <div className='headerDescription'>
               Sign In

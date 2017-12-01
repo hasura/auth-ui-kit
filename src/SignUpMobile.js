@@ -8,12 +8,12 @@ class SignUpMobile extends Component {
 
   render() {
     return (
-      <div className='landingPageWrapper container-fluid'>
+      <div className='landingPageWrapper LightLandingPageWrapper container-fluid'>
         <Helmet>
           <meta charSet="utf-8" />
           <title>Sign up with Mobile</title>
         </Helmet>
-        <div className='landingPageInnerWrapper'>
+        <div className='landingPageInnerWrapper LightLandingPageInnerWrapper'>
           <div className='signUpWrapper'>
             <div className='headerDescription'>
               Sign Up
@@ -21,7 +21,7 @@ class SignUpMobile extends Component {
             <div className='descriptionText'>
               Hello! Sign up with your mobile
             </div>
-            <form className='formGroupWrapper' onSubmit={(e) => {
+            <form className='LightFormGroupWrapper' onSubmit={(e) => {
                 e.preventDefault();
                 if (this.password.value === this.confirm_password.value) {
                   mobilePasswordSignUp(this.mobile.value, this.password.value, this.country_code.value);

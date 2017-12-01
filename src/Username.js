@@ -9,12 +9,12 @@ class Username extends Component {
 
   render() {
     return (
-      <div className='landingPageWrapper container-fluid'>
+      <div className='landingPageWrapper LightLandingPageWrapper container-fluid'>
         <Helmet>
           <meta charSet="utf-8" />
           <title>Sign in with Username</title>
         </Helmet>
-        <div className='landingPageInnerWrapper'>
+        <div className='landingPageInnerWrapper LightLandingPageInnerWrapper'>
           <div className='signUpWrapper'>
             <div className='headerDescription'>
               Sign In
@@ -22,7 +22,7 @@ class Username extends Component {
             <div className='descriptionText'>
               Hello! Sign in with your username or email
             </div>
-            <form className='formGroupWrapper' onSubmit={(e) => {
+            <form className='LightFormGroupWrapper' onSubmit={(e) => {
                 e.preventDefault();
                 usernameSignIn(this.username.value, this.password.value);
               }}>
