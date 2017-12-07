@@ -5,12 +5,12 @@ class ChangePassword extends Component {
 
   render() {
     return (
-      <div className='landingPageWrapper container-fluid'>
+      <div className='landingPageWrapper LightLandingPageWrapper container-fluid'>
         <Helmet>
           <meta charSet="utf-8" />
           <title>Change Password</title>
         </Helmet>
-        <div className='landingPageInnerWrapper'>
+        <div className='landingPageInnerWrapper LightLandingPageInnerWrapper'>
           <div className='signUpWrapper'>
             <div className='headerDescription addPaddTop'>
               Change Password
@@ -18,13 +18,13 @@ class ChangePassword extends Component {
             <div className='descriptionText'>
               Hello! Change your password
             </div>
-            <form className='formGroupWrapper'>
+            <form className='LightFormGroupWrapper'>
               <input type="password" placeholder='Enter new password' />
             </form>
-            <form className='formGroupWrapper'>
+            <form className='LightFormGroupWrapper'>
               <input type="password" placeholder='confirm new password' />
             </form>
-            <form className='formGroupWrapper hide'>
+            <form className='LightFormGroupWrapper hide'>
               <input type="text" placeholder='otp' />
             </form>
             <div className='signInbtn'>

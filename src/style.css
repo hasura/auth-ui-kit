@@ -3,7 +3,6 @@
 body
 {
   margin: 0;
-  color: #333;
 }
 .go_back {
   cursor: pointer;
@@ -37,19 +36,32 @@ body
   width: 66% !important;
   display: inline-block;
 }
-
+.DarkLandingPageWrapper
+{
+  background-color: #333;
+  color: #fff;
+}
+.LightLandingPageWrapper
+{
+  background-color: #fff;
+  color: #333;
+}
+.DarkLandingPageInnerWrapper
+{
+  background-color: #444;
+}
+.LightLandingPageInnerWrapper
+{
+  background-color: #f4f4f4;
+}
 .landingPageWrapper
 {
-  /* background-color: #333; */
-  background-color: #fff;
   width: calc(100vw - 80px);
   height: calc(100vh - 80px);
   padding: 40px;
 }
 .landingPageInnerWrapper
 {
-  /* background-color: #444; */
-  background-color: #f4f4f4;
   text-align: center;
   width: 100%;
   border-radius: 10px;
@@ -84,15 +96,32 @@ body
   margin: 0 auto;
   padding: 0px 10px;
 }
-.formGroupWrapper
+.LightFormGroupWrapper, .DarkFormGroupWrapper
 {
   padding-top: 20px;
 }
-.formGroupWrapper .formInput
+.LightFormGroupWrapper .formInput, .DarkFormGroupWrapper .formInput
 {
   padding-bottom: 15px;
 }
-.formGroupWrapper .formInput input
+.DarkFormGroupWrapper .formInput input
+{
+  width: calc( 100% - 15px );
+  height: 40px;
+  border-radius: 5px;
+  border: 2px solid #333 !important;
+  padding: 0;
+  padding-left: 10px;
+  font-size: 14px;
+  background-color: #555 !important;
+  color: #fff !important;
+}
+.DarkFormGroupWrapper .formInput input:focus
+{
+  border: 2px solid #222 !important;
+  outline: none;
+}
+.LightFormGroupWrapper .formInput input
 {
   width: calc( 100% - 15px );
   height: 40px;
@@ -106,7 +135,7 @@ body
   /* background-color: #555 !important; */
   /* color: #fff !important; */
 }
-.formGroupWrapper .formInput input:focus
+.LightFormGroupWrapper .formInput input:focus
 {
   border: 2px solid #222 !important;
   outline: none;
@@ -227,11 +256,19 @@ body
   width: 20%;
   text-align: center;
 }
+.LightSocialLoginIcon a i
+{
+  color:  #333;
+}
+.DarkSocialLoginIcon a i
+{
+  color:  #333;
+}
 .socialLoginIcon a i
 {
   font-size: 30px;
   cursor: pointer;
-  color:  #333;
+
 }
 .socialLoginIcon a i:hover
 {

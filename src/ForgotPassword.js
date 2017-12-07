@@ -6,12 +6,12 @@ class ForgotPassword extends Component {
 
   render() {
     return (
-      <div className='landingPageWrapper container-fluid'>
+      <div className='landingPageWrapper LightLandingPageWrapper container-fluid'>
         <Helmet>
           <meta charSet="utf-8" />
           <title>Forgot Password</title>
         </Helmet>
-        <div className='landingPageInnerWrapper'>
+        <div className='landingPageInnerWrapper LightLandingPageInnerWrapper'>
           <div className='signUpWrapper'>
             <div className='headerDescription'>
               Forgot Password
@@ -19,7 +19,7 @@ class ForgotPassword extends Component {
             <div className='descriptionText'>
               Hello! Submit your username to reset your password
             </div>
-            <form className='formGroupWrapper'>
+            <form className='LightFormGroupWrapper'>
               <div className='formInput'>
                 <input type="email" placeholder='Enter username' />
               </div>
