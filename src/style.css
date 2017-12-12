@@ -1,0 +1,309 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700');
+body
+{
+  margin: 0;
+}
+.go_back {
+  cursor: pointer;
+  position: absolute;
+  margin-left: 20px;
+  color: #FFCA27;
+  &:hover {
+    color: #EAB41C;
+  }
+}
+.hide
+{
+  display: none !important;
+}
+.textDecoration
+{
+  text-decoration: none;
+}
+.textDecoration:hover
+{
+  text-decoration: underline;
+}
+.countryInput
+{
+  width: 25% !important;
+  display: inline-block;
+  margin-right: 2%;
+}
+.mobileInput
+{
+  width: 66% !important;
+  display: inline-block;
+}
+.DarkLandingPageWrapper
+{
+  background-color: #333;
+  color: #fff;
+}
+.LightLandingPageWrapper
+{
+  background-color: #fff;
+  color: #333;
+}
+.DarkLandingPageInnerWrapper
+{
+  background-color: #444;
+}
+.LightLandingPageInnerWrapper
+{
+  background-color: #f4f4f4;
+}
+.landingPageWrapper
+{
+  width: calc(100vw - 80px);
+  height: calc(100vh - 80px);
+  padding: 40px;
+}
+.landingPageInnerWrapper
+{
+  text-align: center;
+  width: 100%;
+  border-radius: 10px;
+  height: calc(100% - 40px);
+  overflow: scroll;
+  padding: 20px 0;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+}
+.headerDescription
+{
+  font-family: 'Raleway';
+  font-weight: 600;
+  font-size: 22px;
+}
+.addPaddTop
+{
+  padding-top: 20px;
+}
+.descriptionText
+{
+  font-family: 'Open Sans';
+  font-size: 14px;
+  padding-top: 10px;
+}
+.signUpWrapper
+{
+  width: 400px;
+  margin: 0 auto;
+  padding: 0px 10px;
+}
+.LightFormGroupWrapper, .DarkFormGroupWrapper
+{
+  padding-top: 20px;
+}
+.LightFormGroupWrapper .formInput, .DarkFormGroupWrapper .formInput
+{
+  padding-bottom: 15px;
+}
+.DarkFormGroupWrapper .formInput input
+{
+  width: calc( 100% - 15px );
+  height: 40px;
+  border-radius: 5px;
+  border: 2px solid #333 !important;
+  padding: 0;
+  padding-left: 10px;
+  font-size: 14px;
+  background-color: #555 !important;
+  color: #fff !important;
+}
+.DarkFormGroupWrapper .formInput input:focus
+{
+  border: 2px solid #222 !important;
+  outline: none;
+}
+.LightFormGroupWrapper .formInput input
+{
+  width: calc( 100% - 15px );
+  height: 40px;
+  border-radius: 5px;
+  border: 2px solid #ccc;
+  /* border: 2px solid #333 !important; */
+  padding: 0;
+  padding-left: 10px;
+  font-size: 14px;
+
+  /* background-color: #555 !important; */
+  /* color: #fff !important; */
+}
+.LightFormGroupWrapper .formInput input:focus
+{
+  border: 2px solid #222 !important;
+  outline: none;
+}
+.linkDescription
+{
+  color: #FF993A;
+}
+.linkDescription a
+{
+  color: #FF993A;
+  text-decoration: none;
+}
+.linkDescription a:hover
+{
+  text-decoration: underline;
+}
+.forgotPassword
+{
+  text-align: right;
+  padding: 15px 0;
+  cursor: pointer;
+}
+.commonBtn
+{
+  text-align: center;
+}
+.signInbtn a button
+{
+  background-color: #FFCA27;
+  width: 100%;
+  height: 44px;
+  text-align: center;
+  border: 1px solid #FFCA27;
+  text-transform: uppercase;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 15px;
+  color: #fff;
+}
+.signInbtn a button:hover
+{
+  background-color: #EAB41C;
+}
+.signInbtn a button:focus
+{
+  outline:  none;
+}
+.commonBtn a button
+{
+  /* background-color: #FFCA27; */
+  max-width: 300px;
+  min-width: 300px;
+  height: 44px;
+  text-align: left;
+  /* border: 1px solid #FFCA27; */
+  text-transform: uppercase;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 15px;
+  color: #fff;
+}
+.commonBtn a
+{
+  text-decoration: none;
+}
+.commonBtn a button span i
+{
+  padding: 0 20px;
+  font-size: 20px;
+}
+.commonBtn button:focus
+{
+  outline: none;
+}
+.usernameLogin a button
+{
+  background-color: #FFCA27;
+  border: 1px solid #FFCA27;
+}
+.usernameLogin a button:hover
+{
+  background-color: #EAB41C;
+}
+.emailLogin a button
+{
+  background-color: #db4437;
+  border: 1px solid #db4437;
+  color: #fff;
+}
+.emailLogin a button:hover
+{
+  background-color: #c62f28;
+  border: 1px solid #c62f28;
+}
+.mobileLogin a button
+{
+  background-color: #02bd7e;
+  border: 1px solid #02bd7e;
+}
+.mobileLogin a button:hover
+{
+  background-color: #059662;
+  border: 1px solid #059662;
+}
+.socialLoginWrapper
+{
+  padding: 15px 0;
+}
+.socialLoginIconWrapper
+{
+  margin: 0 auto;
+  padding: 20px 0;
+}
+.socialLoginIcon
+{
+  display: inline-block;
+  width: 20%;
+  text-align: center;
+}
+.LightSocialLoginIcon a i
+{
+  color:  #333;
+}
+.DarkSocialLoginIcon a i
+{
+  color:  #333;
+}
+.socialLoginIcon a i
+{
+  font-size: 30px;
+  cursor: pointer;
+
+}
+.socialLoginIcon a i:hover
+{
+  color: #aaa;
+}
+@media (max-width: 767px)
+{
+  .countryInput
+  {
+    width: 27% !important;
+    display: inline-block;
+    margin-right: 2%;
+  }
+  .mobileInput
+  {
+    width: 60% !important;
+    display: inline-block;
+  }
+  .landingPageWrapper
+  {
+    padding: 20px;
+    width: calc(100vw - 40px);
+    height: calc(100vh - 40px);
+  }
+  .signUpWrapper
+  {
+    width: 260px;
+  }
+  .commonBtn a button
+  {
+    max-width: 254px;
+    min-width: 254px;
+  }
+  .commonBtn a button span i
+  {
+    padding: 0 10px;
+  }
+}

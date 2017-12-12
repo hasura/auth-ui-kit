@@ -1,0 +1,19 @@
+{
+  "name": "auth-ui-kit",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^16.1.1",
+    "react-dom": "^16.1.1",
+    "react-helmet": "^5.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.0.17"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "build:clean": "cd build && mv static/js/*.js main.js && mv static/css/*.css main.css && rm -r static",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
