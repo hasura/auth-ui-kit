@@ -3,7 +3,8 @@ import globals from './globals';
 const hostName = window.location.hostname;
 let splitHost = hostName.split(".");
 splitHost.shift();
-const clusterName = splitHost.join(".");
+// const clusterName = splitHost.join(".");
+const clusterName = "h34-barn99-stg.hasura-app.io";
 const authVersion = "v1";
 const authUrl = window.location.protocol + "//auth." + clusterName + "/" + authVersion;
 
@@ -14,6 +15,7 @@ if ( redirectUrl === undefined || redirectUrl === 'undefined' ) {
 console.log(redirectUrl);
 const endpoints = {
   'forgot_password_otp': '/providers/mobile-password/forgot-password',
+  'email_forgot_password': '/providers/email/forgot',
   'reset_password_otp': '/providers/mobile-password/reset-password',
   'verify_mobile_password': '/providers/mobile-password/verify-otp',
   'verify_mobile_otp': '/providers/mobile/verify-otp',

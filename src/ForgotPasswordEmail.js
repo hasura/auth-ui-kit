@@ -3,7 +3,8 @@ import {Helmet} from "react-helmet";
 import './style.css';
 import SignUpMessage from './SignUpMessage';
 import globals from './globals';
-class ForgotPassword extends Component {
+import {emailForgotPassword} from './api';
+class ForgotPasswordEmail extends Component {
 
   render() {
     
@@ -23,17 +24,21 @@ class ForgotPassword extends Component {
               Forgot Password
             </div>
             <div className='descriptionText'>
-              Hello! Submit your username to reset your password
+              Hello! Submit your email to reset your password
             </div>
-            <form className={formGroupThemeClass}>
+            <form className={formGroupThemeClass} onSubmit={(e) => {
+                e.preventDefault();
+                if (this.email.value !== '') {
+                  emailForgotPassword(this.email.value);
+                } else {
+                  alert("Enter an email id to send a forgot password email");
+                }
+              }}>
               <div className='formInput'>
-                <input type="email" placeholder='Enter username' />
-              </div>
-              <div className='formInput'>
-                <input type="text" placeholder='otp' />
+                <input type="email" placeholder='Enter email' ref={(input) => { this.email = input; }} />
               </div>
               <div className='signInbtn'>
-                <a><button>Submit</button></a>
+                <a><button type='submit'>Submit</button></a>
               </div>
             </form>
             <SignUpMessage />
@@ -44,4 +49,4 @@ class ForgotPassword extends Component {
   }
 }
 
-export default ForgotPassword
+export default ForgotPasswordEmail

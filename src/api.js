@@ -413,6 +413,24 @@ const mobileOtpSignIn = (mobile, otp, country_code) => {
   });
 }
 
+const emailForgotPassword = (email) => {
+  var requestOptions = {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        "email": email
+      })
+  };
+
+  return makeRequest(authUrl + endpoints.email_forgot_password, requestOptions)
+  .catch(function(error) {
+    alert("Error sending an email for forgot password: " + JSON.stringify(error));
+  });
+}
+
 export {
   usernameSignIn,
   emailSignIn,
@@ -431,6 +449,7 @@ export {
   mobileOtpVerify,
   sendForgotPasswordOTP,
   resetMobilePassword,
+  emailForgotPassword
   /*
   mobileSignUp,
   */

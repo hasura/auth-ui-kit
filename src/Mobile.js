@@ -116,9 +116,7 @@ class Mobile extends Component {
             </div>
           </div>
         ) : (
-          <div>
-            <ForgotPassword toggleForgotPassword={ this.toggleForgotPassword.bind(this) }/>
-          </div>
+          <ForgotPassword toggleForgotPassword={ this.toggleForgotPassword.bind(this) }/>
         )}
       </div>
     );
@@ -153,8 +151,10 @@ class ForgotPassword extends Component {
     alert('Password doesn\'t match');
   }
   render() {
+    const pageInnerThemeClass = globals.theme === 'light' ? 'LightLandingPageInnerWrapper' : 'DarkLandingPageInnerWrapper';
+    const formGroupThemeClass = globals.theme === 'light' ? 'LightFormGroupWrapper' : 'DarkFormGroupWrapper';
     return (
-      <div className="landingPageInnerWrapper">
+      <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
         <div className="signUpWrapper">
           <div className="go_back" onClick={ this.props.toggleForgotPassword }>
             Go back
@@ -165,7 +165,7 @@ class ForgotPassword extends Component {
           <div className='descriptionText'>
             Enter your registered mobile number to get an OTP to reset your password
           </div>
-          <form className='formGroupWrapper'>
+          <form className={formGroupThemeClass}>
             { !this.state.forgotPasswordInitiated ? (
               <div>
                 <div key="1002" className='formInput'>

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import {Helmet} from 'react-helmet';
-import { NavLink } from "react-router-dom";
 import SocialLoginWrapper from './SocialLoginWrapper';
 import {usernameSignIn} from './api';
 import SignUpMessage from './SignUpMessage';
@@ -37,9 +36,6 @@ class Username extends Component {
               </div>
               <div className='formInput'>
                 <input type="password" placeholder='Password' ref={(input) => { this.password = input; }} />
-              </div>
-              <div className='linkDescription forgotPassword descriptionText'>
-                <NavLink to='/ui/forgot-password'> Forgot Password?</NavLink>
               </div>
               <div className='signInbtn'>
                 <a><button type="submit">Sign In</button></a>

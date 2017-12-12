@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {Helmet} from "react-helmet";
 import { NavLink } from "react-router-dom";
+import {emailSignIn} from './api';
 import SocialLoginWrapper from './SocialLoginWrapper';
 import SignUpMessage from './SignUpMessage';
 import globals from './globals';
@@ -27,18 +28,21 @@ class Email extends Component {
             <div className='descriptionText'>
               Hello! Sign in with your email
             </div>
-            <form className={formGroupThemeClass}>
+            <form className={formGroupThemeClass} onSubmit={(e) => {
+                e.preventDefault();
+                emailSignIn(this.email.value, this.password.value);
+              }}>
               <div className='formInput'>
-                <input type="email" placeholder='Sign in with Email' />
+                <input type="email" placeholder='Email' ref={(input) => { this.email = input; }} />
               </div>
               <div className='formInput'>
-                <input type="password" placeholder='Password' />
+                <input type="password" placeholder='Password' ref={(input) => { this.password = input; }} />
               </div>
               <div className='linkDescription forgotPassword descriptionText'>
                 <NavLink to='/ui/forgot-password'> Forgot Password?</NavLink>
               </div>
               <div className='signInbtn'>
-                <a><button>Sign In</button></a>
+                <a><button type='submit'>Sign In</button></a>
               </div>
             </form>
             <SocialLoginWrapper />

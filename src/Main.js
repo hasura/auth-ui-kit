@@ -6,7 +6,7 @@ import Username from "./Username";
 import Email from "./Email";
 import Mobile from "./Mobile";
 import MobileOtp from "./MobileOtp";
-import ForgotPassword from "./ForgotPassword";
+import ForgotPasswordEmail from "./ForgotPasswordEmail";
 import ChangePassword from "./ChangePassword";
 import globals from './globals';
 import SignUpHome from './SignUpHome';
@@ -51,7 +51,7 @@ class Main extends Component {
             <Route exact path="/ui/signin/email" component={Email}/>
             <Route exact path="/ui/signin/mobile" component={Mobile}/>
             <Route exact path="/ui/signin/mobile-otp" component={MobileOtp}/>
-            <Route exact path="/ui/forgot-password" component={ForgotPassword}/>
+            <Route exact path="/ui/forgot-password" component={ForgotPasswordEmail}/>
             <Route exact path="/ui/change-password" component={ChangePassword}/>
             <Route exact path="/ui/signup" render={() => (
               // check if only one provider is enabled. and redirect accordingly.
