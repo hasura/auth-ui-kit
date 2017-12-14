@@ -25,7 +25,7 @@ class Username extends Component {
               Sign In
             </div>
             <div className='descriptionText'>
-              Hello! Sign in with your username or email
+              Hello! Sign in with your username
             </div>
             <form className={formGroupThemeClass} onSubmit={(e) => {
                 e.preventDefault();
