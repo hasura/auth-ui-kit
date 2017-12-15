@@ -17,7 +17,7 @@ if ( redirectUrl === undefined || redirectUrl === 'undefined' || redirectUrl ===
 console.log(redirectUrl);
 const endpoints = {
   'forgot_password_otp': '/providers/mobile-password/forgot-password',
-  'email_forgot_password': '/providers/email/forgot',
+  'email_forgot_password': '/providers/email/forgot-password',
   'reset_password': '/providers/email/reset-password',
   'reset_password_otp': '/providers/mobile-password/reset-password',
   'verify_mobile_password': '/providers/mobile-password/verify-otp',
