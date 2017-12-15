@@ -47,6 +47,6 @@ os.system('gsutil cp ' + static_file_path + 'main.js.gz' + '* gs://' + bucket_na
 os.system('gsutil cp ' + static_file_path + 'main.css.gz' + '* gs://' + bucket_name + '/' + catalog_version + '/main.css')
 
 # SET CONTENT TYPE and ENCODING GZIP
-os.system('gsutil setmeta -h "Content-Type: application/javascript" gs://auth-ui-kit/' + catalog_version + '/*.js')
+os.system('gsutil setmeta -h "Content-Type: application/javascript" -h "Cache-Control: public, max-age=6" gs://auth-ui-kit/' + catalog_version + '/*.js')
 os.system('gsutil setmeta -h "Content-Type: text/css" gs://auth-ui-kit/' + catalog_version + '/*.css')
 os.system('gsutil setmeta -h "Content-Encoding: gzip" gs://auth-ui-kit/' + catalog_version + '/*')

@@ -22,7 +22,7 @@ class SignUpMobile extends Component {
         return
       })
       .catch( (resp) => {
-        alert("Signup failed with: " + JSON.stringify(resp) );
+        alert("Signup failed with: " + JSON.stringify(resp.message) );
       });
     } else {
       alert("Passwords don't match. Try again");

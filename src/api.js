@@ -96,7 +96,16 @@ const emailSignUp = (email, password) => {
 
   return fetch(authUrl + endpoints.signup, requestOptions)
   .then(response => {
-    handleAuthResponse(response);
+    // handleAuthResponse(response);
+    if (response.ok) {
+      alert("Confirmation email sent. Please verify");
+    } else {
+      const resp = response.json();
+      // handle error code mapping for custom ui
+      resp.then(json => {
+        alert(json.message);
+      });
+    }
   })
   .catch(function(error) {
     alert("An error occured");
