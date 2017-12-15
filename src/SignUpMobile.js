@@ -104,7 +104,7 @@ class SignUpMobile extends Component {
               </div>
             </form>
             <SocialLoginWrapper />
-            <SignInMessage />
+            <SignInMessage location={this.props.location} />
           </div>
         </div>
       </div>

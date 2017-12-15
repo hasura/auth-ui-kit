@@ -7,7 +7,7 @@ import makeRequest from './utils/makeRequest';
 
 const redirectAppropriately = ( payload ) => {
   const redirectUrl = window.localStorage.getItem("redirect_url");
-  if ( redirectUrl !== 'undefined' ) {
+  if ( redirectUrl !== 'undefined' && redirectUrl !== undefined && redirectUrl !== null ) {
     window.location.href = redirectUrl;
   } else {
     const userAccountUrl = authUrl + '/user/info';
@@ -431,6 +431,43 @@ const emailForgotPassword = (email) => {
   });
 }
 
+const logout = () => {
+  var requestOptions = {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      credentials: 'include',
+      body: JSON.stringify({})
+  };
+
+  return makeRequest(authUrl + endpoints.logout, requestOptions).then(
+    window.location.href = '/ui/login'
+  )
+  .catch(function(error) {
+    alert("Could not logout: " + JSON.stringify(error));
+  });
+}
+
+const resetPassword = (token, password) => {
+  var requestOptions = {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      credentials: 'include',
+      body: JSON.stringify({'token': token, 'password': password})
+  };
+
+  return makeRequest(authUrl + endpoints.reset_password, requestOptions).then(function(response) {
+    alert("Password changed successfully.");
+    window.location.href = '/ui/login/email'
+  })
+  .catch(function(error) {
+    alert("Could not reset password: " + JSON.stringify(error));
+  });
+}
+
 export {
   usernameSignIn,
   emailSignIn,
@@ -449,7 +486,9 @@ export {
   mobileOtpVerify,
   sendForgotPasswordOTP,
   resetMobilePassword,
-  emailForgotPassword
+  emailForgotPassword,
+  resetPassword,
+  logout
   /*
   mobileSignUp,
   */

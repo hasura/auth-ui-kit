@@ -17,32 +17,32 @@ class Username extends Component {
       <div className={'landingPageWrapper container-fluid ' + pageWrapperThemeClass}>
         <Helmet>
           <meta charSet="utf-8" />
-          <title>Sign in with Username</title>
+          <title>Login with Username</title>
         </Helmet>
         <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
           <div className='signUpWrapper'>
             <div className='headerDescription'>
-              Sign In
+              Login
             </div>
             <div className='descriptionText'>
-              Hello! Sign in with your username
+              Hello! Login with Username
             </div>
             <form className={formGroupThemeClass} onSubmit={(e) => {
                 e.preventDefault();
                 usernameSignIn(this.username.value, this.password.value);
               }}>
               <div className='formInput'>
-                <input type="text" placeholder='Sign in with Username' ref={(input) => { this.username = input; }} />
+                <input type="text" placeholder='Username' ref={(input) => { this.username = input; }} />
               </div>
               <div className='formInput'>
                 <input type="password" placeholder='Password' ref={(input) => { this.password = input; }} />
               </div>
               <div className='signInbtn'>
-                <a><button type="submit">Sign In</button></a>
+                <a><button type="submit">Login</button></a>
               </div>
             </form>
             <SocialLoginWrapper />
-            <SignUpMessage />
+            <SignUpMessage location={this.props.location} />
           </div>
         </div>
       </div>

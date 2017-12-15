@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import {Helmet} from "react-helmet";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {emailSignIn} from './api';
 import SocialLoginWrapper from './SocialLoginWrapper';
 import SignUpMessage from './SignUpMessage';
@@ -18,15 +18,15 @@ class Email extends Component {
       <div className={'landingPageWrapper container-fluid ' + pageWrapperThemeClass}>
         <Helmet>
           <meta charSet="utf-8" />
-          <title>Sign in with Email</title>
+          <title>Login with Email</title>
         </Helmet>
         <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
           <div className='signUpWrapper'>
             <div className='headerDescription'>
-              Sign In
+              Login
             </div>
             <div className='descriptionText'>
-              Hello! Sign in with your email
+              Hello! Login with Email
             </div>
             <form className={formGroupThemeClass} onSubmit={(e) => {
                 e.preventDefault();
@@ -39,14 +39,14 @@ class Email extends Component {
                 <input type="password" placeholder='Password' ref={(input) => { this.password = input; }} />
               </div>
               <div className='linkDescription forgotPassword descriptionText'>
-                <NavLink to='/ui/forgot-password'> Forgot Password?</NavLink>
+                <Link to={{pathname: '/ui/forgot-password', search: this.props.location.search}}> Forgot Password?</Link>
               </div>
               <div className='signInbtn'>
-                <a><button type='submit'>Sign In</button></a>
+                <a><button type='submit'>Login</button></a>
               </div>
             </form>
             <SocialLoginWrapper />
-            <SignUpMessage />
+            <SignUpMessage location={this.props.location} />
           </div>
         </div>
       </div>

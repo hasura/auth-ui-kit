@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {Helmet} from "react-helmet";
 import './style.css';
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import globals from './globals';
 import SocialLoginWrapper from './SocialLoginWrapper';
 import SignInMessage from './SignInMessage';
@@ -24,47 +24,47 @@ class SignUpHome extends Component {
             </div>
             {globals.username ?
             <div className='commonBtn usernameLogin'>
-              <NavLink to="/ui/signup/username">
+              <Link to={{pathname: '/ui/signup/username', search: this.props.location.search}}>
                 <button>
                   <span><i className="fa fa-user" aria-hidden="true"></i></span>
                   <span>Sign up with Username</span>
                 </button>
-              </NavLink>
+              </Link>
             </div>
             : null}
             {globals.email ?
             <div className='commonBtn emailLogin'>
-              <NavLink to="/ui/signup/email">
+              <Link to={{pathname: '/ui/signup/email', search: this.props.location.search}}>
                 <button>
                   <span><i className="fa fa-envelope" aria-hidden="true"></i></span>
-                  <span>Sign up with email</span>
+                  <span>Sign up with Email</span>
                 </button>
-              </NavLink>
+              </Link>
             </div>
             : null}
             {globals.mobile ?
             <div className='commonBtn mobileLogin'>
-              <NavLink to="/ui/signup/mobile">
+              <Link to={{pathname: '/ui/signup/mobile', search: this.props.location.search}}>
                 <button>
                   <span><i className="fa fa-phone" aria-hidden="true"></i></span>
-                  <span>Sign up with mobile</span>
+                  <span>Sign up with Mobile</span>
                 </button>
-              </NavLink>
+              </Link>
             </div>
             : null}
             {globals.mobileOtp ?
             <div className='commonBtn mobileLogin'>
-              <NavLink to="/ui/signup/mobile-otp">
+              <Link to={{pathname: '/ui/signup/mobile-otp', search: this.props.location.search}}>
                 <button>
                   <span><i className="fa fa-phone" aria-hidden="true"></i></span>
-                  <span>Sign up with mobile otp</span>
+                  <span>Sign up with Mobile/OTP</span>
                 </button>
-              </NavLink>
+              </Link>
             </div>
             : null}
 
             <SocialLoginWrapper />
-            <SignInMessage />
+            <SignInMessage location={this.props.location} />
           </div>
         </div>
       </div>

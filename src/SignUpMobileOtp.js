@@ -47,7 +47,7 @@ class SignUpMobileOtp extends Component {
       <div className={'landingPageWrapper container-fluid ' + pageWrapperThemeClass}>
         <Helmet>
           <meta charSet="utf-8" />
-          <title>Sign up with Mobile OTP</title>
+          <title>Sign up with Mobile/OTP</title>
         </Helmet>
         <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
           <div className='signUpWrapper'>
@@ -55,7 +55,7 @@ class SignUpMobileOtp extends Component {
               Sign Up
             </div>
             <div className='descriptionText'>
-              Hello! Sign up with your mobile OTP
+              Hello! Sign up with Mobile/OTP
             </div>
             <form className={formGroupThemeClass} onSubmit={ (e) => {
               e.preventDefault();
@@ -80,7 +80,7 @@ class SignUpMobileOtp extends Component {
                 { !this.state.isFirstStepCompleted ? (
                   <a>
                     <button data-button-id="login" onClick={ this.handleSignup.bind(this) }>
-                      Signup
+                      Sign Up
                     </button>
                   </a>
                 ) : (
@@ -93,7 +93,7 @@ class SignUpMobileOtp extends Component {
               </div>
             </form>
             <SocialLoginWrapper />
-            <SignInMessage />
+            <SignInMessage location={this.props.location} />
           </div>
         </div>
       </div>

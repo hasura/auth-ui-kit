@@ -1,41 +1,41 @@
 import React, { Component } from "react";
 import {Helmet} from "react-helmet";
-import './style.css';
+import {logout} from './api';
 import globals from './globals';
-class ChangePassword extends Component {
+import './style.css';
+class Restricted extends Component {
 
   render() {
 
     const pageWrapperThemeClass = globals.theme === 'light' ? 'LightLandingPageWrapper' : 'DarkLandingPageWrapper';
     const pageInnerThemeClass = globals.theme === 'light' ? 'LightLandingPageInnerWrapper' : 'DarkLandingPageInnerWrapper';
     const formGroupThemeClass = globals.theme === 'light' ? 'LightFormGroupWrapper' : 'DarkFormGroupWrapper';
-    
+  
     return (
       <div className={'landingPageWrapper container-fluid ' + pageWrapperThemeClass}>
         <Helmet>
           <meta charSet="utf-8" />
-          <title>Change Password</title>
+          <title>Restricted</title>
         </Helmet>
         <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
           <div className='signUpWrapper'>
-            <div className='headerDescription addPaddTop'>
-              Change Password
+            <div className='headerDescription'>
+              Restricted
             </div>
             <div className='descriptionText'>
-              Hello! Change your password
+              Hello! You are logged in with a role which does not allow you to access the service. 
             </div>
-            <form className={formGroupThemeClass}>
-              <input type="password" placeholder='Enter new password' />
-            </form>
-            <form className={formGroupThemeClass}>
-              <input type="password" placeholder='confirm new password' />
-            </form>
-            <form className={formGroupThemeClass +  ' hide'}>
-              <input type="text" placeholder='otp' />
-            </form>
-            <div className='signInbtn'>
-              <a><button>Reset password</button></a>
+            <div className='descriptionText'>
+              Please logout and login again.
             </div>
+            <form className={formGroupThemeClass} onSubmit={(e) => {
+                e.preventDefault();
+                logout();
+              }}>
+              <div className='signInbtn'>
+                <a><button type='submit'>Logout & Login Again</button></a>
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -43,4 +43,4 @@ class ChangePassword extends Component {
   }
 }
 
-export default ChangePassword
+export default Restricted

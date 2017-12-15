@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import {Helmet} from 'react-helmet';
-import SocialLoginWrapper from './SocialLoginWrapper';
-import SignInMessage from './SignInMessage';
-import {usernameSignUp} from './api';
-import globals from './globals';
+import {Helmet} from "react-helmet";
+import {resetPassword} from './api';
 import './style.css';
-class SignUpUsername extends Component {
+import globals from './globals';
+class ResetPassword extends Component {
 
   render() {
 
@@ -13,43 +11,42 @@ class SignUpUsername extends Component {
     const pageInnerThemeClass = globals.theme === 'light' ? 'LightLandingPageInnerWrapper' : 'DarkLandingPageInnerWrapper';
     const formGroupThemeClass = globals.theme === 'light' ? 'LightFormGroupWrapper' : 'DarkFormGroupWrapper';
 
+    // read token sent in the email
+    const currentSearchParams = window.location.search;
+    const token = currentSearchParams.split('=')[1];
+    
     return (
       <div className={'landingPageWrapper container-fluid ' + pageWrapperThemeClass}>
         <Helmet>
           <meta charSet="utf-8" />
-          <title>Sign Up with Username</title>
+          <title>Reset Password</title>
         </Helmet>
         <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
           <div className='signUpWrapper'>
-            <div className='headerDescription'>
-              Sign Up
+            <div className='headerDescription addPaddTop'>
+              Reset Password
             </div>
             <div className='descriptionText'>
-              Hello! Sign Up with Username
+              Hello! Reset your password
             </div>
             <form className={formGroupThemeClass} onSubmit={(e) => {
                 e.preventDefault();
-                if (this.password.value === this.confirm_password.value) {
-                  usernameSignUp(this.username.value, this.password.value);
+                if (this.password.value === this.confirmPassword.value) {
+                  resetPassword(token, this.password.value);
                 } else {
-                  alert("Passwords don't match. Try again");
+                  alert('Passwords don\'t match');
                 }
               }}>
               <div className='formInput'>
-                <input type="text" placeholder='Username' ref={(input) => { this.username = input; }} />
+                <input type="password" placeholder='Enter new password' ref={(input) => { this.password = input; }} />
               </div>
               <div className='formInput'>
-                <input type="password" placeholder='Password' ref={(input) => { this.password = input; }} />
-              </div>
-              <div className='formInput'>
-                <input type="password" placeholder='Confirm Password' ref={(input) => { this.confirm_password = input; }} />
+                <input type="password" placeholder='Confirm new password' ref={(input) => { this.confirmPassword = input; }} />
               </div>
               <div className='signInbtn'>
-                <a><button type="submit">Sign Up</button></a>
+                <a><button type="submit">Reset Password</button></a>
               </div>
             </form>
-            <SocialLoginWrapper />
-            <SignInMessage location={this.props.location} />
           </div>
         </div>
       </div>
@@ -57,4 +54,4 @@ class SignUpUsername extends Component {
   }
 }
 
-export default SignUpUsername;
+export default ResetPassword

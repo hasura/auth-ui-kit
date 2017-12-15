@@ -25,7 +25,7 @@ class SignUpEmail extends Component {
               Sign Up
             </div>
             <div className='descriptionText'>
-              Hello! Sign up with your email
+              Hello! Sign up with Email
             </div>
             <form className={formGroupThemeClass} onSubmit={(e) => {
                 e.preventDefault();
@@ -45,11 +45,11 @@ class SignUpEmail extends Component {
                 <input type="password" placeholder='Confirm Password' ref={(input) => { this.confirm_password = input; }} />
               </div>
               <div className='signInbtn'>
-                <a><button type="submit">Register</button></a>
+                <a><button type="submit">Sign Up</button></a>
               </div>
             </form>
             <SocialLoginWrapper />
-            <SignInMessage />
+            <SignInMessage location={this.props.location} />
           </div>
         </div>
       </div>

@@ -50,15 +50,15 @@ class MobileOtp extends Component {
       <div className={'landingPageWrapper container-fluid ' + pageWrapperThemeClass}>
         <Helmet>
           <meta charSet="utf-8" />
-          <title>Sign in with Mobile OTP</title>
+          <title>Login with Mobile/OTP</title>
         </Helmet>
         <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
           <div className='signUpWrapper'>
             <div className='headerDescription'>
-              Sign In
+              Login
             </div>
             <div className='descriptionText'>
-              Hello! Sign in with your mobile OTP
+              Hello! Login with Mobile/OTP
             </div>
             <form className={formGroupThemeClass} onSubmit={ (e) => {
               e.preventDefault();
@@ -66,7 +66,7 @@ class MobileOtp extends Component {
               { !this.state.isFirstStepCompleted ? (
                 <div key="9" className='formInput'>
                   <input className='countryInput' type="text" placeholder='Country code' ref={ (input) => { this.country_code = input }} />
-                  <input className='mobileInput' type="text" placeholder='Enter mobile number' ref={ (input) => { this.mobile_number= input }} />
+                  <input className='mobileInput' type="text" placeholder='Mobile number' ref={ (input) => { this.mobile_number= input }} />
                 </div>
               ) : (
                 <div key="10" className='formInput'>
@@ -83,7 +83,7 @@ class MobileOtp extends Component {
                 { !this.state.isFirstStepCompleted ? (
                   <a>
                     <button data-button-id="login" onClick={ this.handleSignup.bind(this) }>
-                      Login
+                      Send OTP
                     </button>
                   </a>
                 ) : (
@@ -96,7 +96,7 @@ class MobileOtp extends Component {
               </div>
             </form>
             <SocialLoginWrapper />
-            <SignUpMessage />
+            <SignUpMessage location={this.props.location} />
           </div>
         </div>
       </div>

@@ -41,7 +41,7 @@ class ForgotPasswordEmail extends Component {
                 <a><button type='submit'>Submit</button></a>
               </div>
             </form>
-            <SignUpMessage />
+            <SignUpMessage location={this.props.location} />
           </div>
         </div>
       </div>

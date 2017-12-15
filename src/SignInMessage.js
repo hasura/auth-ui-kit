@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 import './style.css';
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 class SignInMessage extends Component {
   render() {
     return (
       <div className='descriptionText'>
-        Already have an account? <b><NavLink className='linkDescription textDecoration' to="/ui">Sign In</NavLink></b>
+        Already have an account?  
+        <b>
+        	<Link to={{pathname: '/ui', search: this.props.location.search}} className='linkDescription textDecoration'> Login
+        	</Link>
+        </b>
       </div>
     );
   }

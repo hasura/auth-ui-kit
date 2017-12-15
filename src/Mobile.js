@@ -59,16 +59,16 @@ class Mobile extends Component {
       <div className={'landingPageWrapper container-fluid ' + pageWrapperThemeClass}>
         <Helmet>
           <meta charSet="utf-8" />
-          <title>Sign in with Mobile</title>
+          <title>Login with Mobile</title>
         </Helmet>
         { !this.state.enableForgotPassword ? (
           <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
             <div className='signUpWrapper'>
               <div className='headerDescription'>
-                Sign In
+                Login
               </div>
               <div className='descriptionText'>
-                Hello! Sign in with your mobile
+                Hello! Login with Mobile
               </div>
               <form className={formGroupThemeClass}>
               { !this.state.isNotVerified ? (
@@ -99,7 +99,7 @@ class Mobile extends Component {
                 { !this.state.isNotVerified ? (
                   <a>
                     <button data-button-id="signup" onClick={ this.handleLogin.bind(this) }>
-                    Sign in
+                    Login
                     </button>
                   </a>
                 ) : (
@@ -112,11 +112,11 @@ class Mobile extends Component {
               </div>
               </form>
               <SocialLoginWrapper />
-              <SignUpMessage />
+              <SignUpMessage location={this.props.location} />
             </div>
           </div>
         ) : (
-          <ForgotPassword toggleForgotPassword={ this.toggleForgotPassword.bind(this) }/>
+          <ForgotPassword location={this.props.location} toggleForgotPassword={ this.toggleForgotPassword.bind(this) }/>
         )}
       </div>
     );
