@@ -3,21 +3,23 @@ import globals from './globals';
 const hostName = window.location.hostname;
 let splitHost = hostName.split(".");
 splitHost.shift();
-const clusterName = splitHost.join(".");
+// const clusterName = splitHost.join(".");
+const clusterName = "h34-barn99-stg.hasura-app.io";
 const authVersion = "v1";
-const authUrl = window.location.protocol + "//auth." + clusterName + "/" + authVersion;
+//const scheme = window.location.protocol;
+const scheme = 'https:';
+const authUrl = scheme + "//auth." + clusterName + "/" + authVersion;
 
-console.log(window.location);
-const currentLocation = window.location;
 // let redirectUrl = window.localStorage.getItem("redirect_url");
+const currentLocation = window.location;
 let redirectUrl = currentLocation.search.split("=")[1];
 if ( redirectUrl === undefined || redirectUrl === 'undefined' || redirectUrl === null ) {
 	redirectUrl = authUrl + "/user/info";
 }
-console.log(redirectUrl);
 const endpoints = {
   'forgot_password_otp': '/providers/mobile-password/forgot-password',
   'email_forgot_password': '/providers/email/forgot-password',
+  'verify_email': '/providers/email/verify-email',
   'reset_password': '/providers/email/reset-password',
   'reset_password_otp': '/providers/mobile-password/reset-password',
   'verify_mobile_password': '/providers/mobile-password/verify-otp',
