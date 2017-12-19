@@ -435,10 +435,7 @@ const facebookLogin = (access_token, redirectUrl) => {
 
     return makeRequest(authUrl + endpoints.login, requestOptions)
         .then(response => {
-          console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAA');
           console.log(response);
-          console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAA');
-          alert(response);
           window.location.href = redirectUrl;
         })
         .catch(function(error) {
