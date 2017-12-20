@@ -14,15 +14,14 @@ import SignUpUsername from './SignUpUsername';
 import SignUpEmail from './SignUpEmail';
 import SignUpMobile from './SignUpMobile';
 import SignUpMobileOtp from './SignUpMobileOtp';
+import FacebookLogin from './FacebookLogin';
+import GoogleLogin from './GoogleLogin';
+import GithubLogin from './GithubLogin';
+import LinkedinLogin from './LinkedinLogin';
 import Restricted from './Restricted';
 import NotFound from './NotFound';
-import getQueryVariable from './utils';
 
 class Main extends Component {
-  componentDidMount() {
-    const redirectParam = getQueryVariable('redirect_url');
-    window.localStorage.setItem("redirect_url", redirectParam);
-  }
   render() {
     let activeProvider = null;
     if (globals.username) {
@@ -70,6 +69,10 @@ class Main extends Component {
             <Route exact path="/ui/signup/mobile" component={SignUpMobile}/>
             <Route exact path="/ui/signup/mobile-otp" component={SignUpMobileOtp}/>
             <Route exact path="/ui/restricted" component={Restricted}/>
+            <Route exact path="/ui/facebook-response" component={FacebookLogin}/>
+            <Route exact path="/ui/google-response" component={GoogleLogin}/>
+            <Route exact path="/ui/github-response" component={GithubLogin}/>
+            <Route exact path="/ui/linkedin-response" component={LinkedinLogin}/>
             <Route component={NotFound} status={404} />
           </Switch>
           </div>
