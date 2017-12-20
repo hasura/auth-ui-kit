@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {Helmet} from "react-helmet";
 import SocialLoginWrapper from './SocialLoginWrapper';
 import SignUpMessage from './SignUpMessage';
+import Back from './Back';
 import {
   mobilePasswordSignIn,
   mobilePasswordVerify,
@@ -54,66 +55,83 @@ class Mobile extends Component {
     const pageWrapperThemeClass = globals.theme === 'light' ? 'LightLandingPageWrapper' : 'DarkLandingPageWrapper';
     const pageInnerThemeClass = globals.theme === 'light' ? 'LightLandingPageInnerWrapper' : 'DarkLandingPageInnerWrapper';
     const formGroupThemeClass = globals.theme === 'light' ? 'LightFormGroupWrapper' : 'DarkFormGroupWrapper';
-    
+
     return (
-      <div className={'landingPageWrapper container-fluid ' + pageWrapperThemeClass}>
+      <div className={'displayFlex landingPageWrapper container-fluid ' + pageWrapperThemeClass}>
         <Helmet>
           <meta charSet="utf-8" />
           <title>Login with Mobile</title>
         </Helmet>
         { !this.state.enableForgotPassword ? (
-          <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
-            <div className='signUpWrapper'>
-              <div className='headerDescription'>
-                Login
-              </div>
-              <div className='descriptionText'>
-                Hello! Login with Mobile
-              </div>
-              <form className={formGroupThemeClass}>
-              { !this.state.isNotVerified ? (
-                <div>
-                  <div key="1001" className='formInput'>
-                    <input className='countryInput' type="text" placeholder='Country code' ref={(input) => { this.country_code = input; }} />
-                    <input className='mobileInput' type="text" placeholder='Enter mobile number' ref={(input) => { this.mobile = input; }} />
-                  </div>
-                  <div className='formInput'>
-                    <input type="password" placeholder='Password' ref={(input) => { this.password = input; }} />
-                  </div>
-                  <div className='linkDescription forgotPassword descriptionText'>
-                    <a onClick={ this.toggleForgotPassword.bind(this) }>Forgot Password?</a>
-                  </div>
+          <div className={'landingPageInnerWidth'}>
+            <Back />
+            <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
+              <div className='signUpWrapper'>
+                <div className='headerDescription'>
+                  Login
                 </div>
-              ) : (
-                <div key="1000" className='formInput'>
-                  <input type="text" placeholder='otp' ref={ (input) => { this.otp = input }} />
-                  <div className="">
-                    Looks like you haven't verified your mobile number. Please verify your mobile by clicking on the send otp link below.<br/>
-                    <a href="" onClick={ this.resendMobilePasswordOtp.bind(this) }>
-                      Send OTP
-                    </a>
-                  </div>
+                <div className='descriptionText'>
+                  Hello! Login with your mobile number
                 </div>
-              )}
-              <div className='signInbtn'>
+                <form className={formGroupThemeClass}>
                 { !this.state.isNotVerified ? (
-                  <a>
-                    <button data-button-id="signup" onClick={ this.handleLogin.bind(this) }>
-                    Login
-                    </button>
-                  </a>
+                  <div>
+                    <div key="1001" className='formInput'>
+                      <div className='countryInput'>
+                        <label className='formLabel'>
+                          Country Code
+                        </label>
+                        <input type="text" value='+91' ref={(input) => { this.country_code = input; }} />
+                        {/* <i className="fa fa-caret-down" aria-hidden="true"></i> */}
+                      </div>
+                      <div className='mobileInput'>
+                        <label className='formLabel'>
+                          Mobile Number
+                        </label>
+                        <input type="text" ref={(input) => { this.mobile = input; }} />
+                      </div>
+                    </div>
+                    <div className='formInput'>
+                      <label className='formLabel'>
+                        Password
+                      </label>
+                      <input type="password" ref={(input) => { this.password = input; }} />
+                    </div>
+                    <div className='linkDescription forgotPassword descriptionText'>
+                      <a onClick={ this.toggleForgotPassword.bind(this) }>Forgot Password?</a>
+                    </div>
+                  </div>
                 ) : (
-                  <a>
-                    <button data-button-id="verify-mobile" onClick={ this.handleVerification.bind(this) }>
-                      Verify Mobile
-                    </button>
-                  </a>
-                ) }
+                  <div key="1000" className='formInput'>
+                    <input type="text" placeholder='otp' ref={ (input) => { this.otp = input }} />
+                    <div className="">
+                      Looks like you haven{'\''}t verified your mobile number. Please verify your mobile by clicking on the send otp link below.<br/>
+                      <a href="" onClick={ this.resendMobilePasswordOtp.bind(this) }>
+                        Send OTP
+                      </a>
+                    </div>
+                  </div>
+                )}
+                <div className='signInbtn'>
+                  { !this.state.isNotVerified ? (
+                    <a>
+                      <button data-button-id="signup" onClick={ this.handleLogin.bind(this) }>
+                      Login
+                      </button>
+                    </a>
+                  ) : (
+                    <a>
+                      <button data-button-id="verify-mobile" onClick={ this.handleVerification.bind(this) }>
+                        Verify Mobile
+                      </button>
+                    </a>
+                  ) }
+                </div>
+                </form>
+                <SocialLoginWrapper />
               </div>
-              </form>
-              <SocialLoginWrapper />
-              <SignUpMessage location={this.props.location} />
             </div>
+            <SignUpMessage location={this.props.location} />
           </div>
         ) : (
           <ForgotPassword location={this.props.location} toggleForgotPassword={ this.toggleForgotPassword.bind(this) }/>
@@ -154,54 +172,69 @@ class ForgotPassword extends Component {
     const pageInnerThemeClass = globals.theme === 'light' ? 'LightLandingPageInnerWrapper' : 'DarkLandingPageInnerWrapper';
     const formGroupThemeClass = globals.theme === 'light' ? 'LightFormGroupWrapper' : 'DarkFormGroupWrapper';
     return (
-      <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
-        <div className="signUpWrapper">
-          <div className="go_back" onClick={ this.props.toggleForgotPassword }>
-            Go back
-          </div>
-          <div className="headerDescription">
-            Forgot password ? 
-          </div>
-          <div className='descriptionText'>
-            Enter your registered mobile number to get an OTP to reset your password
-          </div>
-          <form className={formGroupThemeClass}>
-            { !this.state.forgotPasswordInitiated ? (
-              <div>
-                <div key="1002" className='formInput'>
-                  <input className='countryInput' type="number" placeholder='Country code' ref={(input) => { this.country_code = input; }} />
-                  <input className='mobileInput' type="text" placeholder='Enter mobile number' ref={(input) => { this.mobile = input; }} />
-                </div>
-              </div>
-            ) : (
-              <div>
-                <div key="1003" className='formInput'>
-                  <input type="text" placeholder='OTP' ref={(input) => { this.forgot_otp = input; }} />
-                </div>
-                <div className='formInput'>
-                  <input type="password" placeholder='Password' ref={(input) => { this.forgot_password = input; }} />
-                </div>
-                <div className='formInput'>
-                  <input type="password" placeholder='Confirm Password' ref={(input) => { this.confirm_password = input; }} />
-                </div>
-              </div>
-            )}
-            <div className='signInbtn'>
-              { !this.state.forgotPasswordInitiated? (
-                <a>
-                  <button data-button-id="send-otp" onClick={ this.sendForgotPasswordOTP.bind(this) }>
-                    Send OTP
-                  </button>
-                </a>
-              ) : (
-                <a>
-                  <button data-button-id="reset-mobile" onClick={ this.resetMobilePassword.bind(this) }>
-                    Reset Password
-                  </button>
-                </a>
-              ) }
+      <div className={'landingPageInnerWidth'}>
+        <Back/>
+        <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
+          <div className="signUpWrapper">
+            <div className="go_back" onClick={ this.props.toggleForgotPassword }>
+              Go back
             </div>
-          </form>
+            <div className="headerDescription">
+              Forgot password ?
+            </div>
+            <div className='descriptionText'>
+              Enter your registered mobile number to get an OTP to reset your password
+            </div>
+            <form className={formGroupThemeClass}>
+              { !this.state.forgotPasswordInitiated ? (
+                <div>
+                  <div key="1002" className='formInput'>
+                    <div className='countryInput'>
+                      <label className='formLabel'>
+                        Country Code
+                      </label>
+                      <input type="text" value='+91' ref={(input) => { this.country_code = input; }} />
+                      {/* <i className="fa fa-caret-down" aria-hidden="true"></i> */}
+                    </div>
+                    <div className='mobileInput'>
+                      <label className='formLabel'>
+                        Enter mobile number
+                      </label>
+                      <input type="text" ref={(input) => { this.mobile = input; }} />
+                    </div>
+
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  <div key="1003" className='formInput'>
+                    <input type="text" placeholder='OTP' ref={(input) => { this.forgot_otp = input; }} />
+                  </div>
+                  <div className='formInput'>
+                    <input type="password" placeholder='Password' ref={(input) => { this.forgot_password = input; }} />
+                  </div>
+                  <div className='formInput'>
+                    <input type="password" placeholder='Confirm Password' ref={(input) => { this.confirm_password = input; }} />
+                  </div>
+                </div>
+              )}
+              <div className='signInbtn'>
+                { !this.state.forgotPasswordInitiated? (
+                  <a>
+                    <button data-button-id="send-otp" onClick={ this.sendForgotPasswordOTP.bind(this) }>
+                      Send OTP
+                    </button>
+                  </a>
+                ) : (
+                  <a>
+                    <button data-button-id="reset-mobile" onClick={ this.resetMobilePassword.bind(this) }>
+                      Reset Password
+                    </button>
+                  </a>
+                ) }
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     );

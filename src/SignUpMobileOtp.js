@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {Helmet} from "react-helmet";
 import SocialLoginWrapper from './SocialLoginWrapper';
 import SignInMessage from './SignInMessage';
+import Back from './Back';
 import globals from './globals';
 import './style.css';
 
@@ -42,59 +43,73 @@ class SignUpMobileOtp extends Component {
     const pageWrapperThemeClass = globals.theme === 'light' ? 'LightLandingPageWrapper' : 'DarkLandingPageWrapper';
     const pageInnerThemeClass = globals.theme === 'light' ? 'LightLandingPageInnerWrapper' : 'DarkLandingPageInnerWrapper';
     const formGroupThemeClass = globals.theme === 'light' ? 'LightFormGroupWrapper' : 'DarkFormGroupWrapper';
-    
+
     return (
-      <div className={'landingPageWrapper container-fluid ' + pageWrapperThemeClass}>
+      <div className={'displayFlex landingPageWrapper container-fluid ' + pageWrapperThemeClass}>
         <Helmet>
           <meta charSet="utf-8" />
           <title>Sign up with Mobile/OTP</title>
         </Helmet>
-        <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
-          <div className='signUpWrapper'>
-            <div className='headerDescription'>
-              Sign Up
-            </div>
-            <div className='descriptionText'>
-              Hello! Sign up with Mobile/OTP
-            </div>
-            <form className={formGroupThemeClass} onSubmit={ (e) => {
-              e.preventDefault();
-            }}>
-              { !this.state.isFirstStepCompleted ? (
-                <div key="1" className='formInput'>
-                  <input className='countryInput' type="text" placeholder='Country code' ref={ (input) => { this.country_code = input }} />
-                  <input className='mobileInput' type="text" placeholder='Enter mobile number' ref={ (input) => { this.mobile_number= input }} />
-                </div>
-              ) : (
-                <div key="2" className='formInput'>
-                  <input type="text" placeholder='otp' ref={ (input) => { this.otp = input }} />
-                  <div className="">
-                    Haven't received OTP yet?
-                    <a href="" onClick={ this.resendMobileOtp.bind(this) }>
-                      Resend
-                    </a>
-                  </div>
-                </div>
-              )}
-              <div className='signInbtn'>
-                { !this.state.isFirstStepCompleted ? (
-                  <a>
-                    <button data-button-id="login" onClick={ this.handleSignup.bind(this) }>
-                      Sign Up
-                    </button>
-                  </a>
-                ) : (
-                  <a>
-                    <button data-button-id="verify-mobile" onClick={ this.handleLogin.bind(this) }>
-                      Verify Mobile
-                    </button>
-                  </a>
-                ) }
+        <div className={'landingPageInnerWidth'}>
+          <Back />
+          <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
+            <div className='signUpWrapper'>
+              <div className='headerDescription'>
+                Sign Up
               </div>
-            </form>
-            <SocialLoginWrapper />
-            <SignInMessage location={this.props.location} />
+              <div className='descriptionText'>
+                Hello! Sign up with yout mobile OTP
+              </div>
+              <form className={formGroupThemeClass} onSubmit={ (e) => {
+                e.preventDefault();
+              }}>
+                { !this.state.isFirstStepCompleted ? (
+                  <div key="1" className='formInput'>
+                    <div className='countryInput'>
+                      <label className='formLabel'>
+                        Country Code
+                      </label>
+                      <input type="text" value='+91' ref={ (input) => { this.country_code = input }} />
+                      {/* <i className="fa fa-caret-down" aria-hidden="true"></i> */}
+                    </div>
+                    <div className='mobileInput'>
+                      <label className='formLabel'>
+                        Mobile Number
+                      </label>
+                      <input type="text" ref={ (input) => { this.mobile_number= input }} />
+                    </div>
+                  </div>
+                ) : (
+                  <div key="2" className='formInput'>
+                    <input type="text" placeholder='otp' ref={ (input) => { this.otp = input }} />
+                    <div className="">
+                      Haven{'\''}t received OTP yet?
+                      <a href="" onClick={ this.resendMobileOtp.bind(this) }>
+                        Resend
+                      </a>
+                    </div>
+                  </div>
+                )}
+                <div className='signInbtn'>
+                  { !this.state.isFirstStepCompleted ? (
+                    <a>
+                      <button data-button-id="login" onClick={ this.handleSignup.bind(this) }>
+                        Sign Up
+                      </button>
+                    </a>
+                  ) : (
+                    <a>
+                      <button data-button-id="verify-mobile" onClick={ this.handleLogin.bind(this) }>
+                        Verify Mobile
+                      </button>
+                    </a>
+                  ) }
+                </div>
+              </form>
+              <SocialLoginWrapper />
+            </div>
           </div>
+          <SignInMessage location={this.props.location} />
         </div>
       </div>
     );

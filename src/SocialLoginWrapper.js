@@ -12,8 +12,14 @@ class SocialLoginWrapper extends Component {
       <div>
         {globals.facebook || globals.google || globals.github || globals.linkedin ?
         <div className='socialLoginWrapper'>
-          <div className='descriptionText'>
-            Or connect with:
+          <div className={'displayFlex'}>
+            <span className={'dividerLine'}>
+            </span>
+            <span className='smallDescriptionText'>
+              Or login with
+            </span>
+            <span className={'dividerLine'}>
+            </span>
           </div>
           <div className='socialLoginIconWrapper'>
             {globals.facebook ?
