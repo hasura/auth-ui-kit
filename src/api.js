@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch';
-import {authUrl, endpoints} from './config';
+import {authUrl, endpoints, githubRedirectUrl, linkedinRedirectUrl} from './config';
 
 import makeRequest from './utils/makeRequest';
 
@@ -418,6 +418,109 @@ const mobileOtpSignIn = (mobile, otp, country_code) => {
   });
 }
 
+const facebookLogin = (access_token, redirectUrl) => {
+    var requestOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+            provider: "facebook",
+            data: {
+                "access_token": access_token
+            }
+        })
+    };
+
+    return makeRequest(authUrl + endpoints.login, requestOptions)
+        .then(response => {
+          console.log(response);
+          window.location.href = redirectUrl;
+        })
+        .catch(function(error) {
+            alert("Error sign in: " + JSON.stringify(error));
+        });
+}
+
+const googleLogin = (id_token, redirectUrl) => {
+    var requestOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+            provider: "google",
+            data: {
+                "id_token": id_token
+            }
+        })
+    };
+
+    return makeRequest(authUrl + endpoints.login, requestOptions)
+        .then(response => {
+          console.log(response);
+          window.location.href = redirectUrl;
+        })
+        .catch(function(error) {
+            alert("Error sign in: " + JSON.stringify(error));
+        });
+}
+
+const githubLogin = (code, redirectUrl) => {
+    var requestOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+            provider: "github",
+            data: {
+                "code": code,
+                "redirect_uri": githubRedirectUrl,
+                "state": redirectUrl
+            }
+        })
+    };
+
+    return makeRequest(authUrl + endpoints.login, requestOptions)
+        .then(response => {
+          console.log(response);
+          window.location.href = redirectUrl;
+        })
+        .catch(function(error) {
+            alert("Error sign in: " + JSON.stringify(error));
+        });
+}
+
+const linkedinLogin = (code, redirectUrl) => {
+    var requestOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+            provider: "linkedin",
+            data: {
+                "code": code,
+                "redirect_uri": linkedinRedirectUrl
+            }
+        })
+    };
+
+    return makeRequest(authUrl + endpoints.login, requestOptions)
+        .then(response => {
+          console.log(response);
+          window.location.href = redirectUrl;
+        })
+        .catch(function(error) {
+            alert("Error sign in: " + JSON.stringify(error));
+        });
+}
+
 const emailForgotPassword = (email) => {
   var requestOptions = {
       method: "POST",
@@ -483,11 +586,12 @@ const verifyEmail = (token) => {
   };
 
   return makeRequest(authUrl + endpoints.verify_email + '?token=' + token, requestOptions).then(function(response) {
-    alert("Email verified successfully.");
-    window.location.href = '/ui/login/email'
+    // alert("Email verified successfully.");
+    return {'status': 'Verification Successful. Redirecting...', 'error': false};
   })
   .catch(function(error) {
-    alert("Could not reset password: " + JSON.stringify(error));
+    // alert("Could not reset password: " + JSON.stringify(error));
+    return {'status': error, 'error': true};
   });
 }
 
@@ -507,6 +611,10 @@ export {
   resendMobilePasswordOtp,
   mobilePasswordVerify,
   mobileOtpVerify,
+  facebookLogin,
+  googleLogin,
+  githubLogin,
+  linkedinLogin,
   sendForgotPasswordOTP,
   resetMobilePassword,
   emailForgotPassword,

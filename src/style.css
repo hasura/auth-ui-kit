@@ -26,6 +26,12 @@ body
   padding-right: 5px;
   font-size: 20px;
 }
+.backBtn a {
+  color: #6b6b6d !important;
+}
+.backBtn a:hover {
+  text-decoration: none;
+}
 .go_back {
   cursor: pointer;
   position: absolute;
