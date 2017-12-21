@@ -73,7 +73,7 @@ class SignUpMobile extends Component {
                         <label className='formLabel'>
                           Country Code
                         </label>
-                        <input type="text" value='+91' ref={(input) => { this.country_code = input; }} />
+                        <input type="text" ref={(input) => { this.country_code = input; }} />
                         {/* <i className="fa fa-caret-down" aria-hidden="true"></i> */}
                       </div>
                       <div className='mobileInput'>

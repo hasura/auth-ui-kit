@@ -21,7 +21,7 @@ class Username extends Component {
           <title>Login with Username</title>
         </Helmet>
         <div className={'landingPageInnerWidth'}>
-          <Back />
+          <Back backUrl={'/ui'} />
           <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
             <div className='signUpWrapper'>
               <div className='headerDescription'>

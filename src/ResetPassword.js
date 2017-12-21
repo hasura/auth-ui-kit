@@ -14,7 +14,7 @@ class ResetPassword extends Component {
 
     // read token sent in the email
     const currentSearchParams = window.location.search;
-    const token = currentSearchParams.split('=')[1];
+    const token = currentSearchParams.split('?token=')[1];
 
     return (
       <div className={'displayFlex landingPageWrapper container-fluid ' + pageWrapperThemeClass}>

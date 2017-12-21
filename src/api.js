@@ -586,11 +586,12 @@ const verifyEmail = (token) => {
   };
 
   return makeRequest(authUrl + endpoints.verify_email + '?token=' + token, requestOptions).then(function(response) {
-    alert("Email verified successfully.");
-    window.location.href = '/ui/login/email'
+    // alert("Email verified successfully.");
+    return {'status': 'Verification Successful. Redirecting...', 'error': false};
   })
   .catch(function(error) {
-    alert("Could not reset password: " + JSON.stringify(error));
+    // alert("Could not reset password: " + JSON.stringify(error));
+    return {'status': error, 'error': true};
   });
 }
 
