@@ -5,8 +5,7 @@ class SignUpMessage extends Component {
   render() {
     return (
       <div className='descriptionText addPaddTop'>
-        Don{'\''}t have an account?
-        	<Link className='textDecoration linkDescription' to={{pathname: '/ui/signup', search: this.props.location.search}}> Sign Up</Link>
+        Don{'\''}t have an account? <Link className='textDecoration linkDescription' to={{pathname: '/ui/signup', search: this.props.location.search}}>Sign Up</Link>
       </div>
     );
   }
