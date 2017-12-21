@@ -341,6 +341,10 @@ body
 }
 @media (max-width: 767px)
 {
+  .headerDescription
+  {
+    padding: 0 0;
+  }
   .countryInput
   {
     width: 27% !important;
@@ -352,23 +356,41 @@ body
     width: 60% !important;
     display: inline-block;
   }
+  .landingPageInnerWidth
+  {
+    width: 280px;
+  }
+  .LightFormGroupWrapper, .DarkFormGroupWrapper
+  {
+    width: 260px;
+  }
   .landingPageWrapper
   {
     padding: 20px;
     width: calc(100vw - 40px);
     height: calc(100vh - 40px);
+    height: auto;
   }
   .signUpWrapper
   {
     width: 260px;
   }
+  .btnIconWidth
+  {
+    width: 50px;
+  }
   .commonBtn a button
   {
     max-width: 254px;
     min-width: 254px;
+    font-size: 15px;
   }
   .commonBtn a button span i
   {
     padding: 0 10px;
+  }
+  .socialLoginIcon
+  {
+    width: 25%;
   }
 }
