@@ -14,7 +14,7 @@ class Email extends Component {
     const pageWrapperThemeClass = globals.theme === 'light' ? 'LightLandingPageWrapper' : 'DarkLandingPageWrapper';
     const pageInnerThemeClass = globals.theme === 'light' ? 'LightLandingPageInnerWrapper' : 'DarkLandingPageInnerWrapper';
     const formGroupThemeClass = globals.theme === 'light' ? 'LightFormGroupWrapper' : 'DarkFormGroupWrapper';
-
+    const headerDescriptionClass = globals.theme === 'light' ? 'lightHeaderDescription' : 'darkHeaderDescription';
     return (
       <div className={'displayFlex landingPageWrapper container-fluid ' + pageWrapperThemeClass}>
         <Helmet>
@@ -25,7 +25,7 @@ class Email extends Component {
           <Back/>
           <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
             <div className='signUpWrapper'>
-              <div className='headerDescription'>
+              <div className={headerDescriptionClass}>
                 Login
               </div>
               <div className='descriptionText'>

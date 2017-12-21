@@ -55,7 +55,7 @@ class Mobile extends Component {
     const pageWrapperThemeClass = globals.theme === 'light' ? 'LightLandingPageWrapper' : 'DarkLandingPageWrapper';
     const pageInnerThemeClass = globals.theme === 'light' ? 'LightLandingPageInnerWrapper' : 'DarkLandingPageInnerWrapper';
     const formGroupThemeClass = globals.theme === 'light' ? 'LightFormGroupWrapper' : 'DarkFormGroupWrapper';
-
+    const headerDescriptionClass = globals.theme === 'light' ? 'lightHeaderDescription' : 'darkHeaderDescription';
     return (
       <div className={'displayFlex landingPageWrapper container-fluid ' + pageWrapperThemeClass}>
         <Helmet>
@@ -67,7 +67,7 @@ class Mobile extends Component {
             <Back />
             <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
               <div className='signUpWrapper'>
-                <div className='headerDescription'>
+                <div className={headerDescriptionClass}>
                   Login
                 </div>
                 <div className='descriptionText'>
@@ -179,7 +179,7 @@ class ForgotPassword extends Component {
             <div className="go_back" onClick={ this.props.toggleForgotPassword }>
               Go back
             </div>
-            <div className="headerDescription">
+            <div className={headerDescriptionClass}>
               Forgot password ?
             </div>
             <div className='descriptionText'>

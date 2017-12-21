@@ -11,7 +11,7 @@ class ResetPassword extends Component {
     const pageWrapperThemeClass = globals.theme === 'light' ? 'LightLandingPageWrapper' : 'DarkLandingPageWrapper';
     const pageInnerThemeClass = globals.theme === 'light' ? 'LightLandingPageInnerWrapper' : 'DarkLandingPageInnerWrapper';
     const formGroupThemeClass = globals.theme === 'light' ? 'LightFormGroupWrapper' : 'DarkFormGroupWrapper';
-
+    const headerDescriptionClass = globals.theme === 'light' ? 'lightHeaderDescription' : 'darkHeaderDescription';
     // read token sent in the email
     const currentSearchParams = window.location.search;
     const token = currentSearchParams.split('?token=')[1];
@@ -26,7 +26,7 @@ class ResetPassword extends Component {
           <Back />
           <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
             <div className='signUpWrapper'>
-              <div className='headerDescription addPaddTop'>
+              <div className={'addPaddTop ' + headerDescriptionClass}>
                 Reset Password
               </div>
               <div className='descriptionText'>

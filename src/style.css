@@ -14,7 +14,7 @@ body
 }
 .backBtn
 {
-  color: #6b6b6d;
+  color: #888;
   font-size: 15px;
   text-align: left;
   padding-bottom: 15px;
@@ -27,7 +27,8 @@ body
   font-size: 20px;
 }
 .backBtn a {
-  color: #6b6b6d !important;
+  color: #888 !important;
+  text-decoration: none;
 }
 .backBtn a:hover {
   text-decoration: none;
@@ -92,7 +93,7 @@ body
 }
 .LightLandingPageWrapper
 {
-  background-color: #fff;
+  background-color: #fafcfd;
   color: #333;
 }
 .landingPageInnerWidth
@@ -103,13 +104,16 @@ body
 .DarkLandingPageInnerWrapper
 {
   background-color: #36393f;
-  -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
-  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
 }
 .LightLandingPageInnerWrapper
 {
-  background-color: #f4f4f4;
+  background-color: #fff;
+  -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
 }
 .landingPageWrapper
 {
@@ -121,9 +125,9 @@ body
 {
   border-radius: 10px;
   padding: 20px 0;
-  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
   margin: 0 auto;
 }
 .headerDescription
@@ -132,6 +136,22 @@ body
   font-weight: 600;
   font-size: 24px;
   color: #e9e9e9;
+  text-transform: uppercase;
+  padding: 10px 0;
+}
+.darkHeaderDescription
+{
+  color: #e9e9e9;
+}
+.lightHeaderDescription
+{
+  color: #000;
+}
+.lightHeaderDescription, .darkHeaderDescription
+{
+  font-family: 'Raleway';
+  font-weight: 600;
+  font-size: 24px;
   text-transform: uppercase;
   padding: 10px 0;
 }
@@ -150,7 +170,7 @@ body
 {
   color: #888888;
   font-family: 'Open Sans';
-  font-size: 15px;
+  font-size: 16px;
   line-height: 20px;
 }
 .smallDescriptionText
@@ -192,6 +212,8 @@ body
   padding-bottom: 10px;
   display: block;
   color: #888888;
+  font-size: 14px;
+  font-weight: 600;
 }
 .DarkFormGroupWrapper .formInput input:focus
 {
@@ -204,26 +226,26 @@ body
   height: 44px;
   border-radius: 5px;
   border: 2px solid #ccc;
-  /* border: 2px solid #333 !important; */
+  border: 2px solid #F5F9FA !important;
   padding: 0;
   padding-left: 10px;
   font-size: 14px;
-
+  background-color: #F5F9FA;
   /* background-color: #555 !important; */
   /* color: #fff !important; */
 }
 .LightFormGroupWrapper .formInput input:focus
 {
-  border: 2px solid #222 !important;
+  border: 2px solid #00D463 !important;
   outline: none;
 }
 .linkDescription
 {
-  color: #21d268;
+  color: #00D463;
 }
 .linkDescription a
 {
-  color: #21d268;
+  color: #00D463;
   text-decoration: none;
 }
 .linkDescription a:hover
@@ -243,12 +265,12 @@ body
 }
 .signInbtn a button
 {
-  background-color: #21d268;
+  background-color: #00D463;
   width: 100%;
   height: 46px;
   text-align: center;
   border-radius: 5px;
-  border: 1px solid #21d268;
+  border: 1px solid #00D463;
   text-transform: uppercase;
   font-size: 14px;
   cursor: pointer;
@@ -263,6 +285,18 @@ body
 {
   outline:  none;
 }
+.darkCommonBtn a button
+{
+  color: #fff;
+  background-color: #42464d;
+  border: 1.5px solid #42464d;
+}
+.lightCommonBtn a button
+{
+  color: #474747;
+  background-color: #fff;
+  border: 1.5px solid #00D463;
+}
 .commonBtn a button
 {
   height: 54px;
@@ -274,9 +308,6 @@ body
   line-height: 24px;
   cursor: pointer;
   margin-top: 20px;
-  color: #fff;
-  background-color: #42464d;
-  border: 0;
   border-radius: 5px;
   display: flex;
   align-items: center;

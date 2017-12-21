@@ -36,7 +36,7 @@ class VerifyEmail extends Component {
 
     const pageWrapperThemeClass = globals.theme === 'light' ? 'LightLandingPageWrapper' : 'DarkLandingPageWrapper';
     const pageInnerThemeClass = globals.theme === 'light' ? 'LightLandingPageInnerWrapper' : 'DarkLandingPageInnerWrapper';
-
+    const headerDescriptionClass = globals.theme === 'light' ? 'lightHeaderDescription' : 'darkHeaderDescription';
     return (
       <div className={'displayFlex landingPageWrapper container-fluid ' + pageWrapperThemeClass}>
         <Helmet>
@@ -46,7 +46,7 @@ class VerifyEmail extends Component {
         <div className={'landingPageInnerWidth'}>
           <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
             <div className='signUpWrapper'>
-              <div className='headerDescription'>
+              <div className={headerDescriptionClass}>
                 Email Verification
               </div>
               <div className='descriptionText'>

@@ -28,7 +28,7 @@ class GoogleLogin extends Component {
 
     const pageWrapperThemeClass = globals.theme === 'light' ? 'LightLandingPageWrapper' : 'DarkLandingPageWrapper';
     const pageInnerThemeClass = globals.theme === 'light' ? 'LightLandingPageInnerWrapper' : 'DarkLandingPageInnerWrapper';
-  
+    const headerDescriptionClass = globals.theme === 'light' ? 'lightHeaderDescription' : 'darkHeaderDescription';
     return (
       <div className={'landingPageWrapper container-fluid ' + pageWrapperThemeClass}>
         <Helmet>
@@ -37,7 +37,7 @@ class GoogleLogin extends Component {
         </Helmet>
         <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
           <div className='signUpWrapper'>
-            <div className='headerDescription'>
+            <div className={headerDescriptionClass}>
               Proceeding to Login...Will redirect after login
             </div>
             <div className='descriptionText'>
