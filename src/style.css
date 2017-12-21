@@ -56,9 +56,9 @@ body
 }
 .countryInput
 {
-  width: 29% !important;
+  width: 28% !important;
   display: inline-block;
-  margin-right: 1%;
+  margin-right: 2%;
   position: relative;
 }
 .countryInput input
