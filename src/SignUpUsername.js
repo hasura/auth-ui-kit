@@ -57,6 +57,9 @@ class SignUpUsername extends Component {
                     usernameSignUp(this.username.value, this.password.value).then( (resp) => {
                       this.enterProgressing(false);
                       handleAuthResponse(resp, this.authRespCallback);
+                    }).catch( ( resp ) => {
+                      this.enterProgressing(false);
+                      this.setState({response: resp});
                     });
                   } else {
                     alert("Passwords don't match. Try again");

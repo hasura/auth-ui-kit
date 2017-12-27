@@ -4,7 +4,7 @@ import SocialLoginWrapper from './SocialLoginWrapper';
 import SignInMessage from './SignInMessage';
 import Back from './Back';
 import ErrorMsg from './ErrorMsg';
-import {emailSignUp, handleAuthResponse} from './api';
+import {emailSignUp} from './api';
 import globals from './globals';
 import './style.css';
 class SignUpEmail extends Component {
@@ -55,8 +55,13 @@ class SignUpEmail extends Component {
                   this.enterProgressing(true);
                   if (this.password.value === this.confirm_password.value) {
                     emailSignUp(this.email.value, this.password.value).then( (resp) => {
+                      console.log(resp);
                       this.enterProgressing(false);
-                      handleAuthResponse(resp, this.authRespCallback);
+                      alert('Verification Email Sent. Please check your inbox');
+                      // handleAuthResponse(resp, this.authRespCallback);
+                    }).catch( ( resp ) => {
+                      this.enterProgressing(false);
+                      this.setState({response: resp});
                     });
                   } else {
                     alert("Passwords don't match. Try again");

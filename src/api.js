@@ -1,4 +1,3 @@
-import fetch from 'isomorphic-fetch';
 import {authUrl, endpoints, githubRedirectUrl, linkedinRedirectUrl} from './config';
 
 import makeRequest from './utils/makeRequest';
@@ -53,11 +52,7 @@ const usernameSignUp = (username, password) => {
       })
   };
 
-  return fetch(authUrl + endpoints.signup, requestOptions)
-  .catch(function(error) {
-    alert("An error occured");
-    console.log('Request Failed:' + error);
-  });
+  return makeRequest(authUrl + endpoints.signup, requestOptions);
 }
 
 const usernameSignIn = (username, password) => {
@@ -76,11 +71,7 @@ const usernameSignIn = (username, password) => {
       })
   };
 
-  return fetch(authUrl + endpoints.login, requestOptions)
-  .catch(function(error) {
-    alert("An error occured");
-    console.log('Request Failed:' + error);
-  });
+  return makeRequest(authUrl + endpoints.login, requestOptions);
 }
 
 const emailSignUp = (email, password) => {
@@ -99,11 +90,7 @@ const emailSignUp = (email, password) => {
       })
   };
 
-  return fetch(authUrl + endpoints.signup, requestOptions)
-  .catch(function(error) {
-    alert("An error occured");
-    console.log('Request Failed:' + error);
-  });
+  return makeRequest(authUrl + endpoints.signup, requestOptions);
 }
 
 const emailSignIn = (email, password) => {
@@ -122,10 +109,7 @@ const emailSignIn = (email, password) => {
       })
   };
 
-  return fetch(authUrl + endpoints.login, requestOptions)
-  .catch(function(error) {
-    console.log('Request Failed:' + error);
-  });
+  return makeRequest(authUrl + endpoints.login, requestOptions);
 }
 
 const mobileOtpSignUp = (mobile_number, country_code) => {
@@ -230,14 +214,7 @@ const resetMobilePassword = (mobile_number, country_code, otp, password) => {
       })
   };
 
-  return makeRequest(authUrl + endpoints.reset_password_otp, requestOptions)
-  .then(response => {
-    handleAuthResponse(response);
-  })
-  .catch(function(error) {
-    alert("Error resetting password: " + JSON.stringify(error));
-    console.log('Request Failed:' + error);
-  });
+  return makeRequest(authUrl + endpoints.reset_password_otp, requestOptions);
 };
 
 const resendMobilePasswordOtp = (mobile_number, country_code) => {
@@ -314,12 +291,6 @@ const mobilePasswordVerify = (mobile, country_code, otp) => {
   };
 
   return makeRequest(authUrl + endpoints.verify_mobile_password, requestOptions);
-  /*
-  .catch(function(error) {
-    // alert("Error signing up: " + JSON.stringify(error));
-    console.log("Error Signing up "  + JSON.stringify(error.message));
-  });
-  */
 }
 
 const mobileOtpVerify = (mobile, country_code, otp) => {

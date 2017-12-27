@@ -72,17 +72,17 @@ class SignUpMobileOtp extends Component {
       <div className={'displayFlex landingPageWrapper container-fluid ' + pageWrapperThemeClass}>
         <Helmet>
           <meta charSet="utf-8" />
-          <title>Sign in with Mobile/OTP</title>
+          <title>Sign up with Mobile/OTP</title>
         </Helmet>
         <div className={'landingPageInnerWidth'}>
           <Back backUrl={'/ui/signup'} />
           <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
             <div className='signUpWrapper'>
               <div className={headerDescriptionClass}>
-                Sign in
+                Sign up
               </div>
               <div className='descriptionText'>
-                Hello! Sign in with your mobile OTP
+                Hello! Sign up with your mobile OTP
               </div>
               <ErrorMsg response={this.state.response} /> 
               <form className={formGroupThemeClass} 
