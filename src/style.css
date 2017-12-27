@@ -295,11 +295,19 @@ body
   background-color: #42464d;
   border: 1.5px solid #42464d;
 }
+.darkCommonBtn a button:hover
+{
+  background-color: #3B3F44;
+}
 .lightCommonBtn a button
 {
   color: #474747;
   background-color: #fff;
   border: 1.5px solid #00D463;
+}
+.lightCommonBtn a button:hover
+{
+  background-color: #f8f8f8;
 }
 .commonBtn a button
 {
@@ -355,6 +363,10 @@ body
 .socialLoginIcon a img
 {
   width: 40px;
+}
+.socialLoginIcon a img:hover
+{
+  opacity: 0.6;
 }
 .LightSocialLoginIcon a i
 {
