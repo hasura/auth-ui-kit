@@ -5,23 +5,34 @@ import makeRequest from './utils/makeRequest';
 
 /* Helper function */
 
-const handleAuthResponse = ( response ) => {
+const handleAuthResponse = ( response, callback ) => {
   console.log(response);
-  response.json().then(resp => {
-    console.log(resp); 
-    if(response.ok) {
-      const currentLocation = window.location;
-      let redirectUrl = currentLocation.search.split("=")[1];
-      if ( redirectUrl === undefined || redirectUrl === 'undefined' || redirectUrl === null ) {
-        redirectUrl = authUrl + "/user/info";
-      }
-      window.location.href = redirectUrl;
-      return Promise.resolve();
-    } else {
-      // check error code mapping and update state to show in UI
-      alert(resp.message);
+  if (typeof(response) === 'function') {
+    response.json().then(resp => {
+      console.log(resp); 
+      if(response.ok) {
+        const currentLocation = window.location;
+        let redirectUrl = decodeURIComponent(currentLocation.search.split("=")[1]);
+        if ( redirectUrl === undefined || redirectUrl === 'undefined' || redirectUrl === null ) {
+          redirectUrl = authUrl + "/user/info";
+        }
+        window.location.href = redirectUrl;
+        return callback(resp);
+      } else {
+        // check error code mapping and update state to show in UI
+        // alert(resp.message);
+        return callback(resp);
+      } 
+    });
+  } else {
+    const currentLocation = window.location;
+    let redirectUrl = decodeURIComponent(currentLocation.search.split("=")[1]);
+    if ( redirectUrl === undefined || redirectUrl === 'undefined' || redirectUrl === null ) {
+      redirectUrl = authUrl + "/user/info";
     }
-  });
+    window.location.href = redirectUrl;
+    // return callback(response);
+  }
 }
 
 /* End of it */
@@ -43,9 +54,6 @@ const usernameSignUp = (username, password) => {
   };
 
   return fetch(authUrl + endpoints.signup, requestOptions)
-  .then(response => {
-    handleAuthResponse(response);
-  })
   .catch(function(error) {
     alert("An error occured");
     console.log('Request Failed:' + error);
@@ -69,9 +77,6 @@ const usernameSignIn = (username, password) => {
   };
 
   return fetch(authUrl + endpoints.login, requestOptions)
-  .then(response => {
-    handleAuthResponse(response);
-  })
   .catch(function(error) {
     alert("An error occured");
     console.log('Request Failed:' + error);
@@ -95,18 +100,6 @@ const emailSignUp = (email, password) => {
   };
 
   return fetch(authUrl + endpoints.signup, requestOptions)
-  .then(response => {
-    // handleAuthResponse(response);
-    if (response.ok) {
-      alert("Confirmation email sent. Please verify");
-    } else {
-      const resp = response.json();
-      // handle error code mapping for custom ui
-      resp.then(json => {
-        alert(json.message);
-      });
-    }
-  })
   .catch(function(error) {
     alert("An error occured");
     console.log('Request Failed:' + error);
@@ -130,9 +123,6 @@ const emailSignIn = (email, password) => {
   };
 
   return fetch(authUrl + endpoints.login, requestOptions)
-  .then(response => {
-    handleAuthResponse(response);
-  })
   .catch(function(error) {
     console.log('Request Failed:' + error);
   });
@@ -171,13 +161,7 @@ const mobileOtpLogin = (mobile, country_code, otp) => {
       })
   };
 
-  return makeRequest(authUrl + endpoints.login, requestOptions)
-  .then(response => {
-    handleAuthResponse(response);
-  })
-  .catch(function(error) {
-    alert("Error sign in: " + JSON.stringify(error));
-  });
+  return makeRequest(authUrl + endpoints.login, requestOptions);
 }
 const mobileOtpSignupFinal = (mobile, country_code, otp) => {
   var requestOptions = {
@@ -196,13 +180,7 @@ const mobileOtpSignupFinal = (mobile, country_code, otp) => {
       })
   };
 
-  return makeRequest(authUrl + endpoints.signup, requestOptions)
-  .then(response => {
-    handleAuthResponse(response);
-  })
-  .catch(function(error) {
-    alert("Error signing up: " + JSON.stringify(error));
-  });
+  return makeRequest(authUrl + endpoints.signup, requestOptions);
 }
 
 const resendMobileOtp = (mobile_number, country_code) => {
@@ -318,7 +296,7 @@ const mobilePasswordSignIn = (mobile, password, country_code) => {
   return makeRequest(authUrl + endpoints.login, requestOptions)
   .then(response => {
     handleAuthResponse(response);
-  })
+  });
 }
 
 const mobilePasswordVerify = (mobile, country_code, otp) => {
@@ -335,13 +313,13 @@ const mobilePasswordVerify = (mobile, country_code, otp) => {
       })
   };
 
-  return makeRequest(authUrl + endpoints.verify_mobile_password, requestOptions)
-  .then(response => {
-    handleAuthResponse(response);
-  })
+  return makeRequest(authUrl + endpoints.verify_mobile_password, requestOptions);
+  /*
   .catch(function(error) {
-    alert("Error signing up: " + JSON.stringify(error));
+    // alert("Error signing up: " + JSON.stringify(error));
+    console.log("Error Signing up "  + JSON.stringify(error.message));
   });
+  */
 }
 
 const mobileOtpVerify = (mobile, country_code, otp) => {
@@ -533,10 +511,7 @@ const emailForgotPassword = (email) => {
       })
   };
 
-  return makeRequest(authUrl + endpoints.email_forgot_password, requestOptions)
-  .catch(function(error) {
-    alert("Error sending an email for forgot password: " + JSON.stringify(error));
-  });
+  return makeRequest(authUrl + endpoints.email_forgot_password, requestOptions);
 }
 
 const logout = () => {
@@ -549,11 +524,12 @@ const logout = () => {
       body: JSON.stringify({})
   };
 
-  return makeRequest(authUrl + endpoints.logout, requestOptions).then(
-    window.location.href = '/ui/login'
+  return makeRequest(authUrl + endpoints.logout, requestOptions).then(function(response) {
+    window.location = '/ui' + decodeURIComponent(window.location.search);
+  }
   )
   .catch(function(error) {
-    alert("Could not logout: " + JSON.stringify(error));
+    alert("Could not logout: " + JSON.stringify(error.message));
   });
 }
 
@@ -567,13 +543,7 @@ const resetPassword = (token, password) => {
       body: JSON.stringify({'token': token, 'password': password})
   };
 
-  return makeRequest(authUrl + endpoints.reset_password, requestOptions).then(function(response) {
-    alert("Password changed successfully.");
-    window.location.href = '/ui/login/email'
-  })
-  .catch(function(error) {
-    alert("Could not reset password: " + JSON.stringify(error));
-  });
+  return makeRequest(authUrl + endpoints.reset_password, requestOptions);
 }
 
 const verifyEmail = (token) => {
@@ -586,11 +556,12 @@ const verifyEmail = (token) => {
   };
 
   return makeRequest(authUrl + endpoints.verify_email + '?token=' + token, requestOptions).then(function(response) {
-    alert("Email verified successfully.");
-    window.location.href = '/ui/login/email'
+    // alert("Email verified successfully.");
+    return {'status': 'Verification Successful. Redirecting...', 'error': false};
   })
   .catch(function(error) {
-    alert("Could not reset password: " + JSON.stringify(error));
+    // alert("Could not reset password: " + JSON.stringify(error));
+    return {'status': error, 'error': true};
   });
 }
 
@@ -619,5 +590,6 @@ export {
   emailForgotPassword,
   resetPassword,
   verifyEmail,
-  logout
+  logout,
+  handleAuthResponse
 }

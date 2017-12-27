@@ -4,12 +4,9 @@ import { Link } from "react-router-dom";
 class SignInMessage extends Component {
   render() {
     return (
-      <div className='descriptionText'>
-        Already have an account?  
-        <b>
-        	<Link to={{pathname: '/ui', search: this.props.location.search}} className='linkDescription textDecoration'> Login
-        	</Link>
-        </b>
+      <div className='descriptionText addPaddTop'>
+        Already have an account? <Link to={{pathname: '/ui', search: this.props.location.search}} className='linkDescription textDecoration'>Login
+      	</Link>
       </div>
     );
   }

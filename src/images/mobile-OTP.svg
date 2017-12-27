@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="19px" height="29px" viewBox="0 0 19 29" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <title>mobile OTP</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="01-light-Login_1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-474.000000, -410.000000)" stroke-linecap="round" stroke-linejoin="round">
+        <g id="mobile-OTP" transform="translate(475.000000, 411.000000)" stroke="#00D463" stroke-width="1.34999996">
+            <rect id="_Rectangle_" x="0" y="0" width="17" height="27" rx="1.34999996"></rect>
+            <path d="M0,22.95 L17,22.95" id="_Path_"></path>
+            <ellipse id="_Path_2" cx="8.6904" cy="7.06725" rx="3.7196" ry="3.69225"></ellipse>
+            <polyline id="_Path_3" points="8.6904 10.75275 8.6904 18.225 8.6904 19.575"></polyline>
+            <path d="M5.6576,18.05625 L8.6904,18.05625" id="_Path_4"></path>
+        </g>
+    </g>
+</svg>

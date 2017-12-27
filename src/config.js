@@ -3,11 +3,13 @@ import globals from './globals';
 const hostName = window.location.hostname;
 let splitHost = hostName.split(".");
 splitHost.shift();
-const clusterName = splitHost.join(".");
-// const clusterName = "h34-barn99-stg.hasura-app.io";
 const authVersion = "v1";
-//const scheme = window.location.protocol;
-const scheme = 'https:';
+let clusterName = splitHost.join(".");
+let scheme = window.location.protocol;
+if (process && process.env && process.env.NODE_ENV === 'development') {
+  clusterName = 'applique52.hasura-app.io';
+  scheme = 'https:';
+}
 const baseDomain = scheme + "//auth." + clusterName;
 const authUrl = baseDomain + "/" + authVersion;
 
@@ -34,7 +36,7 @@ const endpoints = {
   'resend_mobile_password_otp': '/providers/mobile-password/resend-otp',
   'signup': '/signup',
   'login': '/login',
-  'logout': '/logout',
+  'logout': '/user/logout',
   'facebookLogin': 'https://www.facebook.com/v2.11/dialog/oauth?client_id=' + globals.facebook + '&redirect_uri=' + facebookRedirectUrl + '&response_type=token&scope=email&state=' + redirectUrl,
   'googleLogin': 'https://accounts.google.com/o/oauth2/v2/auth?client_id=' + globals.google + '&redirect_uri=' + googleRedirectUrl + '&scope=openid%20profile%20email&response_type=id_token&nonce=user_id&state=' + redirectUrl,
   'githubLogin': 'https://github.com/login/oauth/authorize?client_id=' + globals.github + '&redirect_uri=' + githubRedirectUrl + '&scope=user:email&state=' + redirectUrl,

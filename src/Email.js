@@ -1,53 +1,91 @@
 import React, { Component } from "react";
 import {Helmet} from "react-helmet";
 import { Link } from "react-router-dom";
-import {emailSignIn} from './api';
+import {emailSignIn, handleAuthResponse} from './api';
 import SocialLoginWrapper from './SocialLoginWrapper';
 import SignUpMessage from './SignUpMessage';
+import Back from './Back';
+import ErrorMsg from './ErrorMsg';
 import globals from './globals';
 import './style.css';
 class Email extends Component {
+  state = {
+    isProgressing: false,
+    response: null
+  }
+
+  enterProgressing = (status) => {
+    this.setState({ isProgressing: status });
+  }
+
+  authRespCallback = (resp) => {
+    this.setState({ response: resp});
+  }
 
   render() {
 
     const pageWrapperThemeClass = globals.theme === 'light' ? 'LightLandingPageWrapper' : 'DarkLandingPageWrapper';
     const pageInnerThemeClass = globals.theme === 'light' ? 'LightLandingPageInnerWrapper' : 'DarkLandingPageInnerWrapper';
     const formGroupThemeClass = globals.theme === 'light' ? 'LightFormGroupWrapper' : 'DarkFormGroupWrapper';
-  
+    const headerDescriptionClass = globals.theme === 'light' ? 'lightHeaderDescription' : 'darkHeaderDescription';
+    let submitBtnText = 'Login';
+    if (this.state.isProgressing) {
+      submitBtnText = (<span><i className="fa fa-spinner fa-spin"></i> Logging in..</span>);
+    }
     return (
-      <div className={'landingPageWrapper container-fluid ' + pageWrapperThemeClass}>
+      <div className={'displayFlex landingPageWrapper container-fluid ' + pageWrapperThemeClass}>
         <Helmet>
           <meta charSet="utf-8" />
           <title>Login with Email</title>
         </Helmet>
-        <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
-          <div className='signUpWrapper'>
-            <div className='headerDescription'>
-              Login
+        <div className={'landingPageInnerWidth'}>
+          <Back backUrl={'/ui'} />
+          <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
+            <div className='signUpWrapper'>
+              <div className={headerDescriptionClass}>
+                Login
+              </div>
+              <div className='descriptionText'>
+                Hello! Login with your Email
+              </div>
+              <ErrorMsg response={this.state.response} /> 
+              <form className={formGroupThemeClass} 
+                  onChange={() => { this.setState({response: null})}}
+                  onSubmit={(e) => {
+                  e.preventDefault();
+                  this.enterProgressing(true);
+                  emailSignIn(this.email.value, this.password.value).then( (resp) => {
+                    this.enterProgressing(false);
+                    handleAuthResponse(resp, this.authRespCallback);
+                  });
+                }}>
+                <div className='formInput'>
+                  <label className='formLabel'>
+                    Email ID
+                  </label>
+                  <input type="email" ref={(input) => { this.email = input; }} />
+                </div>
+                <div className='formInput'>
+                  <label className='formLabel'>
+                    Password
+                  </label>
+                  <input type="password" ref={(input) => { this.password = input; }} />
+                </div>
+                <div className='linkDescription forgotPassword descriptionText'>
+                  <Link to={{pathname: '/ui/forgot-password', search: this.props.location.search}}> Forgot Password?</Link>
+                </div>
+                <div className='signInbtn'>
+                  <a>
+                    <button type="submit">
+                      {submitBtnText}
+                    </button>
+                  </a>
+                </div>
+              </form>
+              <SocialLoginWrapper />
             </div>
-            <div className='descriptionText'>
-              Hello! Login with Email
-            </div>
-            <form className={formGroupThemeClass} onSubmit={(e) => {
-                e.preventDefault();
-                emailSignIn(this.email.value, this.password.value);
-              }}>
-              <div className='formInput'>
-                <input type="email" placeholder='Email' ref={(input) => { this.email = input; }} />
-              </div>
-              <div className='formInput'>
-                <input type="password" placeholder='Password' ref={(input) => { this.password = input; }} />
-              </div>
-              <div className='linkDescription forgotPassword descriptionText'>
-                <Link to={{pathname: '/ui/forgot-password', search: this.props.location.search}}> Forgot Password?</Link>
-              </div>
-              <div className='signInbtn'>
-                <a><button type='submit'>Login</button></a>
-              </div>
-            </form>
-            <SocialLoginWrapper />
-            <SignUpMessage location={this.props.location} />
           </div>
+          <SignUpMessage location={this.props.location} />
         </div>
       </div>
     );

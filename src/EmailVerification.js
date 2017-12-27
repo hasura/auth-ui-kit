@@ -18,16 +18,16 @@ class EmailVerification extends Component {
     const pageWrapperThemeClass = globals.theme === 'light' ? 'LightLandingPageWrapper' : 'DarkLandingPageWrapper';
     const pageInnerThemeClass = globals.theme === 'light' ? 'LightLandingPageInnerWrapper' : 'DarkLandingPageInnerWrapper';
     const formGroupThemeClass = globals.theme === 'light' ? 'LightFormGroupWrapper' : 'DarkFormGroupWrapper';
-  
+    const headerDescriptionClass = globals.theme === 'light' ? 'lightHeaderDescription' : 'darkHeaderDescription';
     return (
-      <div className={'landingPageWrapper container-fluid ' + pageWrapperThemeClass}>
+      <div className={'displayFlex landingPageWrapper container-fluid ' + pageWrapperThemeClass}>
         <Helmet>
           <meta charSet="utf-8" />
           <title>Email Verification</title>
         </Helmet>
-        <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
+        <div className={'displayFlex landingPageInnerWrapper ' + pageInnerThemeClass}>
           <div className='signUpWrapper'>
-            <div className='headerDescription'>
+            <div className={headerDescriptionClass}>
               Email Verification
             </div>
             <div className='descriptionText'>

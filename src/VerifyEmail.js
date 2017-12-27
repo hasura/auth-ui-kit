@@ -1,42 +1,57 @@
 import React, { Component } from "react";
 import {Helmet} from "react-helmet";
-import {logout} from './api';
+import {verifyEmail} from './api';
 import globals from './globals';
 import './style.css';
-class Restricted extends Component {
+class VerifyEmail extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {'verifyStatus': 'Verifying Email...'};
+  }
+
+  componentWillMount() {
+    let locationParams = window.location.search;
+    if(locationParams === "") {
+      locationParams = window.location.hash;
+    }
+    const params = locationParams.split("?token=")[1];
+    const token = params;
+    console.log(token);
+    // now trigger verify email endpoint
+    const verifyStatus = verifyEmail(token);
+    verifyStatus.then( (status) => {
+      console.log(status);
+      if (!status.error) {
+        window.location.href = '/ui/login/email';
+      } else {
+        this.setState({
+          verifyStatus: status.status.message
+        });
+      }
+    });
+  }
 
   render() {
 
     const pageWrapperThemeClass = globals.theme === 'light' ? 'LightLandingPageWrapper' : 'DarkLandingPageWrapper';
     const pageInnerThemeClass = globals.theme === 'light' ? 'LightLandingPageInnerWrapper' : 'DarkLandingPageInnerWrapper';
-    const formGroupThemeClass = globals.theme === 'light' ? 'LightFormGroupWrapper' : 'DarkFormGroupWrapper';
     const headerDescriptionClass = globals.theme === 'light' ? 'lightHeaderDescription' : 'darkHeaderDescription';
     return (
       <div className={'displayFlex landingPageWrapper container-fluid ' + pageWrapperThemeClass}>
         <Helmet>
           <meta charSet="utf-8" />
-          <title>Restricted</title>
+          <title>Email Verification</title>
         </Helmet>
         <div className={'landingPageInnerWidth'}>
           <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
             <div className='signUpWrapper'>
               <div className={headerDescriptionClass}>
-                Restricted
+                Email Verification
               </div>
               <div className='descriptionText'>
-                Hello! You are logged in with a role which does not allow you to access the service.
+                {this.state.verifyStatus}
               </div>
-              <div className='descriptionText'>
-                Please logout and login again.
-              </div>
-              <form className={formGroupThemeClass} onSubmit={(e) => {
-                  e.preventDefault();
-                  logout();
-                }}>
-                <div className='signInbtn'>
-                  <a><button type='submit'>Logout & Login Again</button></a>
-                </div>
-              </form>
             </div>
           </div>
         </div>
@@ -45,4 +60,4 @@ class Restricted extends Component {
   }
 }
 
-export default Restricted
+export default VerifyEmail

@@ -6,6 +6,37 @@ body
   font-family: 'Open Sans';
   font-size: 14px;
 }
+.displayFlex
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.backBtn
+{
+  color: #888;
+  font-size: 15px;
+  text-align: left;
+  padding-bottom: 15px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.resendOtpText {
+  padding-top: 10px;
+}
+.backBtn i
+{
+  padding-right: 5px;
+  font-size: 20px;
+}
+.backBtn a {
+  color: #888 !important;
+  text-decoration: none;
+}
+.backBtn a:hover {
+  text-decoration: none;
+}
 .go_back {
   cursor: pointer;
   position: absolute;
@@ -29,127 +60,196 @@ body
 }
 .countryInput
 {
-  width: 25% !important;
+  width: 28% !important;
   display: inline-block;
   margin-right: 2%;
+  position: relative;
 }
+.countryInput input
+{
+  width: 100%;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+.countryInput i
+{
+  position: absolute;
+  bottom: 15px;
+  right: 7px;
+  font-size: 18px;
+}
+
 .mobileInput
 {
-  width: 66% !important;
+  width: 70% !important;
   display: inline-block;
+}
+.mobileInput input
+{
+  width: 100%;
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
 }
 .DarkLandingPageWrapper
 {
-  background-color: #333;
+  background-color: #292b2f;
   color: #fff;
 }
 .LightLandingPageWrapper
 {
-  background-color: #fff;
+  background-color: #fafcfd;
   color: #333;
+}
+.landingPageInnerWidth
+{
+  width: 440px;
+  text-align: center;
 }
 .DarkLandingPageInnerWrapper
 {
-  background-color: #444;
+  background-color: #36393f;
+  -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
 }
 .LightLandingPageInnerWrapper
 {
-  background-color: #f4f4f4;
+  background-color: #fff;
+  -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
 }
 .landingPageWrapper
 {
   width: calc(100vw - 80px);
-  height: calc(100vh - 80px);
+  min-height: calc(100vh - 80px);
   padding: 40px;
-  display: table;
 }
 .landingPageInnerWrapper
 {
-  text-align: center;
-  width: 100%;
   border-radius: 10px;
-  height: calc(100% - 40px);
-  overflow: scroll;
   padding: 20px 0;
-  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
-  display: table-cell;
-  vertical-align:  middle;
+  -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+  margin: 0 auto;
 }
 .headerDescription
 {
   font-family: 'Raleway';
   font-weight: 600;
-  font-size: 22px;
+  font-size: 24px;
+  color: #e9e9e9;
+  text-transform: uppercase;
+  padding: 10px 0;
+}
+.darkHeaderDescription
+{
+  color: #e9e9e9;
+}
+.lightHeaderDescription
+{
+  color: #000;
+}
+.lightHeaderDescription, .darkHeaderDescription
+{
+  font-family: 'Raleway';
+  font-weight: 600;
+  font-size: 24px;
+  text-transform: uppercase;
+  padding: 10px 0;
 }
 .addPaddTop
 {
-  padding-top: 20px;
+  padding-top: 20px !important;
+}
+.dividerLine
+{
+  background-color: #888;
+  display: block;
+  height: 1px;
+  width: 90px;
 }
 .descriptionText
 {
+  color: #888888;
   font-family: 'Open Sans';
-  font-size: 14px;
-  padding-top: 10px;
+  font-size: 16px;
+  line-height: 20px;
+}
+.smallDescriptionText
+{
+  color: #888888;
+  font-family: 'Open Sans';
+  font-size: 13px;
+  line-height: 18px;
 }
 .signUpWrapper
 {
-  width: 400px;
+  width: 380px;
   margin: 0 auto;
-  padding: 0px 10px;
 }
 .LightFormGroupWrapper, .DarkFormGroupWrapper
 {
+  width: 380px;
   padding-top: 20px;
 }
 .LightFormGroupWrapper .formInput, .DarkFormGroupWrapper .formInput
 {
-  padding-bottom: 15px;
+  padding-bottom: 20px;
 }
 .DarkFormGroupWrapper .formInput input
 {
-  width: calc( 100% - 15px );
-  height: 40px;
+  width: calc(100% - 10px);
+  height: 44px;
   border-radius: 5px;
-  border: 2px solid #333 !important;
+  border: 1px solid #42464d !important;
   padding: 0;
   padding-left: 10px;
   font-size: 14px;
-  background-color: #555 !important;
+  background-color: #42464d !important;
   color: #fff !important;
+}
+.formLabel
+{
+  text-align: left;
+  padding-bottom: 10px;
+  display: block;
+  color: #888888;
+  font-size: 14px;
+  font-weight: 600;
 }
 .DarkFormGroupWrapper .formInput input:focus
 {
-  border: 2px solid #222 !important;
+  border: 1px solid #21d268 !important;
   outline: none;
 }
 .LightFormGroupWrapper .formInput input
 {
-  width: calc( 100% - 15px );
-  height: 40px;
+  width: calc( 100% - 10px );
+  height: 44px;
   border-radius: 5px;
   border: 2px solid #ccc;
-  /* border: 2px solid #333 !important; */
+  border: 2px solid #F5F9FA !important;
   padding: 0;
   padding-left: 10px;
   font-size: 14px;
-
+  background-color: #F5F9FA;
   /* background-color: #555 !important; */
   /* color: #fff !important; */
 }
 .LightFormGroupWrapper .formInput input:focus
 {
-  border: 2px solid #222 !important;
+  border: 2px solid #00D463 !important;
   outline: none;
 }
 .linkDescription
 {
-  color: #FF993A;
+  color: #00D463;
 }
 .linkDescription a
 {
-  color: #FF993A;
+  color: #00D463;
   text-decoration: none;
 }
 .linkDescription a:hover
@@ -158,8 +258,9 @@ body
 }
 .forgotPassword
 {
-  text-align: right;
+  text-align: left;
   padding: 15px 0;
+  padding-top: 0;
   cursor: pointer;
 }
 .commonBtn
@@ -168,42 +269,64 @@ body
 }
 .signInbtn a button
 {
-  background-color: #FFCA27;
+  background-color: #00D463;
   width: 100%;
-  height: 44px;
+  height: 46px;
   text-align: center;
-  border: 1px solid #FFCA27;
+  border-radius: 5px;
+  border: 1px solid #00D463;
   text-transform: uppercase;
   font-size: 14px;
   cursor: pointer;
-  margin-top: 15px;
+  margin-top: 10px;
   color: #fff;
 }
 .signInbtn a button:hover
 {
-  background-color: #EAB41C;
+  background-color: #10af50;
 }
 .signInbtn a button:focus
 {
   outline:  none;
 }
+.darkCommonBtn a button
+{
+  color: #fff;
+  background-color: #42464d;
+  border: 1.5px solid #42464d;
+}
+.lightCommonBtn a button
+{
+  color: #474747;
+  background-color: #fff;
+  border: 1.5px solid #00D463;
+}
 .commonBtn a button
 {
-  /* background-color: #FFCA27; */
-  max-width: 300px;
-  min-width: 300px;
-  height: 44px;
+  height: 54px;
+  width: 380px;
   text-align: left;
-  /* border: 1px solid #FFCA27; */
-  text-transform: uppercase;
-  font-size: 14px;
+  font-family: 'Open Sans';
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
   cursor: pointer;
-  margin-top: 15px;
-  color: #fff;
+  margin-top: 20px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
 }
 .commonBtn a
 {
   text-decoration: none;
+}
+.btnIconWidth
+{
+  width: 64px;
+  text-align: center;
+}
+.commonBtn a button span img
+{
 }
 .commonBtn a button span i
 {
@@ -214,50 +337,24 @@ body
 {
   outline: none;
 }
-.usernameLogin a button
-{
-  background-color: #FFCA27;
-  border: 1px solid #FFCA27;
-}
-.usernameLogin a button:hover
-{
-  background-color: #EAB41C;
-}
-.emailLogin a button
-{
-  background-color: #db4437;
-  border: 1px solid #db4437;
-  color: #fff;
-}
-.emailLogin a button:hover
-{
-  background-color: #c62f28;
-  border: 1px solid #c62f28;
-}
-.mobileLogin a button
-{
-  background-color: #02bd7e;
-  border: 1px solid #02bd7e;
-}
-.mobileLogin a button:hover
-{
-  background-color: #059662;
-  border: 1px solid #059662;
-}
 .socialLoginWrapper
 {
-  padding: 15px 0;
+  padding-top: 20px;
 }
 .socialLoginIconWrapper
 {
   margin: 0 auto;
-  padding: 20px 0;
+  padding-top: 20px;
 }
 .socialLoginIcon
 {
   display: inline-block;
-  width: 20%;
+  width: 18%;
   text-align: center;
+}
+.socialLoginIcon a img
+{
+  width: 40px;
 }
 .LightSocialLoginIcon a i
 {
@@ -277,8 +374,16 @@ body
 {
   color: #aaa;
 }
+.errorText {
+  color: red;
+  padding-top: 10px;
+}
 @media (max-width: 767px)
 {
+  .headerDescription
+  {
+    padding: 0 0;
+  }
   .countryInput
   {
     width: 27% !important;
@@ -290,23 +395,41 @@ body
     width: 60% !important;
     display: inline-block;
   }
+  .landingPageInnerWidth
+  {
+    width: 280px;
+  }
+  .LightFormGroupWrapper, .DarkFormGroupWrapper
+  {
+    width: 260px;
+  }
   .landingPageWrapper
   {
     padding: 20px;
     width: calc(100vw - 40px);
     height: calc(100vh - 40px);
+    height: auto;
   }
   .signUpWrapper
   {
     width: 260px;
   }
+  .btnIconWidth
+  {
+    width: 50px;
+  }
   .commonBtn a button
   {
     max-width: 254px;
     min-width: 254px;
+    font-size: 15px;
   }
   .commonBtn a button span i
   {
     padding: 0 10px;
+  }
+  .socialLoginIcon
+  {
+    width: 25%;
   }
 }

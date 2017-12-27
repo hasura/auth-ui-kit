@@ -7,7 +7,7 @@ return (/^[?#]/.test(query) ? query.slice(1) : query)
   .split('&')
   .reduce((params, param) => {
     let [ key, value ] = param.split('=');
-    params[key] = value ? decodeURIComponent(value.replace(/\+/g, ' ')) : '';
+    params[key] = value ? decodeURIComponent(value) : '';
     return params;
   }, { });
 }
