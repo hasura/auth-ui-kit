@@ -2,9 +2,22 @@ import React, { Component } from "react";
 import {Helmet} from "react-helmet";
 import {resetPassword} from './api';
 import Back from './Back';
+import ErrorMsg from './ErrorMsg';
 import './style.css';
 import globals from './globals';
 class ResetPassword extends Component {
+  state = {
+    isProgressing: false,
+    response: null
+  }
+
+  enterProgressing = (status) => {
+    this.setState({ isProgressing: status });
+  }
+
+  authRespCallback = (resp) => {
+    this.setState({ response: resp});
+  }
 
   render() {
 
@@ -15,6 +28,11 @@ class ResetPassword extends Component {
     // read token sent in the email
     const currentSearchParams = window.location.search;
     const token = currentSearchParams.split('?token=')[1];
+
+    let submitBtnText = 'Reset Password';
+    if (this.state.isProgressing) {
+      submitBtnText = (<span><i className="fa fa-spinner fa-spin"></i> Verifying..</span>);
+    }
 
     return (
       <div className={'displayFlex landingPageWrapper container-fluid ' + pageWrapperThemeClass}>
@@ -32,10 +50,22 @@ class ResetPassword extends Component {
               <div className='descriptionText'>
                 Hello! Reset your password
               </div>
-              <form className={formGroupThemeClass} onSubmit={(e) => {
+              <ErrorMsg response={this.state.response} /> 
+              <form className={formGroupThemeClass} 
+                onChange={() => { this.setState({response: null})}}
+                onSubmit={(e) => {
                   e.preventDefault();
+                  this.enterProgressing(true);
                   if (this.password.value === this.confirmPassword.value) {
-                    resetPassword(token, this.password.value);
+                    resetPassword(token, this.password.value).then( ( resp) => {
+                      this.enterProgressing(false);
+                      alert("Password has been reset successfully");
+                      window.location.href = '/ui';
+                    })
+                    .catch( ( resp ) => {
+                      this.enterProgressing(false);
+                      this.setState({response: resp});
+                    });
                   } else {
                     alert('Passwords don\'t match');
                   }
@@ -53,7 +83,7 @@ class ResetPassword extends Component {
                   <input type="password" ref={(input) => { this.confirmPassword = input; }} />
                 </div>
                 <div className='signInbtn'>
-                  <a><button type="submit">Reset Password</button></a>
+                  <a><button type="submit">{submitBtnText}</button></a>
                 </div>
               </form>
             </div>

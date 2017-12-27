@@ -2,15 +2,19 @@ import React, { Component } from "react";
 import './style.css';
 import globals from './globals';
 import {endpoints} from './config';
+import {facebookDarkImg, facebookLightImg, 
+        googlePlusDarkImg, googlePlusLightImg, 
+        githubDarkImg, githubLightImg,
+        linkedinDarkImg, linkedinLightImg} from './images/Images';
 
 class SocialLoginWrapper extends Component {
   render() {
 
     const socialIconThemeClass = globals.theme === 'light' ? 'LightSocialLoginIcon' : 'DarkSocialLoginIcon';
-    const faceBookDark = require('./images/facebook-dark.svg');
-    const googlePlusDark = require('./images/googleplus-dark.svg');
-    const gitHubDark = require('./images/github-dark.svg');
-    const linkedInDark = require('./images/linkedin-dark.svg');
+    const currentFacebookImg = globals.theme === 'light' ? facebookLightImg : facebookDarkImg;
+    const currentGoogleImg = globals.theme === 'light' ? googlePlusLightImg : googlePlusDarkImg;
+    const currentGithubImg = globals.theme === 'light' ? githubLightImg : githubDarkImg;
+    const currentLinkedinImg = globals.theme === 'light' ? linkedinLightImg : linkedinDarkImg;
     return (
       <div>
         {globals.facebook || globals.google || globals.github || globals.linkedin ?
@@ -27,22 +31,22 @@ class SocialLoginWrapper extends Component {
           <div className='socialLoginIconWrapper'>
             {globals.facebook ?
             <div className={'socialLoginIcon ' + socialIconThemeClass}>
-              <a href={endpoints.facebookLogin}><img className='img-responsive' src={faceBookDark} alt='Facebook icon' /></a>
+              <a href={endpoints.facebookLogin}><img className='img-responsive' src={currentFacebookImg} alt='Facebook icon' /></a>
             </div>
             : null}
             {globals.google ?
             <div className={'socialLoginIcon ' + socialIconThemeClass}>
-              <a href={endpoints.googleLogin}><img className='img-responsive' src={googlePlusDark} alt='Google plus icon' /></a>
+              <a href={endpoints.googleLogin}><img className='img-responsive' src={currentGoogleImg} alt='Google plus icon' /></a>
             </div>
             : null}
             {globals.github ?
             <div className={'socialLoginIcon ' + socialIconThemeClass}>
-              <a href={endpoints.githubLogin}><img className='img-responsive' src={gitHubDark} alt='Github icon' /></a>
+              <a href={endpoints.githubLogin}><img className='img-responsive' src={currentGithubImg} alt='Github icon' /></a>
             </div>
             : null}
             {globals.linkedin ?
             <div className={'socialLoginIcon ' + socialIconThemeClass}>
-              <a href={endpoints.linkedinLogin}><img className='img-responsive' src={linkedInDark} alt='Linkedin icon' /></a>
+              <a href={endpoints.linkedinLogin}><img className='img-responsive' src={currentLinkedinImg} alt='Linkedin icon' /></a>
             </div>
             : null}
           </div>

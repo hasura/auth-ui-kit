@@ -3,35 +3,57 @@ import {Helmet} from "react-helmet";
 import SocialLoginWrapper from './SocialLoginWrapper';
 import SignInMessage from './SignInMessage';
 import Back from './Back';
-import { mobilePasswordSignUp, resendMobilePasswordOtp, mobilePasswordVerify } from './api';
+import ErrorMsg from './ErrorMsg';
+import { mobilePasswordSignUp, resendMobilePasswordOtp, mobilePasswordVerify, handleAuthResponse } from './api';
 import globals from './globals';
 import './style.css';
 class SignUpMobile extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      isProgressing: false,
+      response: null
+    }
     this.state.isFirstStepCompleted = false;
     this.state.mobile_number = '';
     this.state.country_code = '';
   }
+  enterProgressing = (status) => {
+    this.setState({ isProgressing: status });
+  }
+
+  authRespCallback = (resp) => {
+    this.setState({ response: resp});
+  }
   handleSignup(e) {
     e.preventDefault();
+    this.enterProgressing(true);
+    this.setState({response: null});
     if (this.password.value === this.confirm_password.value) {
       mobilePasswordSignUp(this.mobile.value, this.password.value, this.country_code.value)
       .then( (resp) => {
+        this.enterProgressing(false);
         this.setState({ ...this.state, mobile_number: this.mobile.value, country_code: this.country_code.value, isFirstStepCompleted: true});
-        return
+        return;
       })
       .catch( (resp) => {
-        alert("Signup failed with: " + JSON.stringify(resp.message) );
+        this.enterProgressing(false);
+        this.setState({response: resp});
       });
     } else {
+      this.enterProgressing(false);
       alert("Passwords don't match. Try again");
     }
   }
   handleVerification(e) {
     e.preventDefault(e);
-    mobilePasswordVerify(this.state.mobile_number, this.state.country_code, this.otp.value);
+    mobilePasswordVerify(this.state.mobile_number, this.state.country_code, this.otp.value).then( ( resp) => {
+      this.enterProgressing(false);
+      handleAuthResponse(resp, this.authRespCallback);
+    })
+    .catch( ( resp ) => {
+      this.setState({response: resp});
+    });
   }
   resendMobilePasswordOtp(e) {
     e.preventDefault();
@@ -49,6 +71,10 @@ class SignUpMobile extends Component {
     const pageInnerThemeClass = globals.theme === 'light' ? 'LightLandingPageInnerWrapper' : 'DarkLandingPageInnerWrapper';
     const formGroupThemeClass = globals.theme === 'light' ? 'LightFormGroupWrapper' : 'DarkFormGroupWrapper';
     const headerDescriptionClass = globals.theme === 'light' ? 'lightHeaderDescription' : 'darkHeaderDescription';
+    let submitBtnText = 'Sign up';
+    if (this.state.isProgressing) {
+      submitBtnText = (<span><i className="fa fa-spinner fa-spin"></i> Signing up..</span>);
+    }
     return (
       <div className={'displayFlex landingPageWrapper container-fluid ' + pageWrapperThemeClass}>
         <Helmet>
@@ -56,7 +82,7 @@ class SignUpMobile extends Component {
           <title>Sign up with Mobile</title>
         </Helmet>
         <div className={'landingPageInnerWidth'}>
-          <Back />
+          <Back backUrl={'/ui/signup'} />
           <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
             <div className='signUpWrapper'>
               <div className={headerDescriptionClass}>
@@ -65,7 +91,8 @@ class SignUpMobile extends Component {
               <div className='descriptionText'>
                 Hello! Sign up with your mobile
               </div>
-              <form className={formGroupThemeClass}>
+              <ErrorMsg response={this.state.response} /> 
+              <form className={formGroupThemeClass} onChange={() => { this.setState({response: null})}}>
                 { !this.state.isFirstStepCompleted ? (
                   <div>
                     <div className='formInput'>
@@ -98,12 +125,9 @@ class SignUpMobile extends Component {
                   </div>
                 ) : (
                   <div className='formInput'>
-                    <input type="text" placeholder='otp' ref={ (input) => { this.otp = input }} />
-                    <div className="">
-                      Haven{'\''}t received OTP yet?
-                      <a href="" onClick={ this.resendMobilePasswordOtp.bind(this) }>
-                        Resend
-                      </a>
+                    <input type="text" placeholder='Enter OTP' ref={ (input) => { this.otp = input }} />
+                    <div className="resendOtpText">
+                      Haven{'\''}t received OTP yet? <a href="" onClick={ this.resendMobilePasswordOtp.bind(this) }> Resend </a>
                     </div>
                   </div>
                 )}
@@ -111,7 +135,7 @@ class SignUpMobile extends Component {
                   { !this.state.isFirstStepCompleted ? (
                     <a>
                       <button data-button-id="signup" onClick={ this.handleSignup.bind(this) }>
-                        Signup
+                        {submitBtnText}
                       </button>
                     </a>
                   ) : (

@@ -3,10 +3,23 @@ import {Helmet} from 'react-helmet';
 import SocialLoginWrapper from './SocialLoginWrapper';
 import SignInMessage from './SignInMessage';
 import Back from './Back';
-import {usernameSignUp} from './api';
+import ErrorMsg from './ErrorMsg';
+import {usernameSignUp, handleAuthResponse} from './api';
 import globals from './globals';
 import './style.css';
 class SignUpUsername extends Component {
+  state = {
+    isProgressing: false,
+    response: null
+  }
+
+  enterProgressing = (status) => {
+    this.setState({ isProgressing: status });
+  }
+
+  authRespCallback = (resp) => {
+    this.setState({ response: resp});
+  }
 
   render() {
 
@@ -14,6 +27,10 @@ class SignUpUsername extends Component {
     const pageInnerThemeClass = globals.theme === 'light' ? 'LightLandingPageInnerWrapper' : 'DarkLandingPageInnerWrapper';
     const formGroupThemeClass = globals.theme === 'light' ? 'LightFormGroupWrapper' : 'DarkFormGroupWrapper';
     const headerDescriptionClass = globals.theme === 'light' ? 'lightHeaderDescription' : 'darkHeaderDescription';
+    let submitBtnText = 'Sign up';
+    if (this.state.isProgressing) {
+      submitBtnText = (<span><i className="fa fa-spinner fa-spin"></i> Signing up..</span>);
+    }
     return (
       <div className={'displayFlex landingPageWrapper container-fluid ' + pageWrapperThemeClass}>
         <Helmet>
@@ -21,7 +38,7 @@ class SignUpUsername extends Component {
           <title>Sign Up with Username</title>
         </Helmet>
         <div className={'landingPageInnerWidth'}>
-          <Back />
+          <Back backUrl={'/ui/signup'} />
           <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
             <div className='signUpWrapper'>
               <div className={headerDescriptionClass}>
@@ -30,10 +47,17 @@ class SignUpUsername extends Component {
               <div className='descriptionText'>
                 Hello! Sign Up with your username
               </div>
-              <form className={formGroupThemeClass} onSubmit={(e) => {
+              <ErrorMsg response={this.state.response} /> 
+              <form className={formGroupThemeClass} 
+                onChange={() => { this.setState({response: null})}}
+                onSubmit={(e) => {
                   e.preventDefault();
+                  this.enterProgressing(true);
                   if (this.password.value === this.confirm_password.value) {
-                    usernameSignUp(this.username.value, this.password.value);
+                    usernameSignUp(this.username.value, this.password.value).then( (resp) => {
+                      this.enterProgressing(false);
+                      handleAuthResponse(resp, this.authRespCallback);
+                    });
                   } else {
                     alert("Passwords don't match. Try again");
                   }
@@ -57,7 +81,11 @@ class SignUpUsername extends Component {
                   <input type="password" ref={(input) => { this.confirm_password = input; }} />
                 </div>
                 <div className='signInbtn'>
-                  <a><button type="submit">Sign Up</button></a>
+                  <a>
+                    <button type="submit">
+                      {submitBtnText}
+                    </button>
+                  </a>
                 </div>
               </form>
               <SocialLoginWrapper />

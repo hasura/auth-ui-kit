@@ -20,6 +20,10 @@ body
   padding-bottom: 15px;
   display: flex;
   align-items: center;
+  cursor: pointer;
+}
+.resendOtpText {
+  padding-top: 10px;
 }
 .backBtn i
 {
@@ -369,6 +373,10 @@ body
 .socialLoginIcon a i:hover
 {
   color: #aaa;
+}
+.errorText {
+  color: red;
+  padding-top: 10px;
 }
 @media (max-width: 767px)
 {

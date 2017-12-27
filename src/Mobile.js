@@ -3,12 +3,14 @@ import {Helmet} from "react-helmet";
 import SocialLoginWrapper from './SocialLoginWrapper';
 import SignUpMessage from './SignUpMessage';
 import Back from './Back';
+import ErrorMsg from './ErrorMsg';
 import {
   mobilePasswordSignIn,
   mobilePasswordVerify,
   resendMobilePasswordOtp,
   sendForgotPasswordOTP,
-  resetMobilePassword
+  resetMobilePassword,
+  handleAuthResponse
 } from './api';
 import globals from './globals';
 
@@ -17,23 +19,39 @@ import './style.css';
 class Mobile extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      isProgressing: false,
+      response: null
+    };
     this.state.isNotVerified = false;
     this.state.enableForgotPassword = false;
     this.state.mobile_number = '';
     this.state.country_code = '';
+  }
+  enterProgressing = (status) => {
+    this.setState({ isProgressing: status });
+  }
+
+  authRespCallback = (resp) => {
+    this.setState({ response: resp});
   }
   toggleForgotPassword() {
     this.setState({ ...this.state, enableForgotPassword: !this.state.enableForgotPassword });
   }
   handleLogin(e) {
     e.preventDefault();
-    mobilePasswordSignIn(this.mobile.value, this.password.value, this.country_code.value)
+    this.enterProgressing(true);
+    mobilePasswordSignIn(this.mobile.value, this.password.value, this.country_code.value).then( (resp) => {
+      this.enterProgressing(false);
+      handleAuthResponse(resp, this.authRespCallback);
+    })
     .catch((resp) => {
       if ( resp.code === "not_verified" ) {
         this.setState({ ...this.state, mobile_number: this.mobile.value, country_code: this.country_code.value, isNotVerified: true });
       }
-      alert("Login failed: " + JSON.stringify(resp));
+      // alert("Login failed: " + JSON.stringify(resp));
+      this.enterProgressing(false);
+      this.setState({response: resp});
     });
   }
   handleVerification(e) {
@@ -56,6 +74,10 @@ class Mobile extends Component {
     const pageInnerThemeClass = globals.theme === 'light' ? 'LightLandingPageInnerWrapper' : 'DarkLandingPageInnerWrapper';
     const formGroupThemeClass = globals.theme === 'light' ? 'LightFormGroupWrapper' : 'DarkFormGroupWrapper';
     const headerDescriptionClass = globals.theme === 'light' ? 'lightHeaderDescription' : 'darkHeaderDescription';
+    let submitBtnText = 'Login';
+    if (this.state.isProgressing) {
+      submitBtnText = (<span><i className="fa fa-spinner fa-spin"></i> Logging in..</span>);
+    }
     return (
       <div className={'displayFlex landingPageWrapper container-fluid ' + pageWrapperThemeClass}>
         <Helmet>
@@ -64,7 +86,7 @@ class Mobile extends Component {
         </Helmet>
         { !this.state.enableForgotPassword ? (
           <div className={'landingPageInnerWidth'}>
-            <Back />
+            <Back backUrl={'/ui'} />
             <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
               <div className='signUpWrapper'>
                 <div className={headerDescriptionClass}>
@@ -73,7 +95,8 @@ class Mobile extends Component {
                 <div className='descriptionText'>
                   Hello! Login with your mobile number
                 </div>
-                <form className={formGroupThemeClass}>
+                <ErrorMsg response={this.state.response} /> 
+                <form onChange={() => { this.setState({response: null})}} className={formGroupThemeClass}>
                 { !this.state.isNotVerified ? (
                   <div>
                     <div key="1001" className='formInput'>
@@ -116,7 +139,7 @@ class Mobile extends Component {
                   { !this.state.isNotVerified ? (
                     <a>
                       <button data-button-id="signup" onClick={ this.handleLogin.bind(this) }>
-                      Login
+                      {submitBtnText}
                       </button>
                     </a>
                   ) : (
@@ -144,20 +167,32 @@ class Mobile extends Component {
 class ForgotPassword extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      isProgressing: false,
+      response: null
+    };
     this.state.forgotPasswordInitiated = false;
     this.state.mobile_number = '';
     this.state.country_code = '';
   }
+  enterProgressing = (status) => {
+    this.setState({ isProgressing: status });
+  }
+
+  authRespCallback = (resp) => {
+    this.setState({ response: resp});
+  }
   sendForgotPasswordOTP(e) {
     e.preventDefault();
+    this.enterProgressing(true);
     sendForgotPasswordOTP(this.mobile.value, this.country_code.value)
     .then(( resp ) => {
       this.setState({ ...this.state, mobile_number: this.mobile.value, country_code: this.country_code.value, forgotPasswordInitiated: true });
       return;
     })
     .catch(( resp ) => {
-      alert("Error sending otp: " + JSON.stringify(resp));
+      this.enterProgressing(false);
+      this.setState({response: resp});
       return Promise.reject();
     });
   }
@@ -172,21 +207,30 @@ class ForgotPassword extends Component {
     const pageInnerThemeClass = globals.theme === 'light' ? 'LightLandingPageInnerWrapper' : 'DarkLandingPageInnerWrapper';
     const formGroupThemeClass = globals.theme === 'light' ? 'LightFormGroupWrapper' : 'DarkFormGroupWrapper';
     const headerDescriptionClass = globals.theme === 'light' ? 'lightHeaderDescription' : 'darkHeaderDescription';
+    let sendBtnText = 'Send OTP';
+    if (this.state.isProgressing) {
+      sendBtnText = (<span><i className="fa fa-spinner fa-spin"></i> Sending OTP..</span>);
+    }
     return (
       <div className={'landingPageInnerWidth'}>
         <Back/>
+        <div className={'backBtn'} onClick={ this.props.toggleForgotPassword }>
+          <i className="fa fa-chevron-left" aria-hidden="true"></i>
+            Back
+        </div>
         <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
+          <div className="hide go_back" onClick={ this.props.toggleForgotPassword }>
+            Go back
+          </div>
           <div className="signUpWrapper">
-            <div className="go_back" onClick={ this.props.toggleForgotPassword }>
-              Go back
-            </div>
             <div className={headerDescriptionClass}>
               Forgot password ?
             </div>
             <div className='descriptionText'>
               Enter your registered mobile number to get an OTP to reset your password
             </div>
-            <form className={formGroupThemeClass}>
+            <ErrorMsg response={this.state.response} /> 
+            <form className={formGroupThemeClass} onChange={() => { this.setState({response: null})}}>
               { !this.state.forgotPasswordInitiated ? (
                 <div>
                   <div key="1002" className='formInput'>
@@ -223,7 +267,7 @@ class ForgotPassword extends Component {
                 { !this.state.forgotPasswordInitiated? (
                   <a>
                     <button data-button-id="send-otp" onClick={ this.sendForgotPasswordOTP.bind(this) }>
-                      Send OTP
+                      {sendBtnText}
                     </button>
                   </a>
                 ) : (

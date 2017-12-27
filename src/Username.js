@@ -1,12 +1,25 @@
 import React, { Component } from "react";
 import {Helmet} from 'react-helmet';
 import SocialLoginWrapper from './SocialLoginWrapper';
-import {usernameSignIn} from './api';
+import {usernameSignIn, handleAuthResponse} from './api';
 import SignUpMessage from './SignUpMessage';
 import Back from './Back';
+import ErrorMsg from './ErrorMsg';
 import globals from './globals';
 import './style.css';
 class Username extends Component {
+  state = {
+    isProgressing: false,
+    response: null
+  }
+
+  enterProgressing = (status) => {
+    this.setState({ isProgressing: status });
+  }
+
+  authRespCallback = (resp) => {
+    this.setState({ response: resp});
+  }
 
   render() {
 
@@ -14,6 +27,10 @@ class Username extends Component {
     const pageInnerThemeClass = globals.theme === 'light' ? 'LightLandingPageInnerWrapper' : 'DarkLandingPageInnerWrapper';
     const formGroupThemeClass = globals.theme === 'light' ? 'LightFormGroupWrapper' : 'DarkFormGroupWrapper';
     const headerDescriptionClass = globals.theme === 'light' ? 'lightHeaderDescription' : 'darkHeaderDescription';
+    let submitBtnText = 'Login';
+    if (this.state.isProgressing) {
+      submitBtnText = (<span><i className="fa fa-spinner fa-spin"></i> Logging in..</span>);
+    }
     return (
       <div className={'displayFlex landingPageWrapper container-fluid ' + pageWrapperThemeClass}>
         <Helmet>
@@ -30,9 +47,16 @@ class Username extends Component {
               <div className='descriptionText'>
                 Hello! Login with your Username
               </div>
-              <form className={formGroupThemeClass} onSubmit={(e) => {
+              <ErrorMsg response={this.state.response} /> 
+              <form className={formGroupThemeClass} 
+                onChange={() => { this.setState({response: null})}} 
+                onSubmit={(e) => {
                   e.preventDefault();
-                  usernameSignIn(this.username.value, this.password.value);
+                  this.enterProgressing(true);
+                  usernameSignIn(this.username.value, this.password.value).then( (resp) => {
+                    this.enterProgressing(false);
+                    handleAuthResponse(resp, this.authRespCallback);
+                  });
                 }}>
                 <div className='formInput'>
                   <label className='formLabel'>
@@ -47,7 +71,11 @@ class Username extends Component {
                   <input type="password" ref={(input) => { this.password = input; }} />
                 </div>
                 <div className='signInbtn'>
-                  <a><button type="submit">Login</button></a>
+                  <a>
+                    <button type="submit">
+                      {submitBtnText}
+                    </button>
+                  </a>
                 </div>
               </form>
               <SocialLoginWrapper />
