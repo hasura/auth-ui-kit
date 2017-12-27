@@ -390,6 +390,28 @@ body
   color: red;
   padding-top: 10px;
 }
+.viewcontainer {
+  height: 70vh;
+  width: 100vw;
+  display: table;
+}
+.centerContent{
+  display: table-cell;
+  vertical-align: middle;
+}
+.message {
+  padding: 50px 20%;
+}
+.message h1 {
+  font-size: 54px;
+  font-weight: bold;
+}
+.message p {
+  margin-left: 15px;
+}
+.message p > a {
+  font-weight: bold;
+}
 @media (max-width: 767px)
 {
   .headerDescription

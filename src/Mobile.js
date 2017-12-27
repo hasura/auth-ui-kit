@@ -56,7 +56,16 @@ class Mobile extends Component {
   }
   handleVerification(e) {
     e.preventDefault(e);
-    mobilePasswordVerify(this.state.mobile_number, this.state.country_code, this.otp.value);
+    this.enterProgressing(true);
+    mobilePasswordVerify(this.state.mobile_number, this.state.country_code, this.otp.value)
+    .then( ( resp) => {
+      this.enterProgressing(false);
+      window.location.href = '/ui/login/mobile';
+    })
+    .catch( ( resp ) => {
+      this.enterProgressing(false);
+      this.setState({response: resp});
+    });
   }
   resendMobilePasswordOtp(e) {
     e.preventDefault();
@@ -196,12 +205,22 @@ class ForgotPassword extends Component {
       return Promise.reject();
     });
   }
-  resetMobilePassword(e) {
+  handleResetMobilePassword(e) {
     e.preventDefault();
+    this.enterProgressing(true);
     if ( this.forgot_password.value === this.confirm_password.value ) {
-      return resetMobilePassword(this.state.mobile_number, this.state.country_code, this.forgot_otp.value, this.forgot_password.value)
+      resetMobilePassword(this.state.mobile_number, this.state.country_code, this.forgot_otp.value, this.forgot_password.value)
+      .then(( resp ) => {
+        this.enterProgressing(false);
+        window.location.href = '/ui';
+      })
+      .catch(( resp ) => {
+        this.enterProgressing(false);
+        this.setState({response: resp});
+      });
+    } else {
+      alert('Password doesn\'t match');
     }
-    alert('Password doesn\'t match');
   }
   render() {
     const pageInnerThemeClass = globals.theme === 'light' ? 'LightLandingPageInnerWrapper' : 'DarkLandingPageInnerWrapper';
@@ -272,7 +291,7 @@ class ForgotPassword extends Component {
                   </a>
                 ) : (
                   <a>
-                    <button data-button-id="reset-mobile" onClick={ this.resetMobilePassword.bind(this) }>
+                    <button data-button-id="reset-mobile" onClick={ this.handleResetMobilePassword.bind(this) }>
                       Reset Password
                     </button>
                   </a>

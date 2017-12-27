@@ -56,6 +56,9 @@ class Username extends Component {
                   usernameSignIn(this.username.value, this.password.value).then( (resp) => {
                     this.enterProgressing(false);
                     handleAuthResponse(resp, this.authRespCallback);
+                  }).catch( ( resp ) => {
+                    this.enterProgressing(false);
+                    this.setState({response: resp});
                   });
                 }}>
                 <div className='formInput'>

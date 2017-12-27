@@ -57,6 +57,9 @@ class Email extends Component {
                   emailSignIn(this.email.value, this.password.value).then( (resp) => {
                     this.enterProgressing(false);
                     handleAuthResponse(resp, this.authRespCallback);
+                  }).catch( ( resp ) => {
+                    this.enterProgressing(false);
+                    this.setState({response: resp});
                   });
                 }}>
                 <div className='formInput'>
