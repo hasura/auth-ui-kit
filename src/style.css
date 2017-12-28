@@ -426,16 +426,18 @@ body
   }
   .mobileInput
   {
-    width: 60% !important;
+    width: 71% !important;
     display: inline-block;
   }
   .landingPageInnerWidth
   {
-    width: 280px;
+    /* width: 280px; */
+    width: 100%;
   }
   .LightFormGroupWrapper, .DarkFormGroupWrapper
   {
-    width: 260px;
+    /* width: 260px; */
+    width: 100%;
   }
   .landingPageWrapper
   {
@@ -446,7 +448,8 @@ body
   }
   .signUpWrapper
   {
-    width: 260px;
+    /* width: 260px; */
+    width: 90%;
   }
   .btnIconWidth
   {
@@ -454,8 +457,9 @@ body
   }
   .commonBtn a button
   {
-    max-width: 254px;
-    min-width: 254px;
+    /* max-width: 254px;
+    min-width: 254px; */
+    width: 100%;
     font-size: 15px;
   }
   .commonBtn a button span i
