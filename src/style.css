@@ -200,7 +200,9 @@ body
 }
 .DarkFormGroupWrapper .formInput input
 {
-  width: calc(100% - 10px);
+  /* width: calc(100% - 10px); */
+  width: 100%;
+  box-shadow: none;
   height: 44px;
   border-radius: 5px;
   border: 1px solid #42464d !important;
@@ -227,7 +229,9 @@ body
 }
 .LightFormGroupWrapper .formInput input
 {
-  width: calc( 100% - 10px );
+  /* width: calc( 100% - 10px ); */
+  width: 100%;
+  box-shadow: none;
   height: 44px;
   border-radius: 5px;
   border: 2px solid #ccc;
