@@ -67,7 +67,7 @@ body
 }
 .countryInput input
 {
-  width: 100%;
+  width: calc(100% - 10px) !important;
   border-top-right-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
 }
@@ -86,7 +86,7 @@ body
 }
 .mobileInput input
 {
-  width: 100%;
+  width: calc(100% - 10px) !important;
   border-top-left-radius: 0 !important;
   border-bottom-left-radius: 0 !important;
 }
@@ -200,8 +200,12 @@ body
 }
 .DarkFormGroupWrapper .formInput input
 {
-  /* width: calc(100% - 10px); */
-  width: 100%;
+  width: calc(100% - 10px);
+  /* width: 100%; */
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   box-shadow: none;
   height: 44px;
   border-radius: 5px;
@@ -229,8 +233,12 @@ body
 }
 .LightFormGroupWrapper .formInput input
 {
-  /* width: calc( 100% - 10px ); */
-  width: 100%;
+  width: calc( 100% - 10px );
+  /* width: 100%; */
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   box-shadow: none;
   height: 44px;
   border-radius: 5px;
@@ -425,13 +433,13 @@ body
   }
   .countryInput
   {
-    width: 27% !important;
+    width: 30% !important;
     display: inline-block;
     margin-right: 2%;
   }
   .mobileInput
   {
-    width: 71% !important;
+    width: 68% !important;
     display: inline-block;
   }
   .landingPageInnerWidth
