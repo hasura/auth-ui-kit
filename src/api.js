@@ -46,7 +46,7 @@ const usernameSignUp = (username, password) => {
       body: JSON.stringify({
         provider: "username",
         data: {
-          "username": username,
+          "username": username.trim(),
           "password": password
         }
       })
@@ -65,7 +65,7 @@ const usernameSignIn = (username, password) => {
       body: JSON.stringify({
         provider: "username",
         data: {
-          "username": username,
+          "username": username.trim(),
           "password": password
         }
       })
@@ -84,7 +84,7 @@ const emailSignUp = (email, password) => {
       body: JSON.stringify({
         provider: "email",
         data: {
-          "email": email,
+          "email": email.trim(),
           "password": password
         }
       })
@@ -103,7 +103,7 @@ const emailSignIn = (email, password) => {
       body: JSON.stringify({
         provider: "email",
         data: {
-          "email": email,
+          "email": email.trim(),
           "password": password
         }
       })
@@ -120,8 +120,8 @@ const mobileOtpSignUp = (mobile_number, country_code) => {
       },
       credentials: 'include',
       body: JSON.stringify({
-        "mobile": mobile_number,
-        "country_code": country_code
+        "mobile": mobile_number.trim(),
+        "country_code": country_code.trim()
       })
   };
 
@@ -138,9 +138,9 @@ const mobileOtpLogin = (mobile, country_code, otp) => {
       body: JSON.stringify({
         provider: "mobile",
         data: {
-          "mobile": mobile,
-          "country_code": country_code,
-          "otp": otp 
+          "mobile": mobile.trim(),
+          "country_code": country_code.trim(),
+          "otp": otp.trim()
         }
       })
   };
@@ -157,9 +157,9 @@ const mobileOtpSignupFinal = (mobile, country_code, otp) => {
       body: JSON.stringify({
         provider: "mobile",
         data: {
-          "mobile": mobile,
-          "country_code": country_code,
-          "otp": otp 
+          "mobile": mobile.trim(),
+          "country_code": country_code.trim(),
+          "otp": otp.trim()
         }
       })
   };
@@ -175,8 +175,8 @@ const resendMobileOtp = (mobile_number, country_code) => {
       },
       credentials: 'include',
       body: JSON.stringify({
-        "mobile": mobile_number,
-        "country_code": country_code
+        "mobile": mobile_number.trim(),
+        "country_code": country_code.trim()
       })
   };
 
@@ -191,8 +191,8 @@ const sendForgotPasswordOTP = (mobile_number, country_code) => {
       },
       credentials: 'include',
       body: JSON.stringify({
-        "mobile": mobile_number,
-        "country_code": country_code
+        "mobile": mobile_number.trim(),
+        "country_code": country_code.trim()
       })
   };
 
@@ -207,10 +207,10 @@ const resetMobilePassword = (mobile_number, country_code, otp, password) => {
       },
       credentials: 'include',
       body: JSON.stringify({
-        "mobile": mobile_number,
-        "country_code": country_code,
+        "mobile": mobile_number.trim(),
+        "country_code": country_code.trim(),
         "password": password,
-        "otp": otp
+        "otp": otp.trim()
       })
   };
 
@@ -225,8 +225,8 @@ const resendMobilePasswordOtp = (mobile_number, country_code) => {
       },
       credentials: 'include',
       body: JSON.stringify({
-        "mobile": mobile_number,
-        "country_code": country_code
+        "mobile": mobile_number.trim(),
+        "country_code": country_code.trim()
       })
   };
 
@@ -243,9 +243,9 @@ const mobilePasswordSignUp = (mobile, password, country_code) => {
       body: JSON.stringify({
         provider: "mobile-password",
         data: {
-          "mobile": mobile,
+          "mobile": mobile.trim(),
           "password": password,
-          "country_code": country_code
+          "country_code": country_code.trim()
         }
       })
   };
@@ -263,8 +263,8 @@ const mobilePasswordSignIn = (mobile, password, country_code) => {
       body: JSON.stringify({
         provider: "mobile-password",
         data: {
-          "mobile": mobile,
-          "country_code": country_code,
+          "mobile": mobile.trim(),
+          "country_code": country_code.trim(),
           "password": password
         }
       })
@@ -284,8 +284,8 @@ const mobilePasswordVerify = (mobile, country_code, otp) => {
       },
       credentials: 'include',
       body: JSON.stringify({
-        "mobile": mobile,
-        "country_code": country_code,
+        "mobile": mobile.trim(),
+        "country_code": country_code.trim(),
         "otp": otp 
       })
   };
@@ -301,9 +301,9 @@ const mobileOtpVerify = (mobile, country_code, otp) => {
       },
       credentials: 'include',
       body: JSON.stringify({
-        "mobile": mobile,
-        "country_code": country_code,
-        "otp": otp 
+        "mobile": mobile.trim(),
+        "country_code": country_code.trim(),
+        "otp": otp.trim()
       })
   };
 
@@ -326,7 +326,7 @@ const mobileOnlySignUp = (mobile, password) => {
       body: JSON.stringify({
         provider: "mobile-password",
         data: {
-          "mobile": mobile,
+          "mobile": mobile.trim(),
           "password": password
         }
       })
@@ -351,9 +351,9 @@ const mobileOtpSignIn = (mobile, otp, country_code) => {
       body: JSON.stringify({
         provider: "mobile",
         data: {
-          "mobile": mobile,
-          "otp": otp,
-          "country_code": country_code
+          "mobile": mobile.trim(),
+          "otp": otp.trim(),
+          "country_code": country_code.trim()
         }
       })
   };
@@ -478,7 +478,7 @@ const emailForgotPassword = (email) => {
       },
       credentials: 'include',
       body: JSON.stringify({
-        "email": email
+        "email": email.trim()
       })
   };
 
