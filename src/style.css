@@ -205,6 +205,7 @@ body
   border-radius: 5px;
   border: 1px solid #42464d !important;
   padding: 0;
+  border: 0;
   padding-left: 10px;
   font-size: 14px;
   background-color: #42464d !important;
