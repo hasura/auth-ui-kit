@@ -200,8 +200,7 @@ body
 }
 .DarkFormGroupWrapper .formInput input
 {
-  width: calc(100% - 10px);
-  /* width: 100%; */
+  width: 100% !important;
   outline: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -233,8 +232,7 @@ body
 }
 .LightFormGroupWrapper .formInput input
 {
-  width: calc( 100% - 10px );
-  /* width: 100%; */
+  width: 100% !important;
   outline: none;
   -webkit-appearance: none;
   -moz-appearance: none;
