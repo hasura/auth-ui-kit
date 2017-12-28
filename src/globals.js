@@ -1,7 +1,7 @@
 const globals = {
   username: window.__env.username,
   email: window.__env.email,
-  mobile: window.__env.mobile,
+  mobilePass: window.__env.mobilePass,
   mobileOtp: window.__env.mobileOtp,
   facebook: window.__env.facebook,
   google: window.__env.google,

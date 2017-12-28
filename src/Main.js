@@ -29,7 +29,7 @@ class Main extends Component {
       activeProvider = 'username'
     } else if (globals.email) {
       activeProvider = 'email';
-    } else if (globals.mobile) {
+    } else if (globals.mobilePass) {
       activeProvider = 'mobile';
     } else if (globals.mobileOtp) {
       activeProvider = 'mobile-otp';
@@ -43,7 +43,7 @@ class Main extends Component {
           <Switch>
             <Route exact path="/ui" render={(props) => (
               // check if only one provider is enabled. and redirect accordingly.
-              (globals.username?1:0)+(globals.email?1:0)+(globals.mobile?1:0)+(globals.mobileOtp?1:0) === 1
+              (globals.username?1:0)+(globals.email?1:0)+(globals.mobilePass?1:0)+(globals.mobileOtp?1:0) === 1
                 ? (
                   <Redirect to={signinRedirectUrl}/>
                 ) : (
@@ -59,7 +59,7 @@ class Main extends Component {
             <Route exact path="/ui/verify-email" component={VerifyEmail}/>
             <Route exact path="/ui/signup" render={(props) => (
               // check if only one provider is enabled. and redirect accordingly.
-              (globals.username?1:0)+(globals.email?1:0)+(globals.mobile?1:0)+(globals.mobileOtp?1:0) === 1
+              (globals.username?1:0)+(globals.email?1:0)+(globals.mobilePass?1:0)+(globals.mobileOtp?1:0) === 1
                 ? (
                   <Redirect to={signupRedirectUrl}/>
                 ) : (

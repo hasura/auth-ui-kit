@@ -45,7 +45,7 @@ class SignUpHome extends Component {
                 </Link>
               </div>
               : null}
-              {globals.mobile ?
+              {globals.mobilePass ?
               <div className={'commonBtn ' + commonBtnClass}>
                 <Link to={{pathname: '/ui/signup/mobile', search: this.props.location.search}}>
                   <button>
