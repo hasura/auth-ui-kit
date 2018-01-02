@@ -38,18 +38,18 @@ class Username extends Component {
           <title>Login with Username</title>
         </Helmet>
         <div className={'landingPageInnerWidth'}>
-          <Back backUrl={'/ui'} />
           <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
             <div className='signUpWrapper'>
+              <Back backUrl={'/ui'} />
               <div className={headerDescriptionClass}>
                 Login
               </div>
               <div className='descriptionText'>
                 Hello! Login with your Username
               </div>
-              <ErrorMsg response={this.state.response} /> 
-              <form className={formGroupThemeClass} 
-                onChange={() => { this.setState({response: null})}} 
+              <ErrorMsg response={this.state.response} />
+              <form className={formGroupThemeClass}
+                onChange={() => { this.setState({response: null})}}
                 onSubmit={(e) => {
                   e.preventDefault();
                   this.enterProgressing(true);
