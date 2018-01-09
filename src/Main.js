@@ -34,8 +34,8 @@ class Main extends Component {
     } else if (globals.mobileOtp) {
       activeProvider = 'mobile-otp';
     }
-    const signinRedirectUrl = "/login/" + activeProvider;
-    const signupRedirectUrl = "/signup/" + activeProvider;
+    const signinRedirectUrl = "/ui/login/" + activeProvider;
+    const signupRedirectUrl = "/ui/signup/" + activeProvider;
     return (
       <Router>
         <div>
