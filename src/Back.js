@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import './style.css';
 import { Link } from "react-router-dom";
+import globals from './globals';
 class Back extends Component {
   render() {
   	const {backUrl} = this.props;
@@ -9,8 +10,10 @@ class Back extends Component {
 		    <i className="fa fa-chevron-left" aria-hidden="true"></i>
 		    <Link to={this.props.backUrl}>Back</Link>
 		</div>) : (<div></div>);
+    const finalBackHtml = (globals.username?1:0)+(globals.email?1:0)+(globals.mobilePass?1:0)+(globals.mobileOtp?1:0) === 1
+        ? <div></div> : backHtml
 
-    return backHtml;
+    return finalBackHtml;
   }
 }
 
