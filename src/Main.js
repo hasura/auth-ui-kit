@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
-import {Route, Redirect, Switch, BrowserRouter as Router} from "react-router-dom";
+// import {Route, Redirect, Switch, BrowserRouter as Router} from "react-router-dom";
+import {Route, Switch, BrowserRouter as Router} from "react-router-dom";
 import Home from "./Home";
 import Username from "./Username";
 import Email from "./Email";
@@ -9,7 +10,7 @@ import MobileOtp from "./MobileOtp";
 import ForgotPasswordEmail from "./ForgotPasswordEmail";
 import ResetPassword from "./ResetPassword";
 import VerifyEmail from "./VerifyEmail";
-import globals from './globals';
+// import globals from './globals';
 import SignUpHome from './SignUpHome';
 import SignUpUsername from './SignUpUsername';
 import SignUpEmail from './SignUpEmail';
@@ -24,6 +25,7 @@ import NotFound from './NotFound';
 
 class Main extends Component {
   render() {
+    /*
     let activeProvider = null;
     if (globals.username) {
       activeProvider = 'username'
@@ -36,11 +38,13 @@ class Main extends Component {
     }
     const signinRedirectUrl = "/ui/login/" + activeProvider;
     const signupRedirectUrl = "/ui/signup/" + activeProvider;
+    */
     return (
       <Router>
         <div>
           <div className="content">
           <Switch>
+          {/*
             <Route exact path="/ui" render={(props) => (
               // check if only one provider is enabled. and redirect accordingly.
               (globals.username?1:0)+(globals.email?1:0)+(globals.mobilePass?1:0)+(globals.mobileOtp?1:0) === 1
@@ -50,6 +54,9 @@ class Main extends Component {
                   <Home location={props.location} />
                 )
             )} />
+          */}
+            <Route exact path="/ui" component={Home}/>
+            <Route exact path="/ui/login" component={Home}/>
             <Route exact path="/ui/login/username" component={Username}/>
             <Route exact path="/ui/login/email" component={Email}/>
             <Route exact path="/ui/login/mobile" component={Mobile}/>
@@ -57,15 +64,18 @@ class Main extends Component {
             <Route exact path="/ui/forgot-password" component={ForgotPasswordEmail}/>
             <Route exact path="/ui/reset-password" component={ResetPassword}/>
             <Route exact path="/ui/verify-email" component={VerifyEmail}/>
+            <Route exact path="/ui/signup" component={SignUpHome}/>
+            {/*
             <Route exact path="/ui/signup" render={(props) => (
               // check if only one provider is enabled. and redirect accordingly.
               (globals.username?1:0)+(globals.email?1:0)+(globals.mobilePass?1:0)+(globals.mobileOtp?1:0) === 1
                 ? (
-                  <Redirect to={signupRedirectUrl}/>
+                  <Redirect to={signupRedirectUrl} location={props.location} />
                 ) : (
                   <SignUpHome location={props.location} />
                 )
             )}/>
+          */}
             <Route exact path="/ui/signup/username" component={SignUpUsername}/>
             <Route exact path="/ui/signup/email" component={SignUpEmail}/>
             <Route exact path="/ui/signup/mobile" component={SignUpMobile}/>
