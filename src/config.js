@@ -18,8 +18,12 @@ const currentLocation = window.location;
 let redirectUrl = currentLocation.search.split("=")[1];
 if ( redirectUrl === undefined || redirectUrl === 'undefined' || redirectUrl === null ) {
   // if url param is not present, check for conf
-	// redirectUrl = authUrl + "/user/info";
-  redirectUrl = window.__env.redirectUrl;
+  // check if conf gave a valid url;
+  if (window.__env.redirectUrl) {
+    redirectUrl = window.__env.redirectUrl;
+  } else {
+    redirectUrl = authUrl + "/user/info";
+  }
 }
 const facebookRedirectUrl = baseDomain + "/ui/facebook-response";
 const googleRedirectUrl = baseDomain + "/ui/google-response";
