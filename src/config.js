@@ -7,7 +7,7 @@ const authVersion = "v1";
 let clusterName = splitHost.join(".");
 let scheme = window.location.protocol;
 if (process && process.env && process.env.NODE_ENV === 'development') {
-  clusterName = 'applique52.hasura-app.io';
+  clusterName = 'come56.hasura-app.io';
   scheme = 'https:';
 }
 const baseDomain = scheme + "//auth." + clusterName;
@@ -17,7 +17,9 @@ const authUrl = baseDomain + "/" + authVersion;
 const currentLocation = window.location;
 let redirectUrl = currentLocation.search.split("=")[1];
 if ( redirectUrl === undefined || redirectUrl === 'undefined' || redirectUrl === null ) {
-	redirectUrl = authUrl + "/user/info";
+  // if url param is not present, check for conf
+	// redirectUrl = authUrl + "/user/info";
+  redirectUrl = window.__env.redirectUrl;
 }
 const facebookRedirectUrl = baseDomain + "/ui/facebook-response";
 const googleRedirectUrl = baseDomain + "/ui/google-response";
@@ -47,5 +49,6 @@ export {
 	endpoints,
 	authUrl,
   githubRedirectUrl,
-  linkedinRedirectUrl
+  linkedinRedirectUrl,
+  redirectUrl
 }

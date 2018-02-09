@@ -1,4 +1,4 @@
-import {authUrl, endpoints, githubRedirectUrl, linkedinRedirectUrl} from './config';
+import {authUrl, endpoints, githubRedirectUrl, linkedinRedirectUrl, redirectUrl as finalRedirectUrl} from './config';
 
 import makeRequest from './utils/makeRequest';
 
@@ -13,7 +13,8 @@ const handleAuthResponse = ( response, callback ) => {
         const currentLocation = window.location;
         let redirectUrl = decodeURIComponent(currentLocation.search.split("=")[1]);
         if ( redirectUrl === undefined || redirectUrl === 'undefined' || redirectUrl === null ) {
-          redirectUrl = authUrl + "/user/info";
+          // redirectUrl = authUrl + "/user/info";
+          redirectUrl = finalRedirectUrl;
         }
         window.location.href = redirectUrl;
         return callback(resp);
@@ -27,7 +28,8 @@ const handleAuthResponse = ( response, callback ) => {
     const currentLocation = window.location;
     let redirectUrl = decodeURIComponent(currentLocation.search.split("=")[1]);
     if ( redirectUrl === undefined || redirectUrl === 'undefined' || redirectUrl === null ) {
-      redirectUrl = authUrl + "/user/info";
+      // redirectUrl = authUrl + "/user/info";
+      redirectUrl = finalRedirectUrl;
     }
     window.location.href = redirectUrl;
     // return callback(response);
