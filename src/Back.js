@@ -7,8 +7,10 @@ class Back extends Component {
   	const {backUrl} = this.props;
   	const backHtml = backUrl ? 
   		(<div className={'backBtn'}>
-		    <i className="fa fa-chevron-left" aria-hidden="true"></i>
-		    <Link to={this.props.backUrl}>Back</Link>
+		    <Link to={this.props.backUrl}>
+        <i className="fa fa-chevron-left" aria-hidden="true"></i>
+        Back
+        </Link>
 		</div>) : (<div></div>);
     const finalBackHtml = (globals.username?1:0)+(globals.email?1:0)+(globals.mobilePass?1:0)+(globals.mobileOtp?1:0) === 1
         ? <div></div> : backHtml
