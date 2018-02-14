@@ -1,31 +1,24 @@
 import React, { Component } from "react";
 import {Helmet} from "react-helmet";
-import {verifyEmail} from './api';
+import {logoutGlobal} from './api';
 import globals from './globals';
 import './style.css';
-class VerifyEmail extends Component {
+class Logout extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {'verifyStatus': 'Verifying Email...'};
+  state = {
+    logoutMsg: "Logging out...",
+    inProgress: true
   }
 
-  componentWillMount() {
-    let locationParams = window.location.search;
-    if(locationParams === "") {
-      locationParams = window.location.hash;
-    }
-    const params = locationParams.split("?token=")[1];
-    const token = params;
-    // now trigger verify email endpoint
-    const verifyStatus = verifyEmail(token);
-    verifyStatus.then( (status) => {
-      if (!status.error) {
-        window.location.href = '/ui/login/email';
-      } else {
-        this.setState({
-          verifyStatus: status.status.message
-        });
+  componentDidMount() {
+    const logoutTrigger = logoutGlobal();
+    const this_ = this;
+    logoutTrigger.then( function(data) {
+      this_.setState({ logoutMsg: data.message, inProgress: false });
+      const currentLocation = window.location;
+      let redirectUrl = decodeURIComponent(currentLocation.search.split("=")[1]);
+      if ( redirectUrl !== undefined && redirectUrl !== 'undefined' && redirectUrl !== null ) {
+        window.location.href = redirectUrl;
       }
     });
   }
@@ -35,20 +28,32 @@ class VerifyEmail extends Component {
     const pageWrapperThemeClass = globals.theme === 'light' ? 'LightLandingPageWrapper' : 'DarkLandingPageWrapper';
     const pageInnerThemeClass = globals.theme === 'light' ? 'LightLandingPageInnerWrapper' : 'DarkLandingPageInnerWrapper';
     const headerDescriptionClass = globals.theme === 'light' ? 'lightHeaderDescription' : 'darkHeaderDescription';
+
+    let inProgressHtml = ( 
+      <div className='descriptionText'>
+        Logging out <span><i className="fa fa-spinner fa-spin"></i></span>
+      </div>
+    );
+    if (!this.state.inProgress) {
+      inProgressHtml = (
+        <div className='descriptionText'>
+          {this.state.logoutMsg}
+        </div>
+      );
+    }
     return (
       <div className={'displayFlex landingPageWrapper container-fluid ' + pageWrapperThemeClass}>
         <Helmet>
           <meta charSet="utf-8" />
-          <title>Email Verification</title>
+          <title>Logout</title>
         </Helmet>
         <div className={'landingPageInnerWidth'}>
           <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
             <div className='signUpWrapper'>
               <div className={headerDescriptionClass}>
-                Email Verification
               </div>
               <div className='descriptionText'>
-                {this.state.verifyStatus}
+                {inProgressHtml}
               </div>
             </div>
           </div>
@@ -58,4 +63,4 @@ class VerifyEmail extends Component {
   }
 }
 
-export default VerifyEmail
+export default Logout 

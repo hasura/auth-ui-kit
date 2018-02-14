@@ -55,7 +55,6 @@ class SignUpEmail extends Component {
                   this.enterProgressing(true);
                   if (this.password.value === this.confirm_password.value) {
                     emailSignUp(this.email.value, this.password.value).then( (resp) => {
-                      console.log(resp);
                       this.enterProgressing(false);
                       alert('Verification Email Sent. Please check your inbox');
                       // handleAuthResponse(resp, this.authRespCallback);

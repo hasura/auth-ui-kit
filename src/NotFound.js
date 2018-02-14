@@ -16,8 +16,8 @@ class NotFound extends Component {
               </div>
               <p>
                 <i className="fa fa-quote-left" aria-hidden="true"></i>&nbsp;
-                Perhaps it's best to go&nbsp;
-                <Link to="/ui">home</Link>.&nbsp;<i className="fa fa-quote-right" aria-hidden="true"></i>
+                Go to &nbsp;
+                <Link to="/ui">Login</Link>.&nbsp;<i className="fa fa-quote-right" aria-hidden="true"></i>
               </p>
             </div>
             <div className="col-md-4 col-sm-12 col-xs-12 hidden-sm hidden-xs">

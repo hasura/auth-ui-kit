@@ -21,6 +21,7 @@ import GoogleLogin from './GoogleLogin';
 import GithubLogin from './GithubLogin';
 import LinkedinLogin from './LinkedinLogin';
 import Restricted from './Restricted';
+import Logout from './Logout';
 import NotFound from './NotFound';
 
 class Main extends Component {
@@ -85,6 +86,8 @@ class Main extends Component {
             <Route exact path="/ui/google-response" component={GoogleLogin}/>
             <Route exact path="/ui/github-response" component={GithubLogin}/>
             <Route exact path="/ui/linkedin-response" component={LinkedinLogin}/>
+
+            <Route exact path="/ui/logout" component={Logout}/>
             <Route component={NotFound} status={404} />
           </Switch>
           </div>

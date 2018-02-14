@@ -54,7 +54,6 @@ class MobileOtp extends Component {
   }
   handleLogin() {
     mobileOtpLogin(this.state.mobile_number, this.state.country_code, this.otp.value).then( (resp) => {
-      console.log(resp);
       this.enterProgressing(false);
       handleAuthResponse(resp, this.authRespCallback);
     })

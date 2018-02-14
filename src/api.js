@@ -487,6 +487,7 @@ const emailForgotPassword = (email) => {
   return makeRequest(authUrl + endpoints.email_forgot_password, requestOptions);
 }
 
+// this is logout for restricted role
 const logout = () => {
   var requestOptions = {
       method: "POST",
@@ -499,10 +500,32 @@ const logout = () => {
 
   return makeRequest(authUrl + endpoints.logout, requestOptions).then(function(response) {
     window.location = '/ui' + decodeURIComponent(window.location.search);
-  }
-  )
+  })
   .catch(function(error) {
     alert("Could not logout: " + JSON.stringify(error.message));
+  });
+}
+
+const logoutGlobal = () => {
+  var requestOptions = {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      credentials: 'include',
+      body: JSON.stringify({})
+  };
+
+  return makeRequest(authUrl + endpoints.logout, requestOptions).then(response => {
+    console.log(response);
+    return response;
+    // handleAuthResponse(response);
+  })
+  .catch(function(error) {
+    // alert("Could not logout: " + JSON.stringify(error.message));
+    const errorMsg = "Could not logout: " + JSON.stringify(error.message);
+    console.log(errorMsg);
+    return error;
   });
 }
 
@@ -564,5 +587,6 @@ export {
   resetPassword,
   verifyEmail,
   logout,
+  logoutGlobal,
   handleAuthResponse
 }
