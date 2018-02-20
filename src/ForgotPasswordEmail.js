@@ -1,37 +1,57 @@
-import React, { Component } from "react";
-import {Helmet} from "react-helmet";
+import React, { Component } from 'react';
+import { Helmet } from 'react-helmet';
 import './style.css';
 import SignUpMessage from './SignUpMessage';
 import Back from './Back';
 import ErrorMsg from './ErrorMsg';
 import globals from './globals';
-import {emailForgotPassword} from './api';
+import { emailForgotPassword } from './api';
 class ForgotPasswordEmail extends Component {
   state = {
     isProgressing: false,
-    response: null
-  }
+    response: null,
+  };
 
-  enterProgressing = (status) => {
+  enterProgressing = status => {
     this.setState({ isProgressing: status });
-  }
+  };
 
-  authRespCallback = (resp) => {
-    this.setState({ response: resp});
-  }
+  authRespCallback = resp => {
+    this.setState({ response: resp });
+  };
 
   render() {
-
-    const pageWrapperThemeClass = globals.theme === 'light' ? 'LightLandingPageWrapper' : 'DarkLandingPageWrapper';
-    const pageInnerThemeClass = globals.theme === 'light' ? 'LightLandingPageInnerWrapper' : 'DarkLandingPageInnerWrapper';
-    const formGroupThemeClass = globals.theme === 'light' ? 'LightFormGroupWrapper' : 'DarkFormGroupWrapper';
-    const headerDescriptionClass = globals.theme === 'light' ? 'lightHeaderDescription' : 'darkHeaderDescription';
+    const pageWrapperThemeClass =
+      globals.theme === 'light'
+        ? 'LightLandingPageWrapper'
+        : 'DarkLandingPageWrapper';
+    const pageInnerThemeClass =
+      globals.theme === 'light'
+        ? 'LightLandingPageInnerWrapper'
+        : 'DarkLandingPageInnerWrapper';
+    const formGroupThemeClass =
+      globals.theme === 'light'
+        ? 'LightFormGroupWrapper'
+        : 'DarkFormGroupWrapper';
+    const headerDescriptionClass =
+      globals.theme === 'light'
+        ? 'lightHeaderDescription'
+        : 'darkHeaderDescription';
     let submitBtnText = 'Send Email';
     if (this.state.isProgressing) {
-      submitBtnText = (<span><i className="fa fa-spinner fa-spin"></i> Sending Email..</span>);
+      submitBtnText = (
+        <span>
+          <i className="fa fa-spinner fa-spin" /> Sending Email..
+        </span>
+      );
     }
     return (
-      <div className={'displayFlex landingPageWrapper container-fluid ' + pageWrapperThemeClass}>
+      <div
+        className={
+          'displayFlex landingPageWrapper container-fluid ' +
+          pageWrapperThemeClass
+        }
+      >
         <Helmet>
           <meta charSet="utf-8" />
           <title>Forgot Password</title>
@@ -39,40 +59,48 @@ class ForgotPasswordEmail extends Component {
         <div className={'landingPageInnerWidth'}>
           <Back backUrl={'/ui/login/email'} />
           <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
-            <div className='signUpWrapper'>
-              <div className={headerDescriptionClass}>
-                Forgot Password
-              </div>
-              <div className='descriptionText'>
+            <div className="signUpWrapper">
+              <div className={headerDescriptionClass}>Forgot Password</div>
+              <div className="descriptionText">
                 Hello! Submit your email to reset your password
               </div>
-              <ErrorMsg response={this.state.response} /> 
-              <form className={formGroupThemeClass} 
-                onChange={() => { this.setState({response: null})}}
-                onSubmit={(e) => {
+              <ErrorMsg response={this.state.response} />
+              <form
+                className={formGroupThemeClass}
+                onChange={() => {
+                  this.setState({ response: null });
+                }}
+                onSubmit={e => {
                   e.preventDefault();
                   if (this.email.value !== '') {
                     this.enterProgressing(true);
-                    emailForgotPassword(this.email.value).then( ( resp) => {
-                      this.enterProgressing(false);
-                      alert("Email Sent. Please check your inbox");
-                    })
-                    .catch( ( resp ) => {
-                      this.enterProgressing(false);
-                      this.setState({response: resp});
-                    });
+                    emailForgotPassword(this.email.value)
+                      .then(resp => {
+                        this.enterProgressing(false);
+                        alert('Email Sent. Please check your inbox');
+                      })
+                      .catch(resp => {
+                        this.enterProgressing(false);
+                        this.setState({ response: resp });
+                      });
                   } else {
-                    alert("Enter an email id to send a forgot password email");
+                    alert('Enter an email id to send a forgot password email');
                   }
-                }}>
-                <div className='formInput'>
-                  <label className='formLabel'>
-                    Email ID
-                  </label>
-                  <input type="email" ref={(input) => { this.email = input; }} />
+                }}
+              >
+                <div className="formInput">
+                  <label className="formLabel">Email ID</label>
+                  <input
+                    type="email"
+                    ref={input => {
+                      this.email = input;
+                    }}
+                  />
                 </div>
-                <div className='signInbtn'>
-                  <a><button type='submit'>{submitBtnText}</button></a>
+                <div className="signInbtn">
+                  <a>
+                    <button type="submit">{submitBtnText}</button>
+                  </a>
                 </div>
               </form>
             </div>
@@ -84,4 +112,4 @@ class ForgotPasswordEmail extends Component {
   }
 }
 
-export default ForgotPasswordEmail
+export default ForgotPasswordEmail;

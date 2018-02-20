@@ -1,18 +1,30 @@
-import {authUrl, endpoints, githubRedirectUrl, linkedinRedirectUrl, redirectUrl as finalRedirectUrl} from './config';
+import {
+  authUrl,
+  endpoints,
+  githubRedirectUrl,
+  linkedinRedirectUrl,
+  redirectUrl as finalRedirectUrl,
+} from './config';
 
 import makeRequest from './utils/makeRequest';
 
 /* Helper function */
 
-const handleAuthResponse = ( response, callback ) => {
+const handleAuthResponse = (response, callback) => {
   console.log(response);
-  if (typeof(response) === 'function') {
+  if (typeof response === 'function') {
     response.json().then(resp => {
-      console.log(resp); 
-      if(response.ok) {
+      console.log(resp);
+      if (response.ok) {
         const currentLocation = window.location;
-        let redirectUrl = decodeURIComponent(currentLocation.search.split("=")[1]);
-        if ( redirectUrl === undefined || redirectUrl === 'undefined' || redirectUrl === null ) {
+        let redirectUrl = decodeURIComponent(
+          currentLocation.search.split('=')[1]
+        );
+        if (
+          redirectUrl === undefined ||
+          redirectUrl === 'undefined' ||
+          redirectUrl === null
+        ) {
           // redirectUrl = authUrl + "/user/info";
           redirectUrl = finalRedirectUrl;
         }
@@ -22,164 +34,168 @@ const handleAuthResponse = ( response, callback ) => {
         // check error code mapping and update state to show in UI
         // alert(resp.message);
         return callback(resp);
-      } 
+      }
     });
   } else {
     const currentLocation = window.location;
-    let redirectUrl = decodeURIComponent(currentLocation.search.split("=")[1]);
-    if ( redirectUrl === undefined || redirectUrl === 'undefined' || redirectUrl === null ) {
+    let redirectUrl = decodeURIComponent(currentLocation.search.split('=')[1]);
+    if (
+      redirectUrl === undefined ||
+      redirectUrl === 'undefined' ||
+      redirectUrl === null
+    ) {
       // redirectUrl = authUrl + "/user/info";
       redirectUrl = finalRedirectUrl;
     }
     window.location.href = redirectUrl;
     // return callback(response);
   }
-}
+};
 
 /* End of it */
 
 const usernameSignUp = (username, password) => {
   var requestOptions = {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json"
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+    body: JSON.stringify({
+      provider: 'username',
+      data: {
+        username: username.trim(),
+        password: password,
       },
-      credentials: 'include',
-      body: JSON.stringify({
-        provider: "username",
-        data: {
-          "username": username.trim(),
-          "password": password
-        }
-      })
+    }),
   };
 
   return makeRequest(authUrl + endpoints.signup, requestOptions);
-}
+};
 
 const usernameSignIn = (username, password) => {
   var requestOptions = {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json"
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+    body: JSON.stringify({
+      provider: 'username',
+      data: {
+        username: username.trim(),
+        password: password,
       },
-      credentials: 'include',
-      body: JSON.stringify({
-        provider: "username",
-        data: {
-          "username": username.trim(),
-          "password": password
-        }
-      })
+    }),
   };
 
   return makeRequest(authUrl + endpoints.login, requestOptions);
-}
+};
 
 const emailSignUp = (email, password) => {
   var requestOptions = {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json"
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+    body: JSON.stringify({
+      provider: 'email',
+      data: {
+        email: email.trim(),
+        password: password,
       },
-      credentials: 'include',
-      body: JSON.stringify({
-        provider: "email",
-        data: {
-          "email": email.trim(),
-          "password": password
-        }
-      })
+    }),
   };
 
   return makeRequest(authUrl + endpoints.signup, requestOptions);
-}
+};
 
 const emailSignIn = (email, password) => {
   var requestOptions = {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json"
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+    body: JSON.stringify({
+      provider: 'email',
+      data: {
+        email: email.trim(),
+        password: password,
       },
-      credentials: 'include',
-      body: JSON.stringify({
-        provider: "email",
-        data: {
-          "email": email.trim(),
-          "password": password
-        }
-      })
+    }),
   };
 
   return makeRequest(authUrl + endpoints.login, requestOptions);
-}
+};
 
 const mobileOtpSignUp = (mobile_number, country_code) => {
   var requestOptions = {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json"
-      },
-      credentials: 'include',
-      body: JSON.stringify({
-        "mobile": mobile_number.trim(),
-        "country_code": country_code.trim()
-      })
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+    body: JSON.stringify({
+      mobile: mobile_number.trim(),
+      country_code: country_code.trim(),
+    }),
   };
 
   return makeRequest(authUrl + endpoints.otp_initiate, requestOptions);
-}
+};
 
 const mobileOtpLogin = (mobile, country_code, otp) => {
   var requestOptions = {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json"
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+    body: JSON.stringify({
+      provider: 'mobile',
+      data: {
+        mobile: mobile.trim(),
+        country_code: country_code.trim(),
+        otp: otp.trim(),
       },
-      credentials: 'include',
-      body: JSON.stringify({
-        provider: "mobile",
-        data: {
-          "mobile": mobile.trim(),
-          "country_code": country_code.trim(),
-          "otp": otp.trim()
-        }
-      })
+    }),
   };
 
   return makeRequest(authUrl + endpoints.login, requestOptions);
-}
+};
 const mobileOtpSignupFinal = (mobile, country_code, otp) => {
   var requestOptions = {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json"
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+    body: JSON.stringify({
+      provider: 'mobile',
+      data: {
+        mobile: mobile.trim(),
+        country_code: country_code.trim(),
+        otp: otp.trim(),
       },
-      credentials: 'include',
-      body: JSON.stringify({
-        provider: "mobile",
-        data: {
-          "mobile": mobile.trim(),
-          "country_code": country_code.trim(),
-          "otp": otp.trim()
-        }
-      })
+    }),
   };
 
   return makeRequest(authUrl + endpoints.signup, requestOptions);
-}
+};
 
 const resendMobileOtp = (mobile_number, country_code) => {
   var requestOptions = {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json"
-      },
-      credentials: 'include',
-      body: JSON.stringify({
-        "mobile": mobile_number.trim(),
-        "country_code": country_code.trim()
-      })
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+    body: JSON.stringify({
+      mobile: mobile_number.trim(),
+      country_code: country_code.trim(),
+    }),
   };
 
   return makeRequest(authUrl + endpoints.resend_otp, requestOptions);
@@ -187,15 +203,15 @@ const resendMobileOtp = (mobile_number, country_code) => {
 
 const sendForgotPasswordOTP = (mobile_number, country_code) => {
   var requestOptions = {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json"
-      },
-      credentials: 'include',
-      body: JSON.stringify({
-        "mobile": mobile_number.trim(),
-        "country_code": country_code.trim()
-      })
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+    body: JSON.stringify({
+      mobile: mobile_number.trim(),
+      country_code: country_code.trim(),
+    }),
   };
 
   return makeRequest(authUrl + endpoints.forgot_password_otp, requestOptions);
@@ -203,17 +219,17 @@ const sendForgotPasswordOTP = (mobile_number, country_code) => {
 
 const resetMobilePassword = (mobile_number, country_code, otp, password) => {
   var requestOptions = {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json"
-      },
-      credentials: 'include',
-      body: JSON.stringify({
-        "mobile": mobile_number.trim(),
-        "country_code": country_code.trim(),
-        "password": password,
-        "otp": otp.trim()
-      })
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+    body: JSON.stringify({
+      mobile: mobile_number.trim(),
+      country_code: country_code.trim(),
+      password: password,
+      otp: otp.trim(),
+    }),
   };
 
   return makeRequest(authUrl + endpoints.reset_password_otp, requestOptions);
@@ -221,35 +237,38 @@ const resetMobilePassword = (mobile_number, country_code, otp, password) => {
 
 const resendMobilePasswordOtp = (mobile_number, country_code) => {
   var requestOptions = {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json"
-      },
-      credentials: 'include',
-      body: JSON.stringify({
-        "mobile": mobile_number.trim(),
-        "country_code": country_code.trim()
-      })
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+    body: JSON.stringify({
+      mobile: mobile_number.trim(),
+      country_code: country_code.trim(),
+    }),
   };
 
-  return makeRequest(authUrl + endpoints.resend_mobile_password_otp, requestOptions);
+  return makeRequest(
+    authUrl + endpoints.resend_mobile_password_otp,
+    requestOptions
+  );
 };
 
 const mobilePasswordSignUp = (mobile, password, country_code) => {
   var requestOptions = {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json"
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+    body: JSON.stringify({
+      provider: 'mobile-password',
+      data: {
+        mobile: mobile.trim(),
+        password: password,
+        country_code: country_code.trim(),
       },
-      credentials: 'include',
-      body: JSON.stringify({
-        provider: "mobile-password",
-        data: {
-          "mobile": mobile.trim(),
-          "password": password,
-          "country_code": country_code.trim()
-        }
-      })
+    }),
   };
 
   return makeRequest(authUrl + endpoints.signup, requestOptions);
@@ -257,309 +276,322 @@ const mobilePasswordSignUp = (mobile, password, country_code) => {
 
 const mobilePasswordSignIn = (mobile, password, country_code) => {
   var requestOptions = {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json"
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+    body: JSON.stringify({
+      provider: 'mobile-password',
+      data: {
+        mobile: mobile.trim(),
+        country_code: country_code.trim(),
+        password: password,
       },
-      credentials: 'include',
-      body: JSON.stringify({
-        provider: "mobile-password",
-        data: {
-          "mobile": mobile.trim(),
-          "country_code": country_code.trim(),
-          "password": password
-        }
-      })
+    }),
   };
 
-  return makeRequest(authUrl + endpoints.login, requestOptions)
-  .then(response => {
-    handleAuthResponse(response);
-  });
-}
+  return makeRequest(authUrl + endpoints.login, requestOptions).then(
+    response => {
+      handleAuthResponse(response);
+    }
+  );
+};
 
 const mobilePasswordVerify = (mobile, country_code, otp) => {
   var requestOptions = {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json"
-      },
-      credentials: 'include',
-      body: JSON.stringify({
-        "mobile": mobile.trim(),
-        "country_code": country_code.trim(),
-        "otp": otp 
-      })
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+    body: JSON.stringify({
+      mobile: mobile.trim(),
+      country_code: country_code.trim(),
+      otp: otp,
+    }),
   };
 
-  return makeRequest(authUrl + endpoints.verify_mobile_password, requestOptions);
-}
+  return makeRequest(
+    authUrl + endpoints.verify_mobile_password,
+    requestOptions
+  );
+};
 
 const mobileOtpVerify = (mobile, country_code, otp) => {
   var requestOptions = {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json"
-      },
-      credentials: 'include',
-      body: JSON.stringify({
-        "mobile": mobile.trim(),
-        "country_code": country_code.trim(),
-        "otp": otp.trim()
-      })
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+    body: JSON.stringify({
+      mobile: mobile.trim(),
+      country_code: country_code.trim(),
+      otp: otp.trim(),
+    }),
   };
 
   return makeRequest(authUrl + endpoints.verify_mobile_otp, requestOptions)
-  .then(response => {
-    handleAuthResponse(response);
-  })
-  .catch(function(error) {
-    alert("Error verifying mobile: " + JSON.stringify(error));
-  });
-}
+    .then(response => {
+      handleAuthResponse(response);
+    })
+    .catch(function(error) {
+      alert('Error verifying mobile: ' + JSON.stringify(error));
+    });
+};
 
 const mobileOnlySignUp = (mobile, password) => {
   var requestOptions = {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json"
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+    body: JSON.stringify({
+      provider: 'mobile-password',
+      data: {
+        mobile: mobile.trim(),
+        password: password,
       },
-      credentials: 'include',
-      body: JSON.stringify({
-        provider: "mobile-password",
-        data: {
-          "mobile": mobile.trim(),
-          "password": password
-        }
-      })
+    }),
   };
 
   return makeRequest(authUrl + endpoints.signup, requestOptions)
-  .then(response => {
-    handleAuthResponse(response);
-  })
-  .catch(function(error) {
-    alert("Error signing up using mobile: " + JSON.stringify(error));
-  });
-}
+    .then(response => {
+      handleAuthResponse(response);
+    })
+    .catch(function(error) {
+      alert('Error signing up using mobile: ' + JSON.stringify(error));
+    });
+};
 
 const mobileOtpSignIn = (mobile, otp, country_code) => {
   var requestOptions = {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json"
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+    body: JSON.stringify({
+      provider: 'mobile',
+      data: {
+        mobile: mobile.trim(),
+        otp: otp.trim(),
+        country_code: country_code.trim(),
       },
-      credentials: 'include',
-      body: JSON.stringify({
-        provider: "mobile",
-        data: {
-          "mobile": mobile.trim(),
-          "otp": otp.trim(),
-          "country_code": country_code.trim()
-        }
-      })
+    }),
   };
 
   return makeRequest(authUrl + endpoints.login, requestOptions)
-  .then(response => {
-    handleAuthResponse(response);
-  })
-  .catch(function(error) {
-    alert("Error sign in: " + JSON.stringify(error));
-  });
-}
+    .then(response => {
+      handleAuthResponse(response);
+    })
+    .catch(function(error) {
+      alert('Error sign in: ' + JSON.stringify(error));
+    });
+};
 
 const facebookLogin = (access_token, redirectUrl) => {
-    var requestOptions = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        credentials: 'include',
-        body: JSON.stringify({
-            provider: "facebook",
-            data: {
-                "access_token": access_token
-            }
-        })
-    };
+  var requestOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+    body: JSON.stringify({
+      provider: 'facebook',
+      data: {
+        access_token: access_token,
+      },
+    }),
+  };
 
-    return makeRequest(authUrl + endpoints.login, requestOptions)
-        .then(response => {
-          console.log(response);
-          window.location.href = redirectUrl;
-        })
-        .catch(function(error) {
-            alert("Error sign in: " + JSON.stringify(error));
-        });
-}
+  return makeRequest(authUrl + endpoints.login, requestOptions)
+    .then(response => {
+      console.log(response);
+      window.location.href = redirectUrl;
+    })
+    .catch(function(error) {
+      alert('Error sign in: ' + JSON.stringify(error));
+    });
+};
 
 const googleLogin = (id_token, redirectUrl) => {
-    var requestOptions = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        credentials: 'include',
-        body: JSON.stringify({
-            provider: "google",
-            data: {
-                "id_token": id_token
-            }
-        })
-    };
+  var requestOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+    body: JSON.stringify({
+      provider: 'google',
+      data: {
+        id_token: id_token,
+      },
+    }),
+  };
 
-    return makeRequest(authUrl + endpoints.login, requestOptions)
-        .then(response => {
-          console.log(response);
-          window.location.href = redirectUrl;
-        })
-        .catch(function(error) {
-            alert("Error sign in: " + JSON.stringify(error));
-        });
-}
+  return makeRequest(authUrl + endpoints.login, requestOptions)
+    .then(response => {
+      console.log(response);
+      window.location.href = redirectUrl;
+    })
+    .catch(function(error) {
+      alert('Error sign in: ' + JSON.stringify(error));
+    });
+};
 
 const githubLogin = (code, redirectUrl) => {
-    var requestOptions = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        credentials: 'include',
-        body: JSON.stringify({
-            provider: "github",
-            data: {
-                "code": code,
-                "redirect_uri": githubRedirectUrl,
-                "state": redirectUrl
-            }
-        })
-    };
+  var requestOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+    body: JSON.stringify({
+      provider: 'github',
+      data: {
+        code: code,
+        redirect_uri: githubRedirectUrl,
+        state: redirectUrl,
+      },
+    }),
+  };
 
-    return makeRequest(authUrl + endpoints.login, requestOptions)
-        .then(response => {
-          console.log(response);
-          window.location.href = redirectUrl;
-        })
-        .catch(function(error) {
-            alert("Error sign in: " + JSON.stringify(error));
-        });
-}
+  return makeRequest(authUrl + endpoints.login, requestOptions)
+    .then(response => {
+      console.log(response);
+      window.location.href = redirectUrl;
+    })
+    .catch(function(error) {
+      alert('Error sign in: ' + JSON.stringify(error));
+    });
+};
 
 const linkedinLogin = (code, redirectUrl) => {
-    var requestOptions = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        credentials: 'include',
-        body: JSON.stringify({
-            provider: "linkedin",
-            data: {
-                "code": code,
-                "redirect_uri": linkedinRedirectUrl
-            }
-        })
-    };
-
-    return makeRequest(authUrl + endpoints.login, requestOptions)
-        .then(response => {
-          console.log(response);
-          window.location.href = redirectUrl;
-        })
-        .catch(function(error) {
-            alert("Error sign in: " + JSON.stringify(error));
-        });
-}
-
-const emailForgotPassword = (email) => {
   var requestOptions = {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json"
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+    body: JSON.stringify({
+      provider: 'linkedin',
+      data: {
+        code: code,
+        redirect_uri: linkedinRedirectUrl,
       },
-      credentials: 'include',
-      body: JSON.stringify({
-        "email": email.trim()
-      })
+    }),
+  };
+
+  return makeRequest(authUrl + endpoints.login, requestOptions)
+    .then(response => {
+      console.log(response);
+      window.location.href = redirectUrl;
+    })
+    .catch(function(error) {
+      alert('Error sign in: ' + JSON.stringify(error));
+    });
+};
+
+const emailForgotPassword = email => {
+  var requestOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+    body: JSON.stringify({
+      email: email.trim(),
+    }),
   };
 
   return makeRequest(authUrl + endpoints.email_forgot_password, requestOptions);
-}
+};
 
 // this is logout for restricted role
 const logout = () => {
   var requestOptions = {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json"
-      },
-      credentials: 'include',
-      body: JSON.stringify({})
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+    body: JSON.stringify({}),
   };
 
-  return makeRequest(authUrl + endpoints.logout, requestOptions).then(function(response) {
-    window.location = '/ui' + decodeURIComponent(window.location.search);
-  })
-  .catch(function(error) {
-    alert("Could not logout: " + JSON.stringify(error.message));
-  });
-}
+  return makeRequest(authUrl + endpoints.logout, requestOptions)
+    .then(function(response) {
+      window.location = '/ui' + decodeURIComponent(window.location.search);
+    })
+    .catch(function(error) {
+      alert('Could not logout: ' + JSON.stringify(error.message));
+    });
+};
 
 const logoutGlobal = () => {
   var requestOptions = {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json"
-      },
-      credentials: 'include',
-      body: JSON.stringify({})
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+    body: JSON.stringify({}),
   };
 
-  return makeRequest(authUrl + endpoints.logout, requestOptions).then(response => {
-    console.log(response);
-    return response;
-    // handleAuthResponse(response);
-  })
-  .catch(function(error) {
-    // alert("Could not logout: " + JSON.stringify(error.message));
-    const errorMsg = "Could not logout: " + JSON.stringify(error.message);
-    console.log(errorMsg);
-    return error;
-  });
-}
+  return makeRequest(authUrl + endpoints.logout, requestOptions)
+    .then(response => {
+      console.log(response);
+      return response;
+      // handleAuthResponse(response);
+    })
+    .catch(function(error) {
+      // alert("Could not logout: " + JSON.stringify(error.message));
+      const errorMsg = 'Could not logout: ' + JSON.stringify(error.message);
+      console.log(errorMsg);
+      return error;
+    });
+};
 
 const resetPassword = (token, password) => {
   var requestOptions = {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json"
-      },
-      credentials: 'include',
-      body: JSON.stringify({'token': token, 'password': password})
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+    body: JSON.stringify({ token: token, password: password }),
   };
 
   return makeRequest(authUrl + endpoints.reset_password, requestOptions);
-}
+};
 
-const verifyEmail = (token) => {
+const verifyEmail = token => {
   var requestOptions = {
-      method: "GET",
-      headers: {
-          "Content-Type": "application/json"
-      },
-      credentials: 'include'
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
   };
 
-  return makeRequest(authUrl + endpoints.verify_email + '?token=' + token, requestOptions).then(function(response) {
-    // alert("Email verified successfully.");
-    return {'status': 'Verification Successful. Redirecting...', 'error': false};
-  })
-  .catch(function(error) {
-    // alert("Could not reset password: " + JSON.stringify(error));
-    return {'status': error, 'error': true};
-  });
-}
+  return makeRequest(
+    authUrl + endpoints.verify_email + '?token=' + token,
+    requestOptions
+  )
+    .then(function(response) {
+      // alert("Email verified successfully.");
+      return {
+        status: 'Verification Successful. Redirecting...',
+        error: false,
+      };
+    })
+    .catch(function(error) {
+      // alert("Could not reset password: " + JSON.stringify(error));
+      return { status: error, error: true };
+    });
+};
 
 export {
   usernameSignIn,
@@ -588,5 +620,5 @@ export {
   verifyEmail,
   logout,
   logoutGlobal,
-  handleAuthResponse
-}
+  handleAuthResponse,
+};

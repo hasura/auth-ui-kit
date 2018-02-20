@@ -8,6 +8,6 @@ const globals = {
   github: window.__env.github,
   linkedin: window.__env.linkedin,
   redirectUrl: window.__env.redirectUrl,
-  theme: window.__env.theme
+  theme: window.__env.theme,
 };
 export default globals;
