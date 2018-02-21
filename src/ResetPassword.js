@@ -38,7 +38,7 @@ class ResetPassword extends Component {
         : 'darkHeaderDescription';
     // read token sent in the email
     const currentSearchParams = window.location.search;
-    const token = currentSearchParams.split('?token=')[1];
+    const token = decodeURIComponent(currentSearchParams.split('?token=')[1]);
 
     let submitBtnText = 'Reset Password';
     if (this.state.isProgressing) {
