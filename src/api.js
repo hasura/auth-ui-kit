@@ -6,12 +6,26 @@ import {
   redirectUrl as finalRedirectUrl,
 } from './config';
 
+import { clusterName } from './config';
+
 import makeRequest from './utils/makeRequest';
 
 /* Helper function */
 
 const handleAuthResponse = (response, callback) => {
-  console.log(response);
+  // set cookie state
+  // check if response from signup/login
+  if (response.auth_token && response.hasura_id && response.hasura_roles) {
+    const uiKitCookie = JSON.stringify({ user_info: response });
+    document.cookie =
+      'hasura_auth_uikit=' +
+      uiKitCookie +
+      ';path=/;domain=' +
+      clusterName +
+      ';max-age=' +
+      20 * 24 * 60 * 60 * 1000 +
+      ';';
+  }
   if (typeof response === 'function') {
     response.json().then(resp => {
       console.log(resp);
@@ -542,7 +556,11 @@ const logoutGlobal = () => {
 
   return makeRequest(authUrl + endpoints.logout, requestOptions)
     .then(response => {
-      console.log(response);
+      // reset the cookie
+      document.cookie =
+        'hasura_auth_uikit=;expires=Thu, 01 Jan 1970 00:00:00 GMT;domain=' +
+        clusterName +
+        ';path=/;';
       return response;
       // handleAuthResponse(response);
     })
