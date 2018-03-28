@@ -7,13 +7,12 @@ const authVersion = 'v1';
 let clusterName = splitHost.join('.');
 let scheme = window.location.protocol;
 if (process && process.env && process.env.NODE_ENV === 'development') {
-  clusterName = 'come56.hasura-app.io';
+  clusterName = process.env.REACT_APP_CLUSTER_NAME;
   scheme = 'https:';
 }
 const baseDomain = scheme + '//auth.' + clusterName;
 const authUrl = baseDomain + '/' + authVersion;
 
-// let redirectUrl = window.localStorage.getItem("redirect_url");
 const currentLocation = window.location;
 let redirectUrl = currentLocation.search.split('=')[1];
 if (
@@ -83,4 +82,5 @@ export {
   githubRedirectUrl,
   linkedinRedirectUrl,
   redirectUrl,
+  clusterName,
 };
