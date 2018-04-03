@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './style.css';
+import '../style.css';
 class ErrorMsg extends Component {
   render() {
     const { response } = this.props;

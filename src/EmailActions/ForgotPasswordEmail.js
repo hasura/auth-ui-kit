@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
-import SocialLoginWrapper from './SocialLoginWrapper';
-import { usernameSignIn, handleAuthResponse } from './api';
-import SignUpMessage from './SignUpMessage';
-import Back from './Back';
-import ErrorMsg from './ErrorMsg';
-import globals from './globals';
-import './style.css';
-class Username extends Component {
+import '../style.css';
+import SignUpMessage from '../SignUp/SignUpMessage';
+import Back from '../Common/Back';
+import ErrorMsg from '../Common/ErrorMsg';
+import globals from '../Common/globals';
+import { emailForgotPassword } from '../Common/api';
+class ForgotPasswordEmail extends Component {
   state = {
     isProgressing: false,
     response: null,
@@ -38,11 +37,11 @@ class Username extends Component {
       globals.theme === 'light'
         ? 'lightHeaderDescription'
         : 'darkHeaderDescription';
-    let submitBtnText = 'Login';
+    let submitBtnText = 'Send Email';
     if (this.state.isProgressing) {
       submitBtnText = (
         <span>
-          <i className="fa fa-spinner fa-spin" /> Logging in..
+          <i className="fa fa-spinner fa-spin" /> Sending Email..
         </span>
       );
     }
@@ -55,15 +54,15 @@ class Username extends Component {
       >
         <Helmet>
           <meta charSet="utf-8" />
-          <title>Login with Username</title>
+          <title>Forgot Password</title>
         </Helmet>
         <div className={'landingPageInnerWidth'}>
-          <Back backUrl={'/ui'} />
+          <Back backUrl={'/ui/login/email'} />
           <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
             <div className="signUpWrapper">
-              <div className={headerDescriptionClass}>Login</div>
+              <div className={headerDescriptionClass}>Forgot Password</div>
               <div className="descriptionText">
-                Hello! Login with your Username
+                Hello! Submit your email to reset your password
               </div>
               <ErrorMsg response={this.state.response} />
               <form
@@ -73,33 +72,28 @@ class Username extends Component {
                 }}
                 onSubmit={e => {
                   e.preventDefault();
-                  this.enterProgressing(true);
-                  usernameSignIn(this.username.value, this.password.value)
-                    .then(resp => {
-                      this.enterProgressing(false);
-                      handleAuthResponse(resp, this.authRespCallback);
-                    })
-                    .catch(resp => {
-                      this.enterProgressing(false);
-                      this.setState({ response: resp });
-                    });
+                  if (this.email.value !== '') {
+                    this.enterProgressing(true);
+                    emailForgotPassword(this.email.value)
+                      .then(resp => {
+                        this.enterProgressing(false);
+                        alert('Email Sent. Please check your inbox');
+                      })
+                      .catch(resp => {
+                        this.enterProgressing(false);
+                        this.setState({ response: resp });
+                      });
+                  } else {
+                    alert('Enter an email id to send a forgot password email');
+                  }
                 }}
               >
                 <div className="formInput">
-                  <label className="formLabel">Username</label>
+                  <label className="formLabel">Email ID</label>
                   <input
-                    type="text"
+                    type="email"
                     ref={input => {
-                      this.username = input;
-                    }}
-                  />
-                </div>
-                <div className="formInput">
-                  <label className="formLabel">Password</label>
-                  <input
-                    type="password"
-                    ref={input => {
-                      this.password = input;
+                      this.email = input;
                     }}
                   />
                 </div>
@@ -109,7 +103,6 @@ class Username extends Component {
                   </a>
                 </div>
               </form>
-              <SocialLoginWrapper />
             </div>
           </div>
           <SignUpMessage location={this.props.location} />
@@ -119,4 +112,4 @@ class Username extends Component {
   }
 }
 
-export default Username;
+export default ForgotPasswordEmail;

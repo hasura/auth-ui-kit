@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
-import SocialLoginWrapper from './SocialLoginWrapper';
-import SignInMessage from './SignInMessage';
-import Back from './Back';
-import ErrorMsg from './ErrorMsg';
+import SocialLoginWrapper from '../SocialLogin/SocialLoginWrapper';
+import SignInMessage from '../SignIn/SignInMessage';
+import Back from '../Common/Back';
+import ErrorMsg from '../Common/ErrorMsg';
 import {
   mobilePasswordSignUp,
   resendMobilePasswordOtp,
   mobilePasswordVerify,
   handleAuthResponse,
-} from './api';
-import globals from './globals';
-import './style.css';
+} from '../Common/api';
+import globals from '../Common/globals';
+import '../style.css';
 class SignUpMobile extends Component {
   constructor() {
     super();

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
-import SocialLoginWrapper from './SocialLoginWrapper';
-import SignInMessage from './SignInMessage';
-import Back from './Back';
-import ErrorMsg from './ErrorMsg';
-import { emailSignUp } from './api';
-import globals from './globals';
-import './style.css';
+import SocialLoginWrapper from '../SocialLogin/SocialLoginWrapper';
+import SignInMessage from '../SignIn/SignInMessage';
+import Back from '../Common/Back';
+import ErrorMsg from '../Common/ErrorMsg';
+import { emailSignUp } from '../Common/api';
+import globals from '../Common/globals';
+import '../style.css';
 class SignUpEmail extends Component {
   state = {
     isProgressing: false,

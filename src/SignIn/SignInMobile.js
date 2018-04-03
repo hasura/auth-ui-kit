@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
-import SocialLoginWrapper from './SocialLoginWrapper';
-import SignUpMessage from './SignUpMessage';
-import Back from './Back';
-import ErrorMsg from './ErrorMsg';
+import SocialLoginWrapper from '../SocialLogin/SocialLoginWrapper';
+import SignUpMessage from '../SignUp/SignUpMessage';
+import Back from '../Common/Back';
+import ErrorMsg from '../Common/ErrorMsg';
 import {
   mobilePasswordSignIn,
   mobilePasswordVerify,
@@ -11,12 +11,12 @@ import {
   sendForgotPasswordOTP,
   resetMobilePassword,
   handleAuthResponse,
-} from './api';
-import globals from './globals';
+} from '../Common/api';
+import globals from '../Common/globals';
 
-import './style.css';
+import '../style.css';
 
-class Mobile extends Component {
+class SignInMobile extends Component {
   constructor() {
     super();
     this.state = {
@@ -439,4 +439,4 @@ class ForgotPassword extends Component {
   }
 }
 
-export default Mobile;
+export default SignInMobile;

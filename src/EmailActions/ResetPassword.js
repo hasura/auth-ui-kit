@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
-import './style.css';
-import SignUpMessage from './SignUpMessage';
-import Back from './Back';
-import ErrorMsg from './ErrorMsg';
-import globals from './globals';
-import { emailForgotPassword } from './api';
-class ForgotPasswordEmail extends Component {
+import { resetPassword } from '../Common/api';
+import Back from '../Common/Back';
+import ErrorMsg from '../Common/ErrorMsg';
+import '../style.css';
+import globals from '../Common/globals';
+class ResetPassword extends Component {
   state = {
     isProgressing: false,
     response: null,
@@ -37,14 +36,19 @@ class ForgotPasswordEmail extends Component {
       globals.theme === 'light'
         ? 'lightHeaderDescription'
         : 'darkHeaderDescription';
-    let submitBtnText = 'Send Email';
+    // read token sent in the email
+    const currentSearchParams = window.location.search;
+    const token = decodeURIComponent(currentSearchParams.split('?token=')[1]);
+
+    let submitBtnText = 'Reset Password';
     if (this.state.isProgressing) {
       submitBtnText = (
         <span>
-          <i className="fa fa-spinner fa-spin" /> Sending Email..
+          <i className="fa fa-spinner fa-spin" /> Verifying..
         </span>
       );
     }
+
     return (
       <div
         className={
@@ -54,16 +58,16 @@ class ForgotPasswordEmail extends Component {
       >
         <Helmet>
           <meta charSet="utf-8" />
-          <title>Forgot Password</title>
+          <title>Reset Password</title>
         </Helmet>
         <div className={'landingPageInnerWidth'}>
-          <Back backUrl={'/ui/login/email'} />
+          <Back />
           <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
             <div className="signUpWrapper">
-              <div className={headerDescriptionClass}>Forgot Password</div>
-              <div className="descriptionText">
-                Hello! Submit your email to reset your password
+              <div className={'addPaddTop ' + headerDescriptionClass}>
+                Reset Password
               </div>
+              <div className="descriptionText">Hello! Reset your password</div>
               <ErrorMsg response={this.state.response} />
               <form
                 className={formGroupThemeClass}
@@ -72,28 +76,38 @@ class ForgotPasswordEmail extends Component {
                 }}
                 onSubmit={e => {
                   e.preventDefault();
-                  if (this.email.value !== '') {
-                    this.enterProgressing(true);
-                    emailForgotPassword(this.email.value)
+                  this.enterProgressing(true);
+                  if (this.password.value === this.confirmPassword.value) {
+                    resetPassword(token, this.password.value)
                       .then(resp => {
                         this.enterProgressing(false);
-                        alert('Email Sent. Please check your inbox');
+                        alert('Password has been reset successfully');
+                        window.location.href = '/ui';
                       })
                       .catch(resp => {
                         this.enterProgressing(false);
                         this.setState({ response: resp });
                       });
                   } else {
-                    alert('Enter an email id to send a forgot password email');
+                    alert("Passwords don't match");
                   }
                 }}
               >
                 <div className="formInput">
-                  <label className="formLabel">Email ID</label>
+                  <label className="formLabel">Enter new password</label>
                   <input
-                    type="email"
+                    type="password"
                     ref={input => {
-                      this.email = input;
+                      this.password = input;
+                    }}
+                  />
+                </div>
+                <div className="formInput">
+                  <label className="formLabel">Confirm new password</label>
+                  <input
+                    type="password"
+                    ref={input => {
+                      this.confirmPassword = input;
                     }}
                   />
                 </div>
@@ -105,11 +119,10 @@ class ForgotPasswordEmail extends Component {
               </form>
             </div>
           </div>
-          <SignUpMessage location={this.props.location} />
         </div>
       </div>
     );
   }
 }
 
-export default ForgotPasswordEmail;
+export default ResetPassword;

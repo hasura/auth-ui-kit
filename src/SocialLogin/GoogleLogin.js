@@ -1,26 +1,25 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
-import { githubLogin } from './api';
-import getParams from './utils/getParams';
-import globals from './globals';
-import './style.css';
+import { googleLogin } from '../Common/api';
+import getParams from '../Utils/getParams';
+import globals from '../Common/globals';
+import '../style.css';
 
-class GithubLogin extends Component {
+class GoogleLogin extends Component {
   componentWillMount() {
     let locationParams = window.location.search;
     if (locationParams === '') {
       locationParams = window.location.hash;
     }
     const params = getParams(locationParams);
-    const code = params.code;
+    const id_token = params.id_token;
     const redirectUrl = params.state;
     // check for error before proceeding
     const error = params.error;
-    const errorMessage = params.error_description;
     if (error) {
-      alert(errorMessage);
+      alert(error);
     } else {
-      githubLogin(code, redirectUrl);
+      googleLogin(id_token, redirectUrl);
     }
   }
 
@@ -45,7 +44,7 @@ class GithubLogin extends Component {
       >
         <Helmet>
           <meta charSet="utf-8" />
-          <title>Github Login</title>
+          <title>Google Login</title>
         </Helmet>
         <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
           <div className="signUpWrapper">
@@ -60,4 +59,4 @@ class GithubLogin extends Component {
   }
 }
 
-export default GithubLogin;
+export default GoogleLogin;

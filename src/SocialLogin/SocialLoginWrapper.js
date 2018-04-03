@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './style.css';
-import globals from './globals';
-import { endpoints } from './config';
+import '../style.css';
+import globals from '../Common/globals';
+import { endpoints } from '../Common/config';
 import {
   facebookDarkImg,
   facebookLightImg,
@@ -11,7 +11,7 @@ import {
   githubLightImg,
   linkedinDarkImg,
   linkedinLightImg,
-} from './images/Images';
+} from '../Images/Images';
 
 class SocialLoginWrapper extends Component {
   render() {

@@ -8,7 +8,7 @@ import {
 
 import { clusterName } from './config';
 
-import makeRequest from './utils/makeRequest';
+import makeRequest from '../Utils/makeRequest';
 
 /* Helper function */
 

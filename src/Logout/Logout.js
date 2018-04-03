@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
-import { logoutGlobal } from './api';
-import globals from './globals';
-import './style.css';
+import { logoutGlobal } from '../Common/api';
+import globals from '../Common/globals';
+import '../style.css';
 class Logout extends Component {
   state = {
     logoutMsg: 'Logging out...',

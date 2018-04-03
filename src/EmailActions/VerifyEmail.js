@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
-import { verifyEmail } from './api';
-import globals from './globals';
-import './style.css';
+import { verifyEmail } from '../Common/api';
+import globals from '../Common/globals';
+import '../style.css';
 class VerifyEmail extends Component {
   constructor(props) {
     super(props);

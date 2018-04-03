@@ -243,7 +243,7 @@ body
   border: 2px solid #ccc;
   border: 2px solid #F5F9FA !important;
   padding: 0;
-  padding-left: 10px;
+  /* padding-left: 10px; */
   font-size: 14px;
   background-color: #F5F9FA;
   /* background-color: #555 !important; */

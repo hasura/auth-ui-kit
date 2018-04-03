@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
-import './style.css';
+import '../style.css';
 import { Link } from 'react-router-dom';
-import globals from './globals';
-import SocialLoginWrapper from './SocialLoginWrapper';
-import SignUpMessage from './SignUpMessage';
+import globals from '../Common/globals';
+import SocialLoginWrapper from '../SocialLogin/SocialLoginWrapper';
+import SignUpMessage from '../SignUp/SignUpMessage';
 import {
   usernameImg,
   emailImg,
   mobileImg,
   mobileOtpImg,
-} from './images/Images';
-class Home extends Component {
+} from '../Images/Images';
+class SignInHome extends Component {
   render() {
     const pageWrapperThemeClass =
       globals.theme === 'light'
@@ -137,4 +137,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default SignInHome;

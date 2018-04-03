@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
-import { logout } from './api';
-import globals from './globals';
-import './style.css';
+import { logout } from '../Common/api';
+import globals from '../Common/globals';
+import '../style.css';
 class Restricted extends Component {
   render() {
     const pageWrapperThemeClass =

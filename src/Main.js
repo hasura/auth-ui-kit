@@ -2,27 +2,27 @@ import React, { Component } from 'react';
 
 // import {Route, Redirect, Switch, BrowserRouter as Router} from "react-router-dom";
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
-import Home from './Home';
-import Username from './Username';
-import Email from './Email';
-import Mobile from './Mobile';
-import MobileOtp from './MobileOtp';
-import ForgotPasswordEmail from './ForgotPasswordEmail';
-import ResetPassword from './ResetPassword';
-import VerifyEmail from './VerifyEmail';
+import SignInHome from './SignIn/SignInHome';
+import SignInUsername from './SignIn/SignInUsername';
+import SignInEmail from './SignIn/SignInEmail';
+import SignInMobile from './SignIn/SignInMobile';
+import SignInMobileOtp from './SignIn/SignInMobileOtp';
+import ForgotPasswordEmail from './EmailActions/ForgotPasswordEmail';
+import ResetPassword from './EmailActions/ResetPassword';
+import VerifyEmail from './EmailActions/VerifyEmail';
+import Restricted from './Advanced/Restricted';
 // import globals from './globals';
-import SignUpHome from './SignUpHome';
-import SignUpUsername from './SignUpUsername';
-import SignUpEmail from './SignUpEmail';
-import SignUpMobile from './SignUpMobile';
-import SignUpMobileOtp from './SignUpMobileOtp';
-import FacebookLogin from './FacebookLogin';
-import GoogleLogin from './GoogleLogin';
-import GithubLogin from './GithubLogin';
-import LinkedinLogin from './LinkedinLogin';
-import Restricted from './Restricted';
-import Logout from './Logout';
-import NotFound from './NotFound';
+import SignUpHome from './SignUp/SignUpHome';
+import SignUpUsername from './SignUp/SignUpUsername';
+import SignUpEmail from './SignUp/SignUpEmail';
+import SignUpMobile from './SignUp/SignUpMobile';
+import SignUpMobileOtp from './SignUp/SignUpMobileOtp';
+import FacebookLogin from './SocialLogin/FacebookLogin';
+import GoogleLogin from './SocialLogin/GoogleLogin';
+import GithubLogin from './SocialLogin/GithubLogin';
+import LinkedinLogin from './SocialLogin/LinkedinLogin';
+import Logout from './Logout/Logout';
+import NotFound from './Advanced/NotFound';
 
 class Main extends Component {
   render() {
@@ -56,12 +56,12 @@ class Main extends Component {
                 )
             )} />
           */}
-              <Route exact path="/ui" component={Home} />
-              <Route exact path="/ui/login" component={Home} />
-              <Route exact path="/ui/login/username" component={Username} />
-              <Route exact path="/ui/login/email" component={Email} />
-              <Route exact path="/ui/login/mobile" component={Mobile} />
-              <Route exact path="/ui/login/mobile-otp" component={MobileOtp} />
+              <Route exact path="/ui" component={SignInHome} />
+              <Route exact path="/ui/login" component={SignInHome} />
+              <Route exact path="/ui/login/username" component={SignInUsername} />
+              <Route exact path="/ui/login/email" component={SignInEmail} />
+              <Route exact path="/ui/login/mobile" component={SignInMobile} />
+              <Route exact path="/ui/login/mobile-otp" component={SignInMobileOtp} />
               <Route
                 exact
                 path="/ui/forgot-password"

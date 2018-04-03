@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
-import './style.css';
+import '../style.css';
 class NotFound extends Component {
   render() {
     return (

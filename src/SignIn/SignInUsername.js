@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
-import { resetPassword } from './api';
-import Back from './Back';
-import ErrorMsg from './ErrorMsg';
-import './style.css';
-import globals from './globals';
-class ResetPassword extends Component {
+import SocialLoginWrapper from '../SocialLogin/SocialLoginWrapper';
+import { usernameSignIn, handleAuthResponse } from '../Common/api';
+import SignUpMessage from '../SignUp/SignUpMessage';
+import Back from '../Common/Back';
+import ErrorMsg from '../Common/ErrorMsg';
+import globals from '../Common/globals';
+import '../style.css';
+class SignInUsername extends Component {
   state = {
     isProgressing: false,
     response: null,
@@ -36,19 +38,14 @@ class ResetPassword extends Component {
       globals.theme === 'light'
         ? 'lightHeaderDescription'
         : 'darkHeaderDescription';
-    // read token sent in the email
-    const currentSearchParams = window.location.search;
-    const token = decodeURIComponent(currentSearchParams.split('?token=')[1]);
-
-    let submitBtnText = 'Reset Password';
+    let submitBtnText = 'Login';
     if (this.state.isProgressing) {
       submitBtnText = (
         <span>
-          <i className="fa fa-spinner fa-spin" /> Verifying..
+          <i className="fa fa-spinner fa-spin" /> Logging in..
         </span>
       );
     }
-
     return (
       <div
         className={
@@ -58,16 +55,16 @@ class ResetPassword extends Component {
       >
         <Helmet>
           <meta charSet="utf-8" />
-          <title>Reset Password</title>
+          <title>Login with Username</title>
         </Helmet>
         <div className={'landingPageInnerWidth'}>
-          <Back />
+          <Back backUrl={'/ui'} />
           <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
             <div className="signUpWrapper">
-              <div className={'addPaddTop ' + headerDescriptionClass}>
-                Reset Password
+              <div className={headerDescriptionClass}>Login</div>
+              <div className="descriptionText">
+                Hello! Login with your Username
               </div>
-              <div className="descriptionText">Hello! Reset your password</div>
               <ErrorMsg response={this.state.response} />
               <form
                 className={formGroupThemeClass}
@@ -77,37 +74,32 @@ class ResetPassword extends Component {
                 onSubmit={e => {
                   e.preventDefault();
                   this.enterProgressing(true);
-                  if (this.password.value === this.confirmPassword.value) {
-                    resetPassword(token, this.password.value)
-                      .then(resp => {
-                        this.enterProgressing(false);
-                        alert('Password has been reset successfully');
-                        window.location.href = '/ui';
-                      })
-                      .catch(resp => {
-                        this.enterProgressing(false);
-                        this.setState({ response: resp });
-                      });
-                  } else {
-                    alert("Passwords don't match");
-                  }
+                  usernameSignIn(this.username.value, this.password.value)
+                    .then(resp => {
+                      this.enterProgressing(false);
+                      handleAuthResponse(resp, this.authRespCallback);
+                    })
+                    .catch(resp => {
+                      this.enterProgressing(false);
+                      this.setState({ response: resp });
+                    });
                 }}
               >
                 <div className="formInput">
-                  <label className="formLabel">Enter new password</label>
+                  <label className="formLabel">Username</label>
                   <input
-                    type="password"
+                    type="text"
                     ref={input => {
-                      this.password = input;
+                      this.username = input;
                     }}
                   />
                 </div>
                 <div className="formInput">
-                  <label className="formLabel">Confirm new password</label>
+                  <label className="formLabel">Password</label>
                   <input
                     type="password"
                     ref={input => {
-                      this.confirmPassword = input;
+                      this.password = input;
                     }}
                   />
                 </div>
@@ -117,12 +109,14 @@ class ResetPassword extends Component {
                   </a>
                 </div>
               </form>
+              <SocialLoginWrapper />
             </div>
           </div>
+          <SignUpMessage location={this.props.location} />
         </div>
       </div>
     );
   }
 }
 
-export default ResetPassword;
+export default SignInUsername;

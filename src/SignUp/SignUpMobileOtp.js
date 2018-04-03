@@ -1,21 +1,19 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
-import SocialLoginWrapper from './SocialLoginWrapper';
-import SignUpMessage from './SignUpMessage';
-import Back from './Back';
-import ErrorMsg from './ErrorMsg';
-import globals from './globals';
-
-import './style.css';
+import SocialLoginWrapper from '../SocialLogin/SocialLoginWrapper';
+import SignInMessage from '../SignIn/SignInMessage';
+import Back from '../Common/Back';
+import ErrorMsg from '../Common/ErrorMsg';
+import globals from '../Common/globals';
+import '../style.css';
 
 import {
   mobileOtpSignUp,
   resendMobileOtp,
-  mobileOtpLogin,
+  mobileOtpSignupFinal,
   handleAuthResponse,
-} from './api';
-
-class MobileOtp extends Component {
+} from '../Common/api';
+class SignUpMobileOtp extends Component {
   constructor() {
     super();
     this.state = {
@@ -35,6 +33,7 @@ class MobileOtp extends Component {
   };
   resendMobileOtp(e) {
     e.preventDefault();
+    this.enterProgressing(true);
     resendMobileOtp(this.state.mobile_number, this.state.country_code)
       .then(resp => {
         alert(
@@ -44,7 +43,7 @@ class MobileOtp extends Component {
         );
       })
       .catch(resp => {
-        alert('Error sending OTP: ' + JSON.stringify(resp));
+        alert('Error sending OTP: ' + JSON.stringify(resp.message));
       });
   }
   handleSignup(e) {
@@ -60,13 +59,12 @@ class MobileOtp extends Component {
         });
       })
       .catch(resp => {
-        // alert('Error sending OTP: ' + JSON.stringify(resp));
         this.enterProgressing(false);
         this.setState({ response: resp });
       });
   }
   handleLogin() {
-    mobileOtpLogin(
+    mobileOtpSignupFinal(
       this.state.mobile_number,
       this.state.country_code,
       this.otp.value
@@ -76,8 +74,6 @@ class MobileOtp extends Component {
         handleAuthResponse(resp, this.authRespCallback);
       })
       .catch(resp => {
-        // alert('Error sending OTP: ' + JSON.stringify(resp));
-        this.enterProgressing(false);
         this.setState({ response: resp });
       });
   }
@@ -115,15 +111,15 @@ class MobileOtp extends Component {
       >
         <Helmet>
           <meta charSet="utf-8" />
-          <title>Login with Mobile/OTP</title>
+          <title>Sign up with Mobile/OTP</title>
         </Helmet>
         <div className={'landingPageInnerWidth'}>
-          <Back backUrl={'/ui'} />
+          <Back backUrl={'/ui/signup'} />
           <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
             <div className="signUpWrapper">
-              <div className={headerDescriptionClass}>Login</div>
+              <div className={headerDescriptionClass}>Sign up</div>
               <div className="descriptionText">
-                Hello! Login with your mobile OTP
+                Hello! Sign up with your mobile OTP
               </div>
               <ErrorMsg response={this.state.response} />
               <form
@@ -136,7 +132,7 @@ class MobileOtp extends Component {
                 }}
               >
                 {!this.state.isFirstStepCompleted ? (
-                  <div key="9" className="formInput">
+                  <div key="1" className="formInput">
                     <div className="countryInput">
                       <label className="formLabel">Country Code</label>
                       <input
@@ -158,7 +154,7 @@ class MobileOtp extends Component {
                     </div>
                   </div>
                 ) : (
-                  <div key="10" className="formInput">
+                  <div key="2" className="formInput">
                     <input
                       type="text"
                       placeholder="Enter OTP"
@@ -167,7 +163,6 @@ class MobileOtp extends Component {
                       }}
                     />
                     <div className="resendOtpText">
-                      {' '}
                       Haven{"'"}t received OTP yet?{' '}
                       <a href="" onClick={this.resendMobileOtp.bind(this)}>
                         {' '}
@@ -201,11 +196,11 @@ class MobileOtp extends Component {
               <SocialLoginWrapper />
             </div>
           </div>
-          <SignUpMessage location={this.props.location} />
+          <SignInMessage location={this.props.location} />
         </div>
       </div>
     );
   }
 }
 
-export default MobileOtp;
+export default SignUpMobileOtp;

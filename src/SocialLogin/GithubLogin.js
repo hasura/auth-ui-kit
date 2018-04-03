@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
-import { linkedinLogin } from './api';
-import getParams from './utils/getParams';
-import globals from './globals';
-import './style.css';
+import { githubLogin } from '../Common/api';
+import getParams from '../Utils/getParams';
+import globals from '../Common/globals';
+import '../style.css';
 
-class LinkedinLogin extends Component {
+class GithubLogin extends Component {
   componentWillMount() {
     let locationParams = window.location.search;
     if (locationParams === '') {
@@ -20,7 +20,7 @@ class LinkedinLogin extends Component {
     if (error) {
       alert(errorMessage);
     } else {
-      linkedinLogin(code, redirectUrl);
+      githubLogin(code, redirectUrl);
     }
   }
 
@@ -45,7 +45,7 @@ class LinkedinLogin extends Component {
       >
         <Helmet>
           <meta charSet="utf-8" />
-          <title>Linkedin Login</title>
+          <title>Github Login</title>
         </Helmet>
         <div className={'landingPageInnerWrapper ' + pageInnerThemeClass}>
           <div className="signUpWrapper">
@@ -60,4 +60,4 @@ class LinkedinLogin extends Component {
   }
 }
 
-export default LinkedinLogin;
+export default GithubLogin;

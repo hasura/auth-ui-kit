@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
-import './style.css';
+import '../style.css';
 import { Link } from 'react-router-dom';
-import globals from './globals';
-import SocialLoginWrapper from './SocialLoginWrapper';
-import SignInMessage from './SignInMessage';
+import globals from '../Common/globals';
+import SocialLoginWrapper from '../SocialLogin/SocialLoginWrapper';
+import SignInMessage from '../SignIn/SignInMessage';
 import {
   usernameImg,
   emailImg,
   mobileImg,
   mobileOtpImg,
-} from './images/Images';
+} from '../Images/Images';
 class SignUpHome extends Component {
   render() {
     const pageWrapperThemeClass =
